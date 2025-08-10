@@ -1,6 +1,6 @@
 ﻿namespace Colors
 {
-    partial class TileForm
+    partial class Tile8x8Form
     {
         /// <summary>
         /// Required designer variable.
@@ -52,15 +52,15 @@
             text.Size = new Size(366, 299);
             text.TabIndex = 1;
             // 
-            // TileForm
+            // TileForm8x8
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(588, 409);
             Controls.Add(text);
             Controls.Add(generate);
-            Name = "TileForm";
-            Text = "TileForm";
+            Name = "TileForm8x8";
+            Text = "Tile (8x8)";
             ResumeLayout(false);
             PerformLayout();
         }

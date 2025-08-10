@@ -17,7 +17,7 @@ namespace Colors.Models
 
         public Pallette Pallette { get; set; }
         public List<Sprite> Sprites { get; set; }
-        public List<Tile> Tiles { get; set; }
+        public List<Tile8x8> Tiles { get; set; }
 
         public Level()
         {

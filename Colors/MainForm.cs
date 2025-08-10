@@ -14,7 +14,8 @@ namespace Colors
     {
         PalletteForm palletteForm = new PalletteForm();
         SpriteForm spriteForm = new SpriteForm();
-        TileForm tileForm = new TileForm();
+        Tile8x8Form tileForm = new Tile8x8Form();
+        Tile16x16Form tile16Form = new Tile16x16Form();
         TileMapForm tileMapForm = new TileMapForm();
         ProjectForm projectForm = new ProjectForm();
 
@@ -34,8 +35,13 @@ namespace Colors
 
             tileForm.MdiParent = this;
             tileForm.Pallette = Program.Project.Palletts.First();
-            tileForm.colors = Program.Project.Tiles.First().Pixels.ToArray();
+            tileForm.colors = Program.Project.Tiles8.First().Pixels.ToArray();
             tileForm.Show();
+
+            tile16Form.MdiParent = this;
+            tile16Form.Pallette = Program.Project.Palletts.First();
+            tile16Form.colors = Program.Project.Tiles16.First().Pixels.ToArray();
+            tile16Form.Show();
 
             projectForm.MdiParent = this;
             projectForm.SpriteForm = spriteForm;

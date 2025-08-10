@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Colors
 {
-    public partial class TileForm : Form
+    public partial class Tile8x8Form : Form
     {
         const int CellSize = 20;
         const int GridSize = 8;
@@ -23,7 +23,7 @@ namespace Colors
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Pallette Pallette { get; set; }
 
-        public TileForm()
+        public Tile8x8Form()
         {
             InitializeComponent();
         }

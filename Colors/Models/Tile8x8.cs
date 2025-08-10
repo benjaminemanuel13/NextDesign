@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Colors.Models
 {
-    public class Tile
+    public class Tile8x8
     {
         public int Id { get; set; }
 
@@ -17,7 +17,7 @@ namespace Colors.Models
         
         public byte[] Pixels { get; set; } = new byte[64];
 
-        public Tile()
+        public Tile8x8()
         {
             for (int i = 0; i < Pixels.Length; i++)
             {
