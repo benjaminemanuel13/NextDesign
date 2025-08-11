@@ -15,6 +15,12 @@ namespace Colors
     public partial class ProjectForm : Form
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Tile8x8Form Tile8Form { get; set; } = null!;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Tile16x16Form Tile16Form { get; set; } = null!;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SpriteForm SpriteForm { get; set; } = null!;
 
         public ProjectForm()
@@ -70,6 +76,15 @@ namespace Colors
             {
                 SpriteForm.SetSprite(node.Tag as Sprite);
             }
+            else if (node.Tag is Tile8x8)
+            {
+                Tile8Form.SetTile(node.Tag as Tile8x8);
+            }
+            else if (node.Tag is Tile16x16)
+            {
+                Tile16Form.SetTile(node.Tag as Tile16x16);
+            }
+
         }
     }
 }

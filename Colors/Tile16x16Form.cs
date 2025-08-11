@@ -1,4 +1,6 @@
 ﻿using Colors.Models;
+using Microsoft.EntityFrameworkCore;
+using SKcode.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +19,10 @@ namespace Colors
 {
     public partial class Tile16x16Form : Form
     {
+        private readonly ProjectDBContext _context;
+
+        private Tile16x16 CurrentTile { get; set; }
+
         const int CellSize = 20;
         const int GridSize = 16;
 
@@ -33,6 +40,24 @@ namespace Colors
         public Tile16x16Form()
         {
             InitializeComponent();
+
+            _context = Program.Project;
+        }
+
+        public void SetTile(Tile16x16 tile)
+        {
+            if (tile == null) return;
+
+            for (int i = 0; i < tile.Pixels.Length; i++)
+            {
+                colors[i] = tile.Pixels[i];
+            }
+
+            CurrentTile = tile;
+
+            this.Invalidate();
+
+            save.Enabled = true;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -105,8 +130,9 @@ namespace Colors
             byte[] tile4 = new byte[32];
 
             var count = 0;
-            for (var y = 2; y <= 256; y+= 2) { 
-                
+            for (var y = 2; y <= 256; y += 2)
+            {
+
             }
 
             for (var y = 2; y <= 64; y += 2)
@@ -132,6 +158,20 @@ namespace Colors
             }
 
             text.Text = sb.ToString().TrimEnd(',');
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            var tile = _context.Tiles16.Where(x => x.Id == CurrentTile.Id).First();
+            tile.Pixels = new byte[CurrentTile.Pixels.Length];
+
+            for (int i = 0; i < CurrentTile.Pixels.Length; i++)
+            {
+                tile.Pixels[i] = colors[i];
+            }
+
+            bool hasChanges = _context.ChangeTracker.HasChanges();
+            int affected = _context.SaveChanges(); // should be > 0
         }
     }
 }

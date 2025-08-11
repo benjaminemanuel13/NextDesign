@@ -22,8 +22,8 @@ namespace SKcode.Data
 
         public DbSet<Game> Games { get; set; } = null!;
         public DbSet<Pallette> Palletts { get; set; } = null!;
+        public DbSet<Sprite> Sprites { get; set; }
         public DbSet<Tile8x8> Tiles8 { get; set; } = null!;
-
         public DbSet<Tile16x16> Tiles16 { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,6 +34,11 @@ namespace SKcode.Data
                 .HasOne(l => l.Pallette)
                 .WithOne(p => p.Level)
                 .HasForeignKey<Pallette>(p => p.LevelId);
+
+            modelBuilder.Entity<Level>()
+                .HasMany(l => l.Sprites)
+                .WithOne(p => p.Level)
+                .HasForeignKey(p => p.LevelId);
 
             modelBuilder.Entity<Level>()
                 .HasMany(l => l.Sprites)

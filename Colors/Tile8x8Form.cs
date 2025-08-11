@@ -1,4 +1,5 @@
 ﻿using Colors.Models;
+using SKcode.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,10 @@ namespace Colors
 {
     public partial class Tile8x8Form : Form
     {
+        private readonly ProjectDBContext _context;
+
+        private Tile8x8 CurrentTile { get; set; }
+
         const int CellSize = 20;
         const int GridSize = 8;
 
@@ -32,6 +37,24 @@ namespace Colors
         public Tile8x8Form()
         {
             InitializeComponent();
+
+            _context = Program.Project;
+        }
+
+        public void SetTile(Tile8x8 tile)
+        {
+            if (tile == null) return;
+
+            for (int i = 0; i < tile.Pixels.Length; i++)
+            {
+                colors[i] = tile.Pixels[i];
+            }
+
+            CurrentTile = tile;
+
+            this.Invalidate();
+
+            save.Enabled = true;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -172,6 +195,20 @@ namespace Colors
             }
 
             text.Text = sb.ToString().TrimEnd(',');
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            var tile = _context.Tiles8.Where(x => x.Id == CurrentTile.Id).First();
+            tile.Pixels = new byte[CurrentTile.Pixels.Length];
+
+            for (int i = 0; i < CurrentTile.Pixels.Length; i++)
+            {
+                tile.Pixels[i] = colors[i];
+            }
+
+            bool hasChanges = _context.ChangeTracker.HasChanges();
+            int affected = _context.SaveChanges(); // should be > 0
         }
     }
 }

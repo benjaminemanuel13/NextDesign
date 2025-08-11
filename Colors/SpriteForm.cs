@@ -1,4 +1,6 @@
 ﻿using Colors.Models;
+using Microsoft.EntityFrameworkCore;
+using SKcode.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +17,10 @@ namespace Colors
 {
     public partial class SpriteForm : Form
     {
+        private readonly ProjectDBContext _context;
+
+        private Sprite CurrentSprite { get; set; }
+
         const int CellSize = 20;
         const int GridSize = 16;
 
@@ -28,6 +34,8 @@ namespace Colors
         public SpriteForm()
         {
             InitializeComponent();
+
+            _context = Program.Project;
 
             Setup();
         }
@@ -43,13 +51,17 @@ namespace Colors
         public void SetSprite(Sprite sprite)
         {
             if (sprite == null) return;
-            
+
             for (int i = 0; i < sprite.Pixels.Length; i++)
             {
                 colors[i] = sprite.Pixels[i];
             }
 
+            CurrentSprite = sprite;
+
             this.Invalidate();
+
+            save.Enabled = true;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -137,6 +149,20 @@ namespace Colors
             }
 
             textBox1.Text = sb.ToString().TrimEnd(',');
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            var tile = _context.Sprites.Where(x => x.Id == CurrentSprite.Id).First();
+            tile.Pixels = new byte[CurrentSprite.Pixels.Length];
+
+            for (int i = 0; i < CurrentSprite.Pixels.Length; i++)
+            {
+                tile.Pixels[i] = colors[i];
+            }
+
+            bool hasChanges = _context.ChangeTracker.HasChanges();
+            int affected = _context.SaveChanges(); // should be > 0
         }
     }
 }

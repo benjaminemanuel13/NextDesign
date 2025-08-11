@@ -30,6 +30,7 @@
         {
             textBox1 = new TextBox();
             generate = new Button();
+            save = new Button();
             SuspendLayout();
             // 
             // textBox1
@@ -52,11 +53,23 @@
             generate.UseVisualStyleBackColor = true;
             generate.Click += generate_Click;
             // 
+            // save
+            // 
+            save.Enabled = false;
+            save.Location = new Point(139, 415);
+            save.Name = "save";
+            save.Size = new Size(92, 23);
+            save.TabIndex = 4;
+            save.Text = "Save";
+            save.UseVisualStyleBackColor = true;
+            save.Click += save_Click;
+            // 
             // SpriteForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(866, 450);
+            Controls.Add(save);
             Controls.Add(generate);
             Controls.Add(textBox1);
             Name = "SpriteForm";
@@ -69,5 +82,6 @@
 
         private TextBox textBox1;
         private Button generate;
+        private Button save;
     }
 }

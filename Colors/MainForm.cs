@@ -46,6 +46,8 @@ namespace Colors
 
             projectForm.MdiParent = this;
             projectForm.SpriteForm = spriteForm;
+            projectForm.Tile8Form = tileForm;
+            projectForm.Tile16Form = tile16Form;
             projectForm.Show();
         }
 

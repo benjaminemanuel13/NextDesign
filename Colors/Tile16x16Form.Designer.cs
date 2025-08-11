@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
+            text = new TextBox();
             generate = new Button();
+            save = new Button();
             SuspendLayout();
             // 
-            // textBox1
+            // text
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Courier New", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(335, 12);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(519, 426);
-            textBox1.TabIndex = 1;
+            text.BorderStyle = BorderStyle.FixedSingle;
+            text.Font = new Font("Courier New", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            text.Location = new Point(335, 12);
+            text.Multiline = true;
+            text.Name = "text";
+            text.Size = new Size(519, 426);
+            text.TabIndex = 1;
             // 
             // generate
             // 
@@ -52,13 +53,25 @@
             generate.UseVisualStyleBackColor = true;
             generate.Click += generate_Click;
             // 
+            // save
+            // 
+            save.Enabled = false;
+            save.Location = new Point(139, 415);
+            save.Name = "save";
+            save.Size = new Size(92, 23);
+            save.TabIndex = 3;
+            save.Text = "Save";
+            save.UseVisualStyleBackColor = true;
+            save.Click += save_Click;
+            // 
             // Tile16x16Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(866, 450);
+            Controls.Add(save);
             Controls.Add(generate);
-            Controls.Add(textBox1);
+            Controls.Add(text);
             Name = "Tile16x16Form";
             Text = "Tile (16x16)";
             ResumeLayout(false);
@@ -67,7 +80,8 @@
 
         #endregion
 
-        private TextBox textBox1;
+        private TextBox text;
         private Button generate;
+        private Button save;
     }
 }

@@ -30,6 +30,7 @@
         {
             generate = new Button();
             text = new TextBox();
+            save = new Button();
             SuspendLayout();
             // 
             // generate
@@ -52,14 +53,26 @@
             text.Size = new Size(366, 299);
             text.TabIndex = 1;
             // 
-            // TileForm8x8
+            // save
+            // 
+            save.Enabled = false;
+            save.Location = new Point(12, 288);
+            save.Name = "save";
+            save.Size = new Size(92, 23);
+            save.TabIndex = 4;
+            save.Text = "Save";
+            save.UseVisualStyleBackColor = true;
+            save.Click += save_Click;
+            // 
+            // Tile8x8Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(588, 409);
+            Controls.Add(save);
             Controls.Add(text);
             Controls.Add(generate);
-            Name = "TileForm8x8";
+            Name = "Tile8x8Form";
             Text = "Tile (8x8)";
             ResumeLayout(false);
             PerformLayout();
@@ -69,5 +82,6 @@
 
         private Button generate;
         private TextBox text;
+        private Button save;
     }
 }

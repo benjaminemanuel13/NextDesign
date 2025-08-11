@@ -12,8 +12,8 @@ namespace Colors
         [STAThread]
         static void Main()
         {
-            Project.Database.EnsureDeleted();
-            Project.Database.EnsureCreated();
+            //Project.Database.EnsureDeleted();
+            //Project.Database.EnsureCreated();
 
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
