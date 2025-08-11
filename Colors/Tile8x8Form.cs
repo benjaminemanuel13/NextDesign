@@ -18,10 +18,16 @@ namespace Colors
         const int CellSize = 20;
         const int GridSize = 8;
 
+        const int PalletteGridSize = 16;
+
         public byte[] colors = new byte[64];
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Pallette Pallette { get; set; }
+
+        private byte currentIndex = 0;
+        public byte theIndex = 0;
+        private byte drawByte = 0;
 
         public Tile8x8Form()
         {
@@ -40,7 +46,6 @@ namespace Colors
 
                 var index = Pallette.Colors[colors[i]];
 
-                //var (r, gVal, b) = ConvertRGB332ToRGB888((byte)colors[i]);
                 var (r, gVal, b) = ConvertRGB332ToRGB888((byte)index);
                 using (Brush brush = new SolidBrush(Color.FromArgb(r, gVal, b)))
                 {
@@ -54,10 +59,76 @@ namespace Colors
                 var (r, gVal, b) = ConvertRGB332ToRGB888((byte)Pallette.Colors[i]);
                 using (Brush brush = new SolidBrush(Color.FromArgb(r, gVal, b)))
                 {
-                    g.FillRectangle(brush, (i * 20) + 8, 350, CellSize, CellSize);
-                    g.DrawRectangle(Pens.Black, (i * 20) + 8, 350, CellSize, CellSize);
+                    g.FillRectangle(brush, (i * 20) + 8, 320, CellSize, CellSize);
+                    g.DrawRectangle(Pens.Black, (i * 20) + 8, 320, CellSize, CellSize);
                 }
             }
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            int col = 0;
+            if (e.Y > 319)
+            {
+                col = (e.X - 8) / CellSize;
+            }
+            else
+            {
+                col = e.X / CellSize;
+            }
+
+            int row = e.Y / CellSize;
+
+            if (row == 16)
+            {
+                if (col >= 0 && col < PalletteGridSize)
+                {
+                    int index = row * PalletteGridSize + col;
+                    var (r, g, b) = ConvertRGB332ToRGB888((byte)index);
+
+                    string tip = $"Index: 0x{index:X2}\nRGB888: ({r}, {g}, {b})";
+                    currentIndex = (byte)index;
+                }
+            }
+            else if (col >= 0 && col < GridSize && row >= 0 && row < GridSize)
+            {
+                int index = row * GridSize + col;
+                var (r, g, b) = ConvertRGB332ToRGB888((byte)index);
+
+                string tip = $"Index: 0x{index:X2}\nRGB888: ({r}, {g}, {b})";
+                //tooltip.SetToolTip(this, tip);
+                drawByte = (byte)index;
+            }
+        }
+
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            base.OnMouseClick(e);
+
+            int col = 0;
+            if (e.Y > 319)
+            {
+                col = (e.X - 8) / CellSize;
+            }
+            else
+            {
+                col = e.X / CellSize;
+            }
+
+            int row = e.Y / CellSize;
+
+            if (row == 16)
+            {
+                theIndex = currentIndex;
+            }
+            else if (col >= 0 && col < GridSize && row >= 0 && row < GridSize)
+            {
+                colors[drawByte] = theIndex;
+            }
+
+            this.Invalidate();
         }
 
         private static (byte r, byte g, byte b) ConvertRGB332ToRGB888(byte rgb332)

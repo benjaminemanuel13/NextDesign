@@ -19,6 +19,8 @@ namespace Colors.Models
         public List<Sprite> Sprites { get; set; }
         public List<Tile8x8> Tiles { get; set; }
 
+        public List<Tile16x16> Tiles16 { get; set; }
+
         public Level()
         {
             

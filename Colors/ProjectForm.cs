@@ -27,7 +27,8 @@ namespace Colors
         private void LoadGames()
         {
             var games = Program.Project.Games.Include(x => x.Levels).ThenInclude(y => y.Sprites)
-                .Include(x => x.Levels).ThenInclude(y => y.Tiles).ToList();
+                .Include(x => x.Levels).ThenInclude(y => y.Tiles).Include(x => x.Levels)
+                .ThenInclude(y => y.Tiles16).ToList();
 
             foreach (var game in games)
             {
@@ -44,7 +45,19 @@ namespace Colors
                         newSprite.Tag = sprite;
                     }
 
+                    var tile8Node = levelNode.Nodes.Add("8x8Tiles", "8x8 Tiles");
+                    foreach (var tile in level.Tiles)
+                    {
+                        var newTile = tile8Node.Nodes.Add(tile.Id.ToString(), tile.Name);
+                        newTile.Tag = tile;
+                    }
 
+                    var tile16Node = levelNode.Nodes.Add("16x16Tiles", "16x16 Tiles");
+                    foreach (var tile in level.Tiles16)
+                    {
+                        var newTile = tile16Node.Nodes.Add(tile.Id.ToString(), tile.Name);
+                        newTile.Tag = tile;
+                    }
                 }
             }
         }

@@ -45,6 +45,11 @@ namespace SKcode.Data
                 .WithOne(p => p.Level)
                 .HasForeignKey(p => p.LevelId);
 
+            modelBuilder.Entity<Level>()
+                .HasMany(l => l.Tiles16)
+                .WithOne(p => p.Level)
+                .HasForeignKey(p => p.LevelId);
+
             modelBuilder.Entity<Game>().HasData(
             new Game { Id = 1, Name = "Game 01", Author = "Ben", Version = "1.0.0" },
             new Game { Id = 2, Name = "Game 02", Author = "Ben", Version = "1.0.0" });

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Colors.Models
 {
-    public class Tile8x8
+    public class Tile8x8 : TileBase
     {
         public int Id { get; set; }
 
@@ -21,7 +21,21 @@ namespace Colors.Models
         {
             for (int i = 0; i < Pixels.Length; i++)
             {
-                Pixels[i] = 0xE3;
+                Pixels[i] = 0x00;
+            }
+        }
+
+        public override int StartSlot
+        {
+            get
+            {
+                return startSlot;
+            }
+
+            set
+            {
+                startSlot = value;
+                endSlot = value;
             }
         }
     }

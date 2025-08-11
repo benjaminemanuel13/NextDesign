@@ -40,6 +40,7 @@ namespace Colors
 
             tile16Form.MdiParent = this;
             tile16Form.Pallette = Program.Project.Palletts.First();
+            tile16Form.Tile8X8Form = tileForm;
             tile16Form.colors = Program.Project.Tiles16.First().Pixels.ToArray();
             tile16Form.Show();
 
@@ -47,6 +48,7 @@ namespace Colors
             projectForm.SpriteForm = spriteForm;
             projectForm.Show();
         }
+
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
 

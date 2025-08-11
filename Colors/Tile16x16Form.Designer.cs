@@ -28,18 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
+            textBox1 = new TextBox();
+            generate = new Button();
             SuspendLayout();
+            // 
+            // textBox1
+            // 
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            textBox1.Font = new Font("Courier New", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.Location = new Point(335, 12);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(519, 426);
+            textBox1.TabIndex = 1;
+            // 
+            // generate
+            // 
+            generate.Location = new Point(237, 415);
+            generate.Name = "generate";
+            generate.Size = new Size(92, 23);
+            generate.TabIndex = 2;
+            generate.Text = "Generate >>";
+            generate.UseVisualStyleBackColor = true;
+            generate.Click += generate_Click;
             // 
             // Tile16x16Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(866, 450);
+            Controls.Add(generate);
+            Controls.Add(textBox1);
             Name = "Tile16x16Form";
             Text = "Tile (16x16)";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private TextBox textBox1;
+        private Button generate;
     }
 }
