@@ -13,7 +13,7 @@ namespace Colors
         static void Main()
         {
             //Project.Database.EnsureDeleted();
-            //Project.Database.EnsureCreated();
+            Project.Database.EnsureCreated();
 
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
