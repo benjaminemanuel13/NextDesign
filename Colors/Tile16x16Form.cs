@@ -124,7 +124,7 @@ namespace Colors
             var sb = new StringBuilder();
 
             var count = 0;
-            for (int z = 0; z < 4; z++)
+            for (int z = 1; z < 5; z++)
             {
                 for (var x = 0; x < 8; x++)
                 {
@@ -139,10 +139,24 @@ namespace Colors
                         line += final;
                         count += 2;
                     }
-
+                    count += 8;
                     line = line.Substring(0, line.Length - 2);
                     sb.AppendLine(line);
                 }
+
+                if (z == 1)
+                {
+                    count = 8;
+                }
+                else if (z == 2)
+                {
+                    count = 16 * 8;
+                }
+                else if (z == 3)
+                {
+                    count = (16 * 8) + 8;
+                }
+
                 sb.AppendLine();
             }
 
