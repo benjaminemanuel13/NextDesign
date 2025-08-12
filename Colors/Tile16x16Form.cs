@@ -122,39 +122,28 @@ namespace Colors
         private void generate_Click(object sender, EventArgs e)
         {
             var sb = new StringBuilder();
-            string line = "";
-
-            byte[] tile1 = new byte[32];
-            byte[] tile2 = new byte[32];
-            byte[] tile3 = new byte[32];
-            byte[] tile4 = new byte[32];
 
             var count = 0;
-            for (var y = 2; y <= 256; y += 2)
+            for (int z = 0; z < 4; z++)
             {
-
-            }
-
-            for (var y = 2; y <= 64; y += 2)
-            {
-                if (y % 8 == 0 && y > 0)
+                for (var x = 0; x < 8; x++)
                 {
-                    sb.Append("db ");
+                    var line = "db ";
+                    for (var y = 0; y < 8; y+= 2)
+                    {
+                        var hex1 = colors[count].ToString("X2");
+                        var hex2 = colors[count + 1].ToString("X2");
+                        string final = hex1.Substring(1, 1);
+                        final += hex2.Substring(1, 1);
+                        final += ", ";
+                        line += final;
+                        count += 2;
+                    }
 
-                    var hex1 = colors[y - 2].ToString("X2");
-                    var hex2 = colors[y - 1].ToString("X2");
-
-                    line += hex1.Substring(1, 1);
-                    line += hex2.Substring(1, 1);
-                    sb.Append(line + "\r\n");
-                    line = "";
+                    line = line.Substring(0, line.Length - 2);
+                    sb.AppendLine(line);
                 }
-                else
-                {
-                    var hex1 = colors[y - 2].ToString("X2");
-                    var hex2 = colors[y - 1].ToString("X2");
-                    line += hex1.Substring(1, 1) + hex2.Substring(1, 1) + ", ";
-                }
+                sb.AppendLine();
             }
 
             text.Text = sb.ToString().TrimEnd(',');
