@@ -39,6 +39,7 @@
             project.Size = new Size(257, 252);
             project.TabIndex = 0;
             project.AfterSelect += project_AfterSelect;
+            project.MouseDown += project_MouseDown;
             // 
             // label1
             // 
@@ -58,6 +59,7 @@
             Controls.Add(project);
             Name = "ProjectForm";
             Text = "ProjectForm";
+            Load += ProjectForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
