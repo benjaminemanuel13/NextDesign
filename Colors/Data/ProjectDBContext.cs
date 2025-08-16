@@ -21,6 +21,7 @@ namespace SKcode.Data
         => optionsBuilder.UseSqlite("Data Source=" + DatabasePath);
 
         public DbSet<Game> Games { get; set; } = null!;
+        public DbSet<Level> Levels { get; set; } = null!;
         public DbSet<Pallette> Palletts { get; set; } = null!;
         public DbSet<Sprite> Sprites { get; set; }
         public DbSet<Tile8x8> Tiles8 { get; set; } = null!;

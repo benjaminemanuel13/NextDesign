@@ -56,15 +56,15 @@ namespace Colors
             contextMenu.Items.Clear();
             if (node.Tag is List<Sprite>)
             {
-                contextMenu.Items.Add("Add Sprite", null, (s, e) => { });
+                var item = contextMenu.Items.Add("Add Sprite", null, (s, e) => { AddSprite(node); });
             }
             else if (node.Tag is List<Tile8x8>)
             {
-                contextMenu.Items.Add("Add 8x8 Tile", null, (s, e) => { });
+                contextMenu.Items.Add("Add 8x8 Tile", null, (s, e) => { AddTile(node); });
             }
             else if (node.Tag is List<Tile16x16>)
             {
-                contextMenu.Items.Add("Add 16x16 Tile", null, (s, e) => { });
+                contextMenu.Items.Add("Add 16x16 Tile", null, (s, e) => { AddLargeTile(node); });
             }
             else if (node.Tag is Sprite)
             {
@@ -84,8 +84,90 @@ namespace Colors
             }
         }
 
+        void AddSprite(TreeNode node)
+        {
+            var levelTag = node.Parent.Tag as Level;
+
+            var level = Program.Project.Levels.Include(x => x.Sprites).Where(x => x.Id == levelTag.Id).FirstOrDefault();
+
+            var newSprite = new Sprite
+            {
+                Name = "New Sprite",
+                LevelId = level.Id,
+                Pixels = new byte[256],
+                Height = 16,
+                Width = 16,
+            };
+
+            for(int i = 0; i < newSprite.Pixels.Length; i++)
+            {
+                newSprite.Pixels[i] = 0xE3;
+            }
+
+            Program.Project.Sprites.Add(newSprite);
+            Program.Project.SaveChanges();
+
+            node.Nodes.Add(newSprite.Id.ToString(), "New Sprite");
+
+            LoadGames();
+        }
+
+        void AddTile(TreeNode node)
+        {
+            var levelTag = node.Parent.Tag as Level;
+
+            var level = Program.Project.Levels.Include(x => x.Tiles).FirstOrDefault(x => x.Id == levelTag.Id);
+
+            var newTile = new Tile8x8
+            {
+                Name = "New Tile",
+                LevelId = level.Id,
+                Pixels = new byte[64],
+            };
+
+            for (int i = 0; i < newTile.Pixels.Length; i++)
+            {
+                newTile.Pixels[i] = 0;
+            }
+
+            Program.Project.Tiles8.Add(newTile);
+            Program.Project.SaveChanges();
+
+            node.Nodes.Add(newTile.Id.ToString(), "New Tile");
+
+            LoadGames();
+        }
+
+        void AddLargeTile(TreeNode node)
+        {
+            var levelTag = node.Parent.Tag as Level;
+
+            var level = Program.Project.Levels.Include(x => x.Tiles16).FirstOrDefault(x => x.Id == levelTag.Id);
+
+            var newTile = new Tile16x16
+            {
+                Name = "New Tile",
+                LevelId = level.Id,
+                Pixels = new byte[256],
+            };
+
+            for (int i = 0; i < newTile.Pixels.Length; i++)
+            {
+                newTile.Pixels[i] = 0;
+            }
+
+            Program.Project.Tiles16.Add(newTile);
+            Program.Project.SaveChanges();
+
+            node.Nodes.Add(newTile.Id.ToString(), "New Tile");
+
+            LoadGames();
+        }
+
         private void LoadGames()
         {
+            project.Nodes.Clear();
+
             var games = Program.Project.Games.Include(x => x.Levels).ThenInclude(y => y.Sprites)
                 .Include(x => x.Levels).ThenInclude(y => y.Tiles).Include(x => x.Levels)
                 .ThenInclude(y => y.Tiles16).ToList();
@@ -93,10 +175,12 @@ namespace Colors
             foreach (var game in games)
             {
                 var node = project.Nodes.Add(game.Id.ToString(), game.Name);
+                node.Tag = game;
 
                 foreach (var level in game.Levels)
                 {
                     var levelNode = node.Nodes.Add(level.Id.ToString(), level.Name);
+                    levelNode.Tag = level;
 
                     var spritesNode = levelNode.Nodes.Add("Sprites", "Sprites");
                     spritesNode.Tag = level.Sprites;
