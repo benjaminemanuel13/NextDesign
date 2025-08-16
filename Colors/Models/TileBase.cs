@@ -13,6 +13,15 @@ namespace Colors.Models
 
 
         protected int endSlot = 0;
-        public virtual int EndSlot { get; set; }
+        public virtual int EndSlot {
+            get
+            {
+                return endSlot;
+            }
+            set
+            { 
+                endSlot = value;
+            }
+        }
     }
 }

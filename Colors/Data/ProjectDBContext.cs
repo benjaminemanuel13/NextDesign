@@ -25,6 +25,7 @@ namespace SKcode.Data
         public DbSet<Sprite> Sprites { get; set; }
         public DbSet<Tile8x8> Tiles8 { get; set; } = null!;
         public DbSet<Tile16x16> Tiles16 { get; set; } = null!;
+        public DbSet<TileMap> TilesMaps { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -103,7 +104,7 @@ namespace SKcode.Data
                 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F ];
 
             modelBuilder.Entity<Tile8x8>().HasData(
-                new Tile8x8 { Id = 1, LevelId = 1, Name = "Tile 01", Pixels = tile });
+                new Tile8x8 { Id = 1, LevelId = 1, Name = "Tile 01", Pixels = tile, StartSlot = 0, EndSlot = 0 });
 
             byte[] tile16 = [ 
                 // Tree 01
@@ -144,7 +145,7 @@ namespace SKcode.Data
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 ];
 
             modelBuilder.Entity<Tile16x16>().HasData(
-                new Tile16x16 { Id = 1, LevelId = 1, Name = "Tile 16 01", Pixels = tile16 });
+                new Tile16x16 { Id = 1, LevelId = 1, Name = "Tile 16 01", Pixels = tile16, StartSlot = 1, EndSlot = 4 });
 
             byte[] tilemap = new byte[1280];
 
