@@ -37,8 +37,20 @@ namespace Colors
                 //    g.FillRectangle(brush, x, y, CellSize, CellSize);
                 //}
 
+                using (Brush brush = new SolidBrush(Color.FromArgb(0, 0, 0)))
+                {
+                    g.DrawString(i.ToString(), DefaultFont, brush, new Point(x, y));
+                }
+
+                
+
                 g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
             }
+        }
+
+        private void TileMapForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

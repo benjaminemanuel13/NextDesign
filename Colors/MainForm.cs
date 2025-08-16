@@ -48,6 +48,7 @@ namespace Colors
             projectForm.SpriteForm = spriteForm;
             projectForm.Tile8Form = tileForm;
             projectForm.Tile16Form = tile16Form;
+            projectForm.TileMapForm = tileMapForm;
             projectForm.Show();
         }
 

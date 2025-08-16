@@ -37,6 +37,7 @@
             ClientSize = new Size(800, 450);
             Name = "TileMapForm";
             Text = "TileMapForm";
+            Load += TileMapForm_Load;
             ResumeLayout(false);
         }
 

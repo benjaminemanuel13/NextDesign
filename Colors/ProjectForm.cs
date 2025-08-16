@@ -23,6 +23,9 @@ namespace Colors
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SpriteForm SpriteForm { get; set; } = null!;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public TileMapForm TileMapForm { get; set; } = null!;
+
         private ContextMenuStrip contextMenu = new ContextMenuStrip();
 
         public ProjectForm()
@@ -118,6 +121,8 @@ namespace Colors
                         var newTile = tile16Node.Nodes.Add(tile.Id.ToString(), tile.Name);
                         newTile.Tag = tile;
                     }
+
+                    var tileMapNode = levelNode.Nodes.Add("TileMap", "Tile Map");
                 }
             }
         }

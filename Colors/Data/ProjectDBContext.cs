@@ -55,6 +55,11 @@ namespace SKcode.Data
                 .WithOne(p => p.Level)
                 .HasForeignKey(p => p.LevelId);
 
+            modelBuilder.Entity<Level>()
+                .HasOne(l => l.TileMap)
+                .WithOne(p => p.Level)
+                .HasForeignKey<TileMap>(p => p.LevelId);
+
             modelBuilder.Entity<Game>().HasData(
             new Game { Id = 1, Name = "Game 01", Author = "Ben", Version = "1.0.0" },
             new Game { Id = 2, Name = "Game 02", Author = "Ben", Version = "1.0.0" });
@@ -63,7 +68,7 @@ namespace SKcode.Data
             new Level { Id = 1, Name = "Level 01", GameId = 1 },
             new Level { Id = 2, Name = "Level 02", GameId = 1 });
 
-            byte[] pallette = [ 
+            byte[] pallette = [
                 0x8C, 0x0D, 0x89, 0x38, 0xE0, 0x8C, 0xFC, 0xE3, 0x1F, 0xFF, 0x70, 0x07, 0x00, 0xC7, 0x92, 0xAA ];
 
             modelBuilder.Entity<Pallette>().HasData(
@@ -140,6 +145,11 @@ namespace SKcode.Data
 
             modelBuilder.Entity<Tile16x16>().HasData(
                 new Tile16x16 { Id = 1, LevelId = 1, Name = "Tile 16 01", Pixels = tile16 });
+
+            byte[] tilemap = new byte[1280];
+
+            modelBuilder.Entity<TileMap>().HasData(
+            new TileMap { Id = 1, LevelId = 1, Name = "Tile Map 01", Colors = tilemap });
         }
     }
 }

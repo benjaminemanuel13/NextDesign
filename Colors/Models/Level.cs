@@ -21,6 +21,8 @@ namespace Colors.Models
 
         public List<Tile16x16> Tiles16 { get; set; }
 
+        public TileMap TileMap { get; set; }
+
         public Level()
         {
             
