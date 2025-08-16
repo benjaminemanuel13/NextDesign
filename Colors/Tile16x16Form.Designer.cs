@@ -40,6 +40,7 @@
             text.Location = new Point(335, 12);
             text.Multiline = true;
             text.Name = "text";
+            text.ScrollBars = ScrollBars.Vertical;
             text.Size = new Size(519, 426);
             text.TabIndex = 1;
             // 

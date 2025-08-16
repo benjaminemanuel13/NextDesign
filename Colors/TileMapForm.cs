@@ -16,6 +16,9 @@ namespace Colors
         const int CellSize = 20;
         const int GridSize = 40;
 
+        public byte[] tiles = new byte[1280];
+        private int currentIndex = 0;
+
         public TileMapForm()
         {
             InitializeComponent();
@@ -39,13 +42,33 @@ namespace Colors
 
                 using (Brush brush = new SolidBrush(Color.FromArgb(0, 0, 0)))
                 {
-                    g.DrawString(i.ToString(), DefaultFont, brush, new Point(x, y));
+                    g.DrawString(tiles[i].ToString(), DefaultFont, brush, new Point(x, y));
                 }
-
-                
 
                 g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
             }
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+
+            int col = e.X / CellSize;
+            int row = e.Y / CellSize;
+
+            if (col >= 0 && col < GridSize && row >= 0 && row < GridSize)
+            {
+                int index = row * GridSize + col;
+                currentIndex = index;
+            }
+        }
+
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            base.OnMouseClick(e);
+
+            tiles[currentIndex] = 1;// Tile8X8Form.theIndex;
+            this.Invalidate();
         }
 
         private void TileMapForm_Load(object sender, EventArgs e)
