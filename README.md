@@ -10,4 +10,8 @@ TileMap designer next to do, though I might do the assembly generation (skeleton
 
 Have added capability to add new Sprites, 8x8 Tiles and 16x16 Tiles which save in DB when added.
 
+[Edit 18/08/2025]
+
+The sprite, tile8 and tile16 forms populate from default data but you can't actually edit/save them without clicking on them in the Project Window.  Once selected it enables the Save button on the form.
+
 If you find this useful please let me know at benjaminemanuel13@gmail.com
