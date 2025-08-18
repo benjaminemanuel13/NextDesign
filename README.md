@@ -8,6 +8,6 @@ TileMap designer next to do, though I might do the assembly generation (skeleton
 
 [Edit 16/08/2025]
 
-Have added capability to add Sprites, 8x8 Tiles and 16x16 Tiles which save in DB when added.
+Have added capability to add new Sprites, 8x8 Tiles and 16x16 Tiles which save in DB when added.
 
 If you find this useful please let me know at benjaminemanuel13@gmail.com
