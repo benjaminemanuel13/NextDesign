@@ -64,7 +64,57 @@ namespace Colors
 
         private void palletteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void projectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            projectForm.Show();
+            projectForm.BringToFront();
+        }
+
+        private void pallettespritesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void x8TileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void x16TileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tileMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             
+        }
+
+        private void x16TileToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            tile16Form.Show();
+            tile16Form.BringToFront();
+        }
+
+        private void pallettespritesToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            palletteForm.Show();
+            palletteForm.BringToFront();
+        }
+
+        private void x8TileToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            tileForm.Show();
+            tileForm.BringToFront();
+        }
+
+        private void tileMapToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            tileMapForm.Show();
+            tileMapForm.BringToFront();
         }
     }
 }
