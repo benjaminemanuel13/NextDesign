@@ -31,6 +31,7 @@
             textBox1 = new TextBox();
             generate = new Button();
             save = new Button();
+            not = new Label();
             SuspendLayout();
             // 
             // textBox1
@@ -64,11 +65,22 @@
             save.UseVisualStyleBackColor = true;
             save.Click += save_Click;
             // 
+            // not
+            // 
+            not.AutoSize = true;
+            not.ForeColor = Color.IndianRed;
+            not.Location = new Point(35, 415);
+            not.Name = "not";
+            not.Size = new Size(98, 15);
+            not.TabIndex = 7;
+            not.Text = "No Sprite Loaded";
+            // 
             // SpriteForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(866, 450);
+            Controls.Add(not);
             Controls.Add(save);
             Controls.Add(generate);
             Controls.Add(textBox1);
@@ -83,5 +95,6 @@
         private TextBox textBox1;
         private Button generate;
         private Button save;
+        private Label not;
     }
 }
