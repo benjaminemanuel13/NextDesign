@@ -210,5 +210,14 @@ namespace Colors
             bool hasChanges = _context.ChangeTracker.HasChanges();
             int affected = _context.SaveChanges(); // should be > 0
         }
+
+        private void select_Click(object sender, EventArgs e)
+        {
+            if (CurrentTile == null) return;
+
+            var tile = _context.Tiles8.Where(x => x.Id == CurrentTile.Id).First();
+
+            MainForm.TileMapForm.CurrentTile = tile;
+        }
     }
 }

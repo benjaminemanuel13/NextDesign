@@ -129,7 +129,7 @@ namespace Colors
                 for (var x = 0; x < 8; x++)
                 {
                     var line = "db ";
-                    for (var y = 0; y < 8; y+= 2)
+                    for (var y = 0; y < 8; y += 2)
                     {
                         var hex1 = colors[count].ToString("X2");
                         var hex2 = colors[count + 1].ToString("X2");
@@ -175,6 +175,15 @@ namespace Colors
 
             bool hasChanges = _context.ChangeTracker.HasChanges();
             int affected = _context.SaveChanges(); // should be > 0
+        }
+
+        private void select_Click(object sender, EventArgs e)
+        {
+            if (CurrentTile == null) return;
+
+            var tile = _context.Tiles16.Where(x => x.Id == CurrentTile.Id).First();
+
+            MainForm.TileMapForm.CurrentTile = tile;
         }
     }
 }

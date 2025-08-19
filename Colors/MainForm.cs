@@ -12,6 +12,9 @@ namespace Colors
 {
     public partial class MainForm : Form
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public static TileMapForm TileMapForm { get; private set; } = null!;
+
         PalletteForm palletteForm = new PalletteForm();
         SpriteForm spriteForm = new SpriteForm();
         Tile8x8Form tileForm = new Tile8x8Form();
@@ -32,6 +35,8 @@ namespace Colors
 
             tileMapForm.MdiParent = this;
             tileMapForm.Show();
+
+            TileMapForm = tileMapForm;
 
             tileForm.MdiParent = this;
             tileForm.Pallette = Program.Project.Palletts.First();

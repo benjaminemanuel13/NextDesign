@@ -31,6 +31,7 @@
             text = new TextBox();
             generate = new Button();
             save = new Button();
+            select = new Button();
             SuspendLayout();
             // 
             // text
@@ -65,11 +66,22 @@
             save.UseVisualStyleBackColor = true;
             save.Click += save_Click;
             // 
+            // select
+            // 
+            select.Location = new Point(12, 415);
+            select.Name = "select";
+            select.Size = new Size(121, 23);
+            select.TabIndex = 6;
+            select.Text = "Select for tilemap";
+            select.UseVisualStyleBackColor = true;
+            select.Click += select_Click;
+            // 
             // Tile16x16Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(866, 450);
+            Controls.Add(select);
             Controls.Add(save);
             Controls.Add(generate);
             Controls.Add(text);
@@ -84,5 +96,6 @@
         private TextBox text;
         private Button generate;
         private Button save;
+        private Button select;
     }
 }

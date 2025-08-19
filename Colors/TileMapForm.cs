@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Colors.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,9 @@ namespace Colors
 
         public byte[] tiles = new byte[1280];
         private int currentIndex = 0;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public TileBase CurrentTile { get; set; }
 
         public TileMapForm()
         {
@@ -53,6 +57,18 @@ namespace Colors
         {
             base.OnMouseMove(e);
 
+            if (CurrentTile == null) return;
+
+            bool show4 = false;
+            if (CurrentTile is Tile8x8)
+            {
+                show4 = false;
+            }
+            else if (CurrentTile is Tile16x16)
+            {
+                show4 = true;
+            }
+
             int col = e.X / CellSize;
             int row = e.Y / CellSize;
 
@@ -65,13 +81,13 @@ namespace Colors
 
                 g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
 
-                if (x < 39 * CellSize) {
+                if (x < 39 * CellSize && show4) {
                     g.DrawRectangle(Pens.Black, x + CellSize, y, CellSize, CellSize);
                 }
-                if (y < 31 * CellSize) {
+                if (y < 31 * CellSize && show4) {
                     g.DrawRectangle(Pens.Black, x, y + CellSize, CellSize, CellSize);
                 }
-                if (x < 39 * CellSize && y < 31 * CellSize) {
+                if (x < 39 * CellSize && y < 31 * CellSize && show4) {
                     g.DrawRectangle(Pens.Black, x + CellSize, y + CellSize, CellSize, CellSize);
                 }
                 
@@ -83,15 +99,15 @@ namespace Colors
 
                 g.DrawRectangle(Pens.LightGoldenrodYellow, x, y, CellSize, CellSize);
 
-                if (x < 39 * CellSize)
+                if (x < 39 * CellSize && show4)
                 {
                     g.DrawRectangle(Pens.LightGoldenrodYellow, x + CellSize, y, CellSize, CellSize);
                 }
-                if (y < 31 * CellSize)
+                if (y < 31 * CellSize && show4)
                 {
                     g.DrawRectangle(Pens.LightGoldenrodYellow, x, y + CellSize, CellSize, CellSize);
                 }
-                if (x < 39 * CellSize && y < 31 * CellSize)
+                if (x < 39 * CellSize && y < 31 * CellSize && show4)
                 {
                     g.DrawRectangle(Pens.LightGoldenrodYellow, x + CellSize, y + CellSize, CellSize, CellSize);
                 }
@@ -101,6 +117,15 @@ namespace Colors
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
+
+            if (CurrentTile == null) return;
+
+            if (CurrentTile is Tile8x8)
+            {
+            }
+            else if (CurrentTile is Tile16x16)
+            {
+            }
 
             tiles[currentIndex] = 1;
 
