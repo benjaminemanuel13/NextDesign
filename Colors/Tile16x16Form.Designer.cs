@@ -32,6 +32,7 @@
             generate = new Button();
             save = new Button();
             select = new Button();
+            not = new Label();
             SuspendLayout();
             // 
             // text
@@ -68,6 +69,7 @@
             // 
             // select
             // 
+            select.Enabled = false;
             select.Location = new Point(12, 415);
             select.Name = "select";
             select.Size = new Size(121, 23);
@@ -76,11 +78,22 @@
             select.UseVisualStyleBackColor = true;
             select.Click += select_Click;
             // 
+            // not
+            // 
+            not.AutoSize = true;
+            not.ForeColor = Color.IndianRed;
+            not.Location = new Point(12, 397);
+            not.Name = "not";
+            not.Size = new Size(87, 15);
+            not.TabIndex = 7;
+            not.Text = "No Tile Loaded";
+            // 
             // Tile16x16Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(866, 450);
+            Controls.Add(not);
             Controls.Add(select);
             Controls.Add(save);
             Controls.Add(generate);
@@ -97,5 +110,6 @@
         private Button generate;
         private Button save;
         private Button select;
+        private Label not;
     }
 }

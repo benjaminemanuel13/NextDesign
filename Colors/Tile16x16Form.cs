@@ -58,6 +58,8 @@ namespace Colors
             this.Invalidate();
 
             save.Enabled = true;
+            select.Enabled = true;
+            not.Visible = false;
         }
 
         protected override void OnPaint(PaintEventArgs e)

@@ -32,6 +32,7 @@
             text = new TextBox();
             save = new Button();
             select = new Button();
+            not = new Label();
             SuspendLayout();
             // 
             // generate
@@ -67,6 +68,7 @@
             // 
             // select
             // 
+            select.Enabled = false;
             select.Location = new Point(384, 317);
             select.Name = "select";
             select.Size = new Size(187, 23);
@@ -75,11 +77,22 @@
             select.UseVisualStyleBackColor = true;
             select.Click += select_Click;
             // 
+            // not
+            // 
+            not.AutoSize = true;
+            not.ForeColor = Color.IndianRed;
+            not.Location = new Point(12, 270);
+            not.Name = "not";
+            not.Size = new Size(87, 15);
+            not.TabIndex = 6;
+            not.Text = "No Tile Loaded";
+            // 
             // Tile8x8Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(588, 348);
+            Controls.Add(not);
             Controls.Add(select);
             Controls.Add(save);
             Controls.Add(text);
@@ -96,5 +109,6 @@
         private TextBox text;
         private Button save;
         private Button select;
+        private Label not;
     }
 }
