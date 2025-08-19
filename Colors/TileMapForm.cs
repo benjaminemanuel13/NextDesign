@@ -56,10 +56,45 @@ namespace Colors
             int col = e.X / CellSize;
             int row = e.Y / CellSize;
 
-            if (col >= 0 && col < GridSize && row >= 0 && row < GridSize)
+            Graphics g = this.CreateGraphics();
+
+            if (col >= 0 && col < GridSize && row >= 0 && row < 32)
             {
+                int x = (currentIndex % GridSize) * CellSize;
+                int y = (currentIndex / GridSize) * CellSize;
+
+                g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
+
+                if (x < 39 * CellSize) {
+                    g.DrawRectangle(Pens.Black, x + CellSize, y, CellSize, CellSize);
+                }
+                if (y < 31 * CellSize) {
+                    g.DrawRectangle(Pens.Black, x, y + CellSize, CellSize, CellSize);
+                }
+                if (x < 39 * CellSize && y < 31 * CellSize) {
+                    g.DrawRectangle(Pens.Black, x + CellSize, y + CellSize, CellSize, CellSize);
+                }
+                
                 int index = row * GridSize + col;
                 currentIndex = index;
+
+                x = (index % GridSize) * CellSize;
+                y = (index / GridSize) * CellSize;
+
+                g.DrawRectangle(Pens.LightGoldenrodYellow, x, y, CellSize, CellSize);
+
+                if (x < 39 * CellSize)
+                {
+                    g.DrawRectangle(Pens.LightGoldenrodYellow, x + CellSize, y, CellSize, CellSize);
+                }
+                if (y < 31 * CellSize)
+                {
+                    g.DrawRectangle(Pens.LightGoldenrodYellow, x, y + CellSize, CellSize, CellSize);
+                }
+                if (x < 39 * CellSize && y < 31 * CellSize)
+                {
+                    g.DrawRectangle(Pens.LightGoldenrodYellow, x + CellSize, y + CellSize, CellSize, CellSize);
+                }
             }
         }
 
@@ -67,8 +102,22 @@ namespace Colors
         {
             base.OnMouseClick(e);
 
-            tiles[currentIndex] = 1;// Tile8X8Form.theIndex;
-            this.Invalidate();
+            tiles[currentIndex] = 1;
+
+            int x = (currentIndex % GridSize) * CellSize;
+            int y = (currentIndex / GridSize) * CellSize;
+
+            Graphics g = this.CreateGraphics();
+
+            using (Brush brush = new SolidBrush(Color.White))
+            {
+                g.FillRectangle(brush, x, y, CellSize, CellSize);
+            }
+            
+            using (Brush brush = new SolidBrush(Color.FromArgb(0, 0, 0)))
+            {
+                g.DrawString(tiles[currentIndex].ToString(), DefaultFont, brush, new Point(x, y));
+            }
         }
 
         private void TileMapForm_Load(object sender, EventArgs e)
