@@ -90,7 +90,7 @@ namespace Colors
 
         private void tileMapToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void x16TileToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -115,6 +115,17 @@ namespace Colors
         {
             tileMapForm.Show();
             tileMapForm.BringToFront();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void generateProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var generateProjectForm = new GenerateProjectForm();
+            generateProjectForm.ShowDialog(this);
         }
     }
 }

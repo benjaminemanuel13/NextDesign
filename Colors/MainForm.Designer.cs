@@ -40,12 +40,14 @@
             x8TileToolStripMenuItem = new ToolStripMenuItem();
             x16TileToolStripMenuItem = new ToolStripMenuItem();
             tileMapToolStripMenuItem = new ToolStripMenuItem();
+            projectToolStripMenuItem1 = new ToolStripMenuItem();
+            generateProjectToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fIleToolStripMenuItem, windowToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fIleToolStripMenuItem, windowToolStripMenuItem, projectToolStripMenuItem1 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(680, 24);
@@ -62,26 +64,27 @@
             // newProjectToolStripMenuItem
             // 
             newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            newProjectToolStripMenuItem.Size = new Size(143, 22);
+            newProjectToolStripMenuItem.Size = new Size(180, 22);
             newProjectToolStripMenuItem.Text = "New Project";
             newProjectToolStripMenuItem.Click += newProjectToolStripMenuItem_Click;
             // 
             // openProjectToolStripMenuItem
             // 
             openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            openProjectToolStripMenuItem.Size = new Size(143, 22);
+            openProjectToolStripMenuItem.Size = new Size(180, 22);
             openProjectToolStripMenuItem.Text = "Open Project";
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(140, 6);
+            toolStripMenuItem1.Size = new Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(143, 22);
+            exitToolStripMenuItem.Size = new Size(180, 22);
             exitToolStripMenuItem.Text = "E&xit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // windowToolStripMenuItem
             // 
@@ -93,37 +96,51 @@
             // projectToolStripMenuItem
             // 
             projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-            projectToolStripMenuItem.Size = new Size(180, 22);
+            projectToolStripMenuItem.Size = new Size(179, 22);
             projectToolStripMenuItem.Text = "Project";
             projectToolStripMenuItem.Click += projectToolStripMenuItem_Click;
             // 
             // pallettespritesToolStripMenuItem
             // 
             pallettespritesToolStripMenuItem.Name = "pallettespritesToolStripMenuItem";
-            pallettespritesToolStripMenuItem.Size = new Size(180, 22);
+            pallettespritesToolStripMenuItem.Size = new Size(179, 22);
             pallettespritesToolStripMenuItem.Text = "256 Pallette (sprites)";
             pallettespritesToolStripMenuItem.Click += pallettespritesToolStripMenuItem_Click_1;
             // 
             // x8TileToolStripMenuItem
             // 
             x8TileToolStripMenuItem.Name = "x8TileToolStripMenuItem";
-            x8TileToolStripMenuItem.Size = new Size(180, 22);
+            x8TileToolStripMenuItem.Size = new Size(179, 22);
             x8TileToolStripMenuItem.Text = "8x8 Tile";
             x8TileToolStripMenuItem.Click += x8TileToolStripMenuItem_Click_1;
             // 
             // x16TileToolStripMenuItem
             // 
             x16TileToolStripMenuItem.Name = "x16TileToolStripMenuItem";
-            x16TileToolStripMenuItem.Size = new Size(180, 22);
+            x16TileToolStripMenuItem.Size = new Size(179, 22);
             x16TileToolStripMenuItem.Text = "16x16 Tile";
             x16TileToolStripMenuItem.Click += x16TileToolStripMenuItem_Click_1;
             // 
             // tileMapToolStripMenuItem
             // 
             tileMapToolStripMenuItem.Name = "tileMapToolStripMenuItem";
-            tileMapToolStripMenuItem.Size = new Size(180, 22);
+            tileMapToolStripMenuItem.Size = new Size(179, 22);
             tileMapToolStripMenuItem.Text = "Tile Map";
             tileMapToolStripMenuItem.Click += tileMapToolStripMenuItem_Click_1;
+            // 
+            // projectToolStripMenuItem1
+            // 
+            projectToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { generateProjectToolStripMenuItem });
+            projectToolStripMenuItem1.Name = "projectToolStripMenuItem1";
+            projectToolStripMenuItem1.Size = new Size(56, 20);
+            projectToolStripMenuItem1.Text = "Project";
+            // 
+            // generateProjectToolStripMenuItem
+            // 
+            generateProjectToolStripMenuItem.Name = "generateProjectToolStripMenuItem";
+            generateProjectToolStripMenuItem.Size = new Size(180, 22);
+            generateProjectToolStripMenuItem.Text = "Generate Project";
+            generateProjectToolStripMenuItem.Click += generateProjectToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -157,5 +174,7 @@
         private ToolStripMenuItem x8TileToolStripMenuItem;
         private ToolStripMenuItem x16TileToolStripMenuItem;
         private ToolStripMenuItem tileMapToolStripMenuItem;
+        private ToolStripMenuItem projectToolStripMenuItem1;
+        private ToolStripMenuItem generateProjectToolStripMenuItem;
     }
 }
