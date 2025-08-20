@@ -27,6 +27,8 @@ namespace SKcode.Data
         public DbSet<Tile8x8> Tiles8 { get; set; } = null!;
         public DbSet<Tile16x16> Tiles16 { get; set; } = null!;
         public DbSet<TileMap> TilesMaps { get; set; } = null!;
+        public DbSet<TileLookup> TileLookups { get; set; } = null!;
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -148,10 +150,21 @@ namespace SKcode.Data
             modelBuilder.Entity<Tile16x16>().HasData(
                 new Tile16x16 { Id = 1, LevelId = 1, Name = "Tile 16 01", Pixels = tile16, StartSlot = 1, EndSlot = 4 });
 
-            byte[] tilemap = new byte[1280];
+            int[] tilemap = new int[1280];
+
+            for(int i = 0; i < tilemap.Length; i++)
+            {
+                tilemap[i] = 1;
+            }
+
+            tilemap[1] = 2;
 
             modelBuilder.Entity<TileMap>().HasData(
-            new TileMap { Id = 1, LevelId = 1, Name = "Tile Map 01", Colors = tilemap });
+            new TileMap { Id = 1, LevelId = 1, Name = "Tile Map 01", LookupIds = tilemap });
+
+            modelBuilder.Entity<TileLookup>().HasData(
+                new TileLookup { Id = 1, Type = (TileType)0, TileId = 1 },
+                new TileLookup { Id = 2, Type = (TileType)1, TileId = 1});
         }
     }
 }

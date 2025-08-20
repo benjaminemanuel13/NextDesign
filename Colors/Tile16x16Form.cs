@@ -23,7 +23,7 @@ namespace Colors
 
         private Tile16x16 CurrentTile { get; set; }
 
-        const int CellSize = 20;
+        const int CellSize = 16;
         const int GridSize = 16;
 
         public byte[] colors = new byte[256];
@@ -68,16 +68,73 @@ namespace Colors
 
             Graphics g = e.Graphics;
 
-            for (int i = 0; i < 256; i++)
+            var count = 0;
+            
+            for (int i = 0; i < 8; i++)
             {
-                int x = (i % GridSize) * CellSize;
-                int y = (i / GridSize) * CellSize;
-
-                var (r, gVal, b) = ConvertRGB332ToRGB888((byte)Pallette.Colors[colors[i]]);
-                using (Brush brush = new SolidBrush(Color.FromArgb(r, gVal, b)))
+                for (int j = 0; j < 8; j++)
                 {
-                    g.FillRectangle(brush, x, y, CellSize, CellSize);
-                    g.DrawRectangle(Pens.WhiteSmoke, x, y, CellSize, CellSize);
+                    int x = j * CellSize;
+                    int y = i * CellSize;
+
+                    var (r, gVal, b) = ConvertRGB332ToRGB888((byte)Tile8X8Form.Pallette.Colors[colors[count++]]);
+                    using (Brush brush = new SolidBrush(Color.FromArgb(r, gVal, b)))
+                    {
+                        g.FillRectangle(brush, x, y, CellSize, CellSize);
+                        g.DrawRectangle(Pens.WhiteSmoke, x, y, CellSize, CellSize);
+                    }
+                }
+            }
+            
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    int x = j * CellSize;
+                    int y = i * CellSize;
+                    var left = x + (CellSize * 8);
+
+                    var (r, gVal, b) = ConvertRGB332ToRGB888((byte)Tile8X8Form.Pallette.Colors[colors[count++]]);
+                    using (Brush brush = new SolidBrush(Color.FromArgb(r, gVal, b)))
+                    {
+                        g.FillRectangle(brush, left, y, CellSize, CellSize);
+                        g.DrawRectangle(Pens.WhiteSmoke, left, y, CellSize, CellSize);
+                    }
+                }
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    int x = j * CellSize;
+                    int y = i * CellSize;
+                    var top = y + (CellSize * 8);
+
+                    var (r, gVal, b) = ConvertRGB332ToRGB888((byte)Tile8X8Form.Pallette.Colors[colors[count++]]);
+                    using (Brush brush = new SolidBrush(Color.FromArgb(r, gVal, b)))
+                    {
+                        g.FillRectangle(brush, x, top, CellSize, CellSize);
+                        g.DrawRectangle(Pens.WhiteSmoke, x, top, CellSize, CellSize);
+                    }
+                }
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    int x = j * CellSize;
+                    int y = i * CellSize;
+                    var left = x + (CellSize * 8);
+                    var top = y + (CellSize * 8);
+
+                    var (r, gVal, b) = ConvertRGB332ToRGB888((byte)Tile8X8Form.Pallette.Colors[colors[count++]]);
+                    using (Brush brush = new SolidBrush(Color.FromArgb(r, gVal, b)))
+                    {
+                        g.FillRectangle(brush, left, top, CellSize, CellSize);
+                        g.DrawRectangle(Pens.WhiteSmoke, left, top, CellSize, CellSize);
+                    }
                 }
             }
         }
@@ -91,7 +148,25 @@ namespace Colors
 
             if (col >= 0 && col < GridSize && row >= 0 && row < GridSize)
             {
-                int index = row * GridSize + col;
+                int index = 0;
+
+                if (row < 8 && col < 8)
+                {
+                    index = row * 8 + col;
+                }
+                else if (row < 8 && col >= 8)
+                {
+                    index = row * 8 + (col - 8) + 64;
+                }
+                else if (row >= 8 && col < 8)
+                {
+                    index = (row - 8) * 8 + col + 128;
+                }
+                else
+                {
+                    index = (row - 8) * 8 + (col - 8) + 192;
+                }
+                
                 var (r, g, b) = ConvertRGB332ToRGB888((byte)index);
 
                 string tip = $"Index: 0x{index:X2}\nRGB888: ({r}, {g}, {b})";
@@ -103,9 +178,14 @@ namespace Colors
         {
             base.OnMouseClick(e);
 
-            colors[currentIndex] = Tile8X8Form.theIndex;
+            int col = e.X / CellSize;
+            int row = e.Y / CellSize;
 
-            this.Invalidate();
+            if (col >= 0 && col < GridSize && row >= 0 && row < GridSize)
+            {
+                colors[currentIndex] = Tile8X8Form.theIndex;
+                this.Invalidate();
+            }
         }
 
         private static (byte r, byte g, byte b) ConvertRGB332ToRGB888(byte rgb332)
@@ -126,8 +206,17 @@ namespace Colors
             var sb = new StringBuilder();
 
             var count = 0;
-            for (int z = 1; z < 5; z++)
+            for (int z = 0; z < 4; z++)
             {
+                if (z == 2)
+                {
+                    count = 128;
+                }
+                else if (z == 3)
+                {
+                    count = 192;
+                }
+
                 for (var x = 0; x < 8; x++)
                 {
                     var line = "db ";
@@ -141,7 +230,6 @@ namespace Colors
                         line += final;
                         count += 2;
                     }
-                    count += 8;
                     line = line.Substring(0, line.Length - 2);
                     sb.AppendLine(line);
                 }
@@ -150,15 +238,7 @@ namespace Colors
                 {
                     count = 8;
                 }
-                else if (z == 2)
-                {
-                    count = 16 * 8;
-                }
-                else if (z == 3)
-                {
-                    count = (16 * 8) + 8;
-                }
-
+                
                 sb.AppendLine();
             }
 
@@ -170,9 +250,41 @@ namespace Colors
             var tile = _context.Tiles16.Where(x => x.Id == CurrentTile.Id).First();
             tile.Pixels = new byte[CurrentTile.Pixels.Length];
 
-            for (int i = 0; i < CurrentTile.Pixels.Length; i++)
+            int count = 0;
+            for (int i = 0; i < 8; i++)
             {
-                tile.Pixels[i] = colors[i];
+                for (int j = 0; j < 8; j++)
+                {
+                    int index = i * 8 + j;
+                    tile.Pixels[index] = colors[count++];
+                }
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    int index = (i * 8 + j) + 64;
+                    tile.Pixels[index] = colors[count++];
+                }
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    int index = (i * 8 + j) + (64 * 2);
+                    tile.Pixels[index] = colors[count++];
+                }
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    int index = (i * 8 + j) + (64 * 3);
+                    tile.Pixels[index] = colors[count++];
+                }
             }
 
             bool hasChanges = _context.ChangeTracker.HasChanges();

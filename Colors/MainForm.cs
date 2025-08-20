@@ -36,8 +36,6 @@ namespace Colors
             tileMapForm.MdiParent = this;
             tileMapForm.Show();
 
-            TileMapForm = tileMapForm;
-
             tileForm.MdiParent = this;
             tileForm.Pallette = Program.Project.Palletts.First();
             tileForm.colors = Program.Project.Tiles8.First().Pixels.ToArray();
@@ -48,6 +46,9 @@ namespace Colors
             tile16Form.Tile8X8Form = tileForm;
             tile16Form.colors = Program.Project.Tiles16.First().Pixels.ToArray();
             tile16Form.Show();
+
+            TileMapForm = tileMapForm;
+            tileMapForm.Tile8X8Form = tileForm;
 
             projectForm.MdiParent = this;
             projectForm.SpriteForm = spriteForm;

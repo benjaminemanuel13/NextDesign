@@ -68,15 +68,18 @@ namespace Colors
             }
             else if (node.Tag is Sprite)
             {
+                contextMenu.Items.Add("Rename Sprite", null, (s, e) => { /* Rename logic */ });
                 contextMenu.Items.Add("Delete Sprite", null, (s, e) => { /* Delete logic */ });
             }
             else if (node.Tag is Tile8x8)
             {
-                contextMenu.Items.Add("Delete 8x8 Tile", null, (s, e) => { /* Delete logic */ });
+                contextMenu.Items.Add("Rename Tile", null, (s, e) => { /* Rename logic */ });
+                contextMenu.Items.Add("Delete Tile", null, (s, e) => { /* Delete logic */ });
             }
             else if (node.Tag is Tile16x16)
             {
-                contextMenu.Items.Add("Delete 16x16 Tile", null, (s, e) => { /* Delete logic */ });
+                contextMenu.Items.Add("Rename Tile", null, (s, e) => { /* Rename logic */ });
+                contextMenu.Items.Add("Delete Tile", null, (s, e) => { /* Delete logic */ });
             }
             else
             {

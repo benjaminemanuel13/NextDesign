@@ -12,8 +12,7 @@ namespace Colors.Models
 
         public int LevelId { get; set; } = 0;
         public Level Level { get; set; }
-
         public string Name { get; set; } = string.Empty;
-        public byte[] Colors { get; set; } = new byte[1280];
+        public int[] LookupIds { get; set; } = new int[1280];
     }
 }
