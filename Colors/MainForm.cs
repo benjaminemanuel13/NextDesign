@@ -128,5 +128,10 @@ namespace Colors
             var generateProjectForm = new GenerateProjectForm();
             generateProjectForm.ShowDialog(this);
         }
+
+        private void exportBINFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

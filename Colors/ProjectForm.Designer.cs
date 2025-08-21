@@ -57,7 +57,9 @@
             ClientSize = new Size(283, 450);
             Controls.Add(label1);
             Controls.Add(project);
+            MaximizeBox = false;
             Name = "ProjectForm";
+            ShowInTaskbar = false;
             Text = "ProjectForm";
             Load += ProjectForm_Load;
             ResumeLayout(false);

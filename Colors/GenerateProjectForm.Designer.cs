@@ -71,6 +71,7 @@
             path.Name = "path";
             path.Size = new Size(438, 23);
             path.TabIndex = 3;
+            path.Text = "C:\\Users\\benja\\source\\Next\\Game";
             // 
             // label3
             // 
@@ -109,7 +110,7 @@
             cancel.UseVisualStyleBackColor = true;
             cancel.Click += cancel_Click;
             // 
-            // GenerateProject
+            // GenerateProjectForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -126,7 +127,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "GenerateProject";
+            Name = "GenerateProjectForm";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Generate Project";

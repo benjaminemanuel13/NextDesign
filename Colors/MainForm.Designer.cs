@@ -42,12 +42,14 @@
             tileMapToolStripMenuItem = new ToolStripMenuItem();
             projectToolStripMenuItem1 = new ToolStripMenuItem();
             generateProjectToolStripMenuItem = new ToolStripMenuItem();
+            exportToolStripMenuItem = new ToolStripMenuItem();
+            exportBINFilesToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fIleToolStripMenuItem, windowToolStripMenuItem, projectToolStripMenuItem1 });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fIleToolStripMenuItem, projectToolStripMenuItem1, exportToolStripMenuItem, windowToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(680, 24);
@@ -64,25 +66,25 @@
             // newProjectToolStripMenuItem
             // 
             newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            newProjectToolStripMenuItem.Size = new Size(180, 22);
+            newProjectToolStripMenuItem.Size = new Size(143, 22);
             newProjectToolStripMenuItem.Text = "New Project";
             newProjectToolStripMenuItem.Click += newProjectToolStripMenuItem_Click;
             // 
             // openProjectToolStripMenuItem
             // 
             openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            openProjectToolStripMenuItem.Size = new Size(180, 22);
+            openProjectToolStripMenuItem.Size = new Size(143, 22);
             openProjectToolStripMenuItem.Text = "Open Project";
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(177, 6);
+            toolStripMenuItem1.Size = new Size(140, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(143, 22);
             exitToolStripMenuItem.Text = "E&xit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -142,6 +144,20 @@
             generateProjectToolStripMenuItem.Text = "Generate Project";
             generateProjectToolStripMenuItem.Click += generateProjectToolStripMenuItem_Click;
             // 
+            // exportToolStripMenuItem
+            // 
+            exportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportBINFilesToolStripMenuItem });
+            exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            exportToolStripMenuItem.Size = new Size(52, 20);
+            exportToolStripMenuItem.Text = "Export";
+            // 
+            // exportBINFilesToolStripMenuItem
+            // 
+            exportBINFilesToolStripMenuItem.Name = "exportBINFilesToolStripMenuItem";
+            exportBINFilesToolStripMenuItem.Size = new Size(180, 22);
+            exportBINFilesToolStripMenuItem.Text = "Export .BIN files";
+            exportBINFilesToolStripMenuItem.Click += exportBINFilesToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -176,5 +192,7 @@
         private ToolStripMenuItem tileMapToolStripMenuItem;
         private ToolStripMenuItem projectToolStripMenuItem1;
         private ToolStripMenuItem generateProjectToolStripMenuItem;
+        private ToolStripMenuItem exportToolStripMenuItem;
+        private ToolStripMenuItem exportBINFilesToolStripMenuItem;
     }
 }
