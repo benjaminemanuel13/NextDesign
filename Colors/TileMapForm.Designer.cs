@@ -28,13 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
+            save = new Button();
+            button1 = new Button();
             SuspendLayout();
+            // 
+            // save
+            // 
+            save.Location = new Point(12, 518);
+            save.Name = "save";
+            save.Size = new Size(75, 23);
+            save.TabIndex = 0;
+            save.Text = "Save";
+            save.UseVisualStyleBackColor = true;
+            save.Click += save_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(93, 518);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 1;
+            button1.Text = "Export...";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // TileMapForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1084, 679);
+            ClientSize = new Size(711, 553);
+            Controls.Add(button1);
+            Controls.Add(save);
             Name = "TileMapForm";
             Text = "TileMapForm";
             Load += TileMapForm_Load;
@@ -42,5 +66,8 @@
         }
 
         #endregion
+
+        private Button save;
+        private Button button1;
     }
 }

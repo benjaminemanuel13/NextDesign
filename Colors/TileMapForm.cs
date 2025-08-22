@@ -33,7 +33,7 @@ namespace Colors
             var thesetiles = Program.Project.TilesMaps.First();
 
             var count = 0;
-            foreach(var id in thesetiles.LookupIds)
+            foreach (var id in thesetiles.LookupIds)
             {
                 tiles[count++] = id;
             }
@@ -219,16 +219,19 @@ namespace Colors
 
                 g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
 
-                if (x < 39 * CellSize && show4) {
+                if (x < 39 * CellSize && show4)
+                {
                     g.DrawRectangle(Pens.Black, x + CellSize, y, CellSize, CellSize);
                 }
-                if (y < 31 * CellSize && show4) {
+                if (y < 31 * CellSize && show4)
+                {
                     g.DrawRectangle(Pens.Black, x, y + CellSize, CellSize, CellSize);
                 }
-                if (x < 39 * CellSize && y < 31 * CellSize && show4) {
+                if (x < 39 * CellSize && y < 31 * CellSize && show4)
+                {
                     g.DrawRectangle(Pens.Black, x + CellSize, y + CellSize, CellSize, CellSize);
                 }
-                
+
                 int index = row * GridSize + col;
                 currentIndex = index;
 
@@ -283,6 +286,84 @@ namespace Colors
         private void TileMapForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            byte[] output = new byte[1280];
+            int count = 0;
+            byte tilePos = 0;
+
+            // int: id, int: position in output array
+            Dictionary<int, byte> tileMap = new Dictionary<int, byte>();
+
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                var tileId = tiles[i];
+
+                if (tileId == 0) continue;
+
+                var lookup = Program.Project.TileLookups.Where(x => x.Id == tileId).First();
+
+                byte newPos = 0;
+
+                if (lookup.Type == TileType.Tile8x8)
+                {
+                    if (!tileMap.ContainsKey(tileId))
+                    {
+                        tileMap.Add(tileId, tilePos);
+                        newPos = tilePos;
+                        output[i] = tilePos++;
+
+                        var tile = Program.Project.Tiles8.Find(lookup.TileId);
+                        // Write Tile To BIN file here
+                    }
+                    else
+                    {
+                        newPos = tileMap[tileId];
+                        output[i] = newPos;
+                    }
+                }
+                else if (lookup.Type == TileType.Tile16x16)
+                {
+                    if (!tileMap.ContainsKey(tileId))
+                    {
+                        tileMap.Add(tileId, tilePos);
+                        output[i] = tilePos;
+                        newPos = tilePos;
+                        tilePos += 4;
+
+                        var tile = Program.Project.Tiles16.Find(lookup.TileId);
+                        // Write Tile To BIN file here (x4 tiles)
+                    }
+                    else
+                    {
+                        newPos = tileMap[tileId];
+                        output[i] = newPos;
+                    }
+
+                    tiles[i + 1] = 0;
+                    output[i + 1] = ++newPos;
+
+                    if (i < 1240)
+                    {
+                        tiles[i + 40] = 0;
+                        output[i + 40] = ++newPos;
+
+                        tiles[i + 41] = 0;
+                        output[i + 41] = ++newPos;
+                    }
+                }
+            }
+
+            //output should contain the final tilemap
         }
     }
 }
