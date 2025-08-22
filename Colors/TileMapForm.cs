@@ -337,7 +337,6 @@ namespace Colors
                         output[i] = tilePos++;
 
                         var tile = Program.Project.Tiles8.Find(lookup.TileId);
-                        // Write Tile To BIN file here
                         var data = Save8x8Tile(tile.Pixels);
                         writer.Write(data);
                     }
@@ -357,8 +356,6 @@ namespace Colors
                         tilePos += 4;
 
                         var tile = Program.Project.Tiles16.Find(lookup.TileId);
-                        // Write Tile To BIN file here (x4 tiles)
-
                         var data = Save16x16Tile(tile.Pixels);
                         writer.Write(data);
                     }
@@ -389,12 +386,10 @@ namespace Colors
 
             for (int i = 0; i < 1280; i++)
             {
-                //finaloutput[i] = 0;
                 finaloutput[i] = output[varcount++];
             }
 
             File.WriteAllBytes(basePath + "tileMap.map", finaloutput);
-            //File.WriteAllText(basePath + "tileMap.map", SaveMap(finaloutput));
         }
 
         private string Save8x8Tile(byte[] colors)
