@@ -277,16 +277,6 @@ namespace Colors
 
             Graphics g = this.CreateGraphics();
 
-            //using (Brush brush = new SolidBrush(Color.White))
-            //{
-            //    g.FillRectangle(brush, x, y, CellSize, CellSize);
-            //}
-
-            //using (Brush brush = new SolidBrush(Color.FromArgb(0, 0, 0)))
-            //{
-            //    g.DrawString(tiles[currentIndex].ToString(), DefaultFont, brush, new Point(x, y));
-            //}
-
             DrawTile(currentIndex, x, y, g);
         }
 
