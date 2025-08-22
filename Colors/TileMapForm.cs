@@ -9,11 +9,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Colors
 {
     public partial class TileMapForm : Form
     {
+        private string basePath = @"C:\Users\benja\source\Next\Game\";
+
         const int CellSize = 16;
         const int GridSize = 40;
 
@@ -37,6 +40,8 @@ namespace Colors
             {
                 tiles[count++] = id;
             }
+
+            mode.SelectedIndex = 0;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -44,28 +49,42 @@ namespace Colors
             base.OnPaint(e);
             Graphics g = e.Graphics;
 
-            for (int i = 0; i < 1280; i++)
+            if (mode.SelectedIndex == 0)
             {
-                int x = (i % GridSize) * CellSize;
-                int y = (i / GridSize) * CellSize;
 
-                //var (r, gVal, b) = ConvertRGB332ToRGB888((byte)colors[i]);
-                //using (Brush brush = new SolidBrush(Color.FromArgb(r, gVal, b)))
-                //{
-                //    g.FillRectangle(brush, x, y, CellSize, CellSize);
-                //}
-
-                using (Brush brush = new SolidBrush(Color.FromArgb(0, 0, 0)))
+                for (int i = 0; i < 1280; i++)
                 {
-                    if (tiles[i] != 0)
+                    int x = (i % GridSize) * CellSize;
+                    int y = (i / GridSize) * CellSize;
+
+                    using (Brush brush = new SolidBrush(Color.FromArgb(0, 0, 0)))
                     {
-                        //g.DrawString(tiles[i].ToString(), DefaultFont, brush, new Point(x, y));
-
-                        DrawTile(i, x, y, g);
+                        if (tiles[i] != 0)
+                        {
+                            DrawTile(i, x, y, g);
+                        }
                     }
-                }
 
-                g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
+                    g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 1280; i++)
+                {
+                    int x = (i % GridSize) * CellSize;
+                    int y = (i / GridSize) * CellSize;
+
+                    using (Brush brush = new SolidBrush(Color.FromArgb(0xFF, 0xFF, 0xFF)))
+                    {
+                        if (tiles[i] != 0)
+                        {
+                            g.FillRectangle(brush, x, y, CellSize, CellSize);
+                        }
+                    }
+
+                    g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
+                }
             }
         }
 
@@ -76,12 +95,9 @@ namespace Colors
 
             if (lookup.Type == TileType.Tile8x8)
             {
-                // Just Draw 8x8
                 id = lookup.TileId;
 
                 var tile = Program.Project.Tiles8.Find(id);
-
-                // Draw the sucker
 
                 var count = 0;
                 for (int j = 0; j < CellSize; j += 2)
@@ -101,15 +117,9 @@ namespace Colors
             }
             else if (lookup.Type == TileType.Tile16x16)
             {
-                // Draw 16x16 Tile
-                // Set tiles[i + 1] to -1
-                // Set tiles[i + 40] to -1
-                // Set tiles[i + 41] to -1
                 id = lookup.TileId;
 
                 var tile = Program.Project.Tiles16.Find(id);
-
-                // Draw the sucker
 
                 var count = 0;
                 for (int j = 0; j < CellSize; j += 2)
@@ -290,9 +300,10 @@ namespace Colors
 
         private void save_Click(object sender, EventArgs e)
         {
-            
+            var tilemap = Program.Project.TilesMaps.First();
+            tilemap.LookupIds = tiles;
 
-
+            Program.Project.SaveChanges();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -303,6 +314,9 @@ namespace Colors
 
             // int: id, int: position in output array
             Dictionary<int, byte> tileMap = new Dictionary<int, byte>();
+
+            //var tileStream = File.OpenWrite(basePath + "tiles.asm");
+            var writer = new StreamWriter(basePath + "tiles.asm", false, Encoding.UTF8);
 
             for (int i = 0; i < tiles.Length; i++)
             {
@@ -324,6 +338,8 @@ namespace Colors
 
                         var tile = Program.Project.Tiles8.Find(lookup.TileId);
                         // Write Tile To BIN file here
+                        var data = Save8x8Tile(tile.Pixels);
+                        writer.Write(data);
                     }
                     else
                     {
@@ -342,6 +358,9 @@ namespace Colors
 
                         var tile = Program.Project.Tiles16.Find(lookup.TileId);
                         // Write Tile To BIN file here (x4 tiles)
+
+                        var data = Save16x16Tile(tile.Pixels);
+                        writer.Write(data);
                     }
                     else
                     {
@@ -363,7 +382,135 @@ namespace Colors
                 }
             }
 
-            //output should contain the final tilemap
+            writer.Close();
+
+            byte[] finaloutput = new byte[1280 * 2];
+            int varcount = 0;
+
+            for (int i = 0; i < 1280; i++)
+            {
+                //finaloutput[i] = 0;
+                finaloutput[i] = output[varcount++];
+            }
+
+            File.WriteAllBytes(basePath + "tileMap.map", finaloutput);
+            //File.WriteAllText(basePath + "tileMap.map", SaveMap(finaloutput));
+        }
+
+        private string Save8x8Tile(byte[] colors)
+        {
+            var sb = new StringBuilder();
+            string line = "";
+
+            for (var y = 2; y <= 64; y += 2)
+            {
+                if (y % 8 == 0 && y > 0)
+                {
+                    sb.Append("\tdb ");
+
+                    var hex1 = colors[y - 2].ToString("X2");
+                    var hex2 = colors[y - 1].ToString("X2");
+
+                    line += "0x";
+                    line += hex1.Substring(1, 1);
+                    line += hex2.Substring(1, 1);
+                    sb.Append(line + "\r\n");
+                    line = "";
+                }
+                else
+                {
+                    var hex1 = colors[y - 2].ToString("X2");
+                    var hex2 = colors[y - 1].ToString("X2");
+                    line += "0x" + hex1.Substring(1, 1) + hex2.Substring(1, 1) + ", ";
+                }
+            }
+
+            return sb.ToString().TrimEnd(',');
+        }
+
+        private string Save16x16Tile(byte[] colors)
+        {
+            var sb = new StringBuilder();
+
+            var count = 0;
+            for (int z = 0; z < 4; z++)
+            {
+                if (z == 2)
+                {
+                    count = 128;
+                }
+                else if (z == 3)
+                {
+                    count = 192;
+                }
+
+                for (var x = 0; x < 8; x++)
+                {
+                    var line = "\tdb ";
+                    for (var y = 0; y < 8; y += 2)
+                    {
+                        var hex1 = colors[count].ToString("X2");
+                        var hex2 = colors[count + 1].ToString("X2");
+                        string final = "0x" + hex1.Substring(1, 1);
+                        final += hex2.Substring(1, 1);
+                        final += ", ";
+                        line += final;
+                        count += 2;
+                    }
+                    line = line.Substring(0, line.Length - 2);
+                    sb.AppendLine(line);
+                }
+
+                if (z == 1)
+                {
+                    count = 8;
+                }
+
+                sb.AppendLine();
+            }
+
+            return sb.ToString().TrimEnd(',');
+        }
+
+        string SaveMap(byte[] colors)
+        {
+            var sb = new StringBuilder();
+            string line = "";
+
+            for (var y = 2; y <= 1280; y += 2)
+            {
+                if (y % 8 == 0 && y > 0)
+                {
+                    sb.Append("db ");
+
+                    var hex1 = colors[y - 2].ToString("X2");
+                    var hex2 = colors[y - 1].ToString("X2");
+
+                    line += "0x";
+                    line += hex1.Substring(1, 1);
+                    line += hex2.Substring(1, 1);
+                    sb.Append(line + "\r\n");
+                    line = "";
+                }
+                else
+                {
+                    var hex1 = colors[y - 2].ToString("X2");
+                    var hex2 = colors[y - 1].ToString("X2");
+                    line += "0x" + hex1.Substring(1, 1) + hex2.Substring(1, 1) + ", ";
+                }
+            }
+
+            return sb.ToString().TrimEnd(',');
+        }
+
+        private void mode_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void mode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Invalidate();
         }
     }
 }
