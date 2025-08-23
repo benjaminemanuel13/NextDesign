@@ -60,7 +60,7 @@
             MaximizeBox = false;
             Name = "ProjectForm";
             ShowInTaskbar = false;
-            Text = "ProjectForm";
+            Text = "Project";
             Load += ProjectForm_Load;
             ResumeLayout(false);
             PerformLayout();

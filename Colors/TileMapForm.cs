@@ -19,9 +19,14 @@ namespace Colors
 
         const int CellSize = 16;
         const int GridSize = 40;
+        const int PathCellSize = 32;
 
         public int[] tiles = new int[1280];
         private int currentIndex = 0;
+
+        private int currentCol = 0;
+        private int currentRow = 0;
+        private bool settingPathStep = false;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TileBase CurrentTile { get; set; }
@@ -75,15 +80,38 @@ namespace Colors
                     int x = (i % GridSize) * CellSize;
                     int y = (i / GridSize) * CellSize;
 
-                    using (Brush brush = new SolidBrush(Color.FromArgb(0xFF, 0xFF, 0xFF)))
+                    using (Brush brush = new SolidBrush(Color.FromArgb(0, 0, 0)))
                     {
                         if (tiles[i] != 0)
                         {
-                            g.FillRectangle(brush, x, y, CellSize, CellSize);
+                            DrawTile(i, x, y, g);
                         }
                     }
+                }
 
-                    g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
+                int top = 0;
+                int left = 0;
+                for (int i = 0; i < 32 /2; i++)
+                {
+                    for (int j = 0; j < 40 /2; j++)
+                    {
+                        int x = left * CellSize;
+                        int y = top * CellSize;
+
+                        using (Brush brush = new SolidBrush(Color.FromArgb(0xFF, 0xFF, 0xFF)))
+                        {
+                            if (tiles[i] != 0)
+                            {
+                                //g.FillRectangle(brush, x, y, CellSize * 2, CellSize * 2);
+                            }
+                        }
+
+                        g.DrawRectangle(Pens.Black, x, y, CellSize * 2, CellSize * 2);
+
+                        left +=2;
+                    }
+                    left = 0;
+                    top +=2;
                 }
             }
         }
@@ -201,9 +229,31 @@ namespace Colors
             return (r, g, b);
         }
 
+        private void PathMouseMove(MouseEventArgs e)
+        {
+            int col = e.X / CellSize;
+            int row = e.Y / CellSize;
+
+            if (col >= 0 && col < GridSize && row >= 0 && row < 32)
+            {
+                col = col / 2;
+                row = row / 2;
+
+                currentCol = col;
+                currentRow = row;
+            }
+                
+        }
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
+
+            if(mode.SelectedIndex == 1)
+            {
+                PathMouseMove(e);
+                return;
+            }
 
             if (CurrentTile == null) return;
 
@@ -265,9 +315,23 @@ namespace Colors
             }
         }
 
+        private void PathsMouseClick(MouseEventArgs e)
+        {
+            if(settingPathStep == false)
+            {
+                // Set the Step
+            }
+        }
+
         protected override void OnMouseClick(MouseEventArgs e)
         {
             base.OnMouseClick(e);
+
+            if(mode.SelectedIndex == 1)
+            {
+                PathsMouseClick(e);
+                return;
+            }
 
             if (CurrentTile == null) return;
 
@@ -505,6 +569,15 @@ namespace Colors
 
         private void mode_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(mode.SelectedIndex == 0)
+            {
+                pathPanel.Visible = false;
+            }
+            else
+            {
+                pathPanel.Visible = true;
+            }
+
             this.Invalidate();
         }
     }

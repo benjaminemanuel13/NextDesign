@@ -12,7 +12,7 @@ namespace Colors
         [STAThread]
         static void Main()
         {
-            //Project.Database.EnsureDeleted();
+            Project.Database.EnsureDeleted();
             Project.Database.EnsureCreated();
 
             ApplicationConfiguration.Initialize();

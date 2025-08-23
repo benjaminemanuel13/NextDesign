@@ -85,7 +85,7 @@
             Controls.Add(generate);
             Controls.Add(textBox1);
             Name = "SpriteForm";
-            Text = "SpriteForm";
+            Text = "Sprite";
             ResumeLayout(false);
             PerformLayout();
         }

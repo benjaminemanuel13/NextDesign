@@ -29,6 +29,9 @@ namespace SKcode.Data
         public DbSet<TileMap> TilesMaps { get; set; } = null!;
         public DbSet<TileLookup> TileLookups { get; set; } = null!;
 
+        public DbSet<Colors.Models.Path> Paths { get; set; } = null!;
+        public DbSet<Step> Steps { get; set; } = null!;
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -63,6 +66,16 @@ namespace SKcode.Data
                 .HasOne(l => l.TileMap)
                 .WithOne(p => p.Level)
                 .HasForeignKey<TileMap>(p => p.LevelId);
+
+            modelBuilder.Entity<Level>()
+                .HasMany(l => l.Paths)
+                .WithOne(p => p.Level)
+                .HasForeignKey(p => p.LevelId);
+
+            modelBuilder.Entity<Colors.Models.Path>()
+                .HasMany(l => l.Steps)
+                .WithOne(p => p.Path)
+                .HasForeignKey(p => p.PathId);
 
             modelBuilder.Entity<Game>().HasData(
             new Game { Id = 1, Name = "Game 01", Author = "Ben", Version = "1.0.0" },
@@ -162,7 +175,13 @@ namespace SKcode.Data
 
             modelBuilder.Entity<TileLookup>().HasData(
                 new TileLookup { Id = 1, Type = (TileType)0, TileId = 1 },
-                new TileLookup { Id = 2, Type = (TileType)1, TileId = 1});
+                new TileLookup { Id = 2, Type = (TileType)1, TileId = 1 });
+
+            modelBuilder.Entity<Colors.Models.Path>().HasData(
+                new Colors.Models.Path { Id = 1, Name = "Path 01", LevelId = 1 });
+
+            modelBuilder.Entity<Step>().HasData(
+                new Step { Id = 1, Name = "Step 01", PathId = 1 });
         }
     }
 }

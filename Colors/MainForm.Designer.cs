@@ -34,16 +34,16 @@
             openProjectToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripSeparator();
             exitToolStripMenuItem = new ToolStripMenuItem();
+            projectToolStripMenuItem1 = new ToolStripMenuItem();
+            generateProjectToolStripMenuItem = new ToolStripMenuItem();
+            exportToolStripMenuItem = new ToolStripMenuItem();
+            exportBINFilesToolStripMenuItem = new ToolStripMenuItem();
             windowToolStripMenuItem = new ToolStripMenuItem();
             projectToolStripMenuItem = new ToolStripMenuItem();
             pallettespritesToolStripMenuItem = new ToolStripMenuItem();
             x8TileToolStripMenuItem = new ToolStripMenuItem();
             x16TileToolStripMenuItem = new ToolStripMenuItem();
             tileMapToolStripMenuItem = new ToolStripMenuItem();
-            projectToolStripMenuItem1 = new ToolStripMenuItem();
-            generateProjectToolStripMenuItem = new ToolStripMenuItem();
-            exportToolStripMenuItem = new ToolStripMenuItem();
-            exportBINFilesToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -88,6 +88,34 @@
             exitToolStripMenuItem.Text = "E&xit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
+            // projectToolStripMenuItem1
+            // 
+            projectToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { generateProjectToolStripMenuItem });
+            projectToolStripMenuItem1.Name = "projectToolStripMenuItem1";
+            projectToolStripMenuItem1.Size = new Size(56, 20);
+            projectToolStripMenuItem1.Text = "Project";
+            // 
+            // generateProjectToolStripMenuItem
+            // 
+            generateProjectToolStripMenuItem.Name = "generateProjectToolStripMenuItem";
+            generateProjectToolStripMenuItem.Size = new Size(161, 22);
+            generateProjectToolStripMenuItem.Text = "Generate Project";
+            generateProjectToolStripMenuItem.Click += generateProjectToolStripMenuItem_Click;
+            // 
+            // exportToolStripMenuItem
+            // 
+            exportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportBINFilesToolStripMenuItem });
+            exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            exportToolStripMenuItem.Size = new Size(52, 20);
+            exportToolStripMenuItem.Text = "Export";
+            // 
+            // exportBINFilesToolStripMenuItem
+            // 
+            exportBINFilesToolStripMenuItem.Name = "exportBINFilesToolStripMenuItem";
+            exportBINFilesToolStripMenuItem.Size = new Size(156, 22);
+            exportBINFilesToolStripMenuItem.Text = "Export .BIN files";
+            exportBINFilesToolStripMenuItem.Click += exportBINFilesToolStripMenuItem_Click;
+            // 
             // windowToolStripMenuItem
             // 
             windowToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { projectToolStripMenuItem, pallettespritesToolStripMenuItem, x8TileToolStripMenuItem, x16TileToolStripMenuItem, tileMapToolStripMenuItem });
@@ -130,34 +158,6 @@
             tileMapToolStripMenuItem.Text = "Tile Map";
             tileMapToolStripMenuItem.Click += tileMapToolStripMenuItem_Click_1;
             // 
-            // projectToolStripMenuItem1
-            // 
-            projectToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { generateProjectToolStripMenuItem });
-            projectToolStripMenuItem1.Name = "projectToolStripMenuItem1";
-            projectToolStripMenuItem1.Size = new Size(56, 20);
-            projectToolStripMenuItem1.Text = "Project";
-            // 
-            // generateProjectToolStripMenuItem
-            // 
-            generateProjectToolStripMenuItem.Name = "generateProjectToolStripMenuItem";
-            generateProjectToolStripMenuItem.Size = new Size(180, 22);
-            generateProjectToolStripMenuItem.Text = "Generate Project";
-            generateProjectToolStripMenuItem.Click += generateProjectToolStripMenuItem_Click;
-            // 
-            // exportToolStripMenuItem
-            // 
-            exportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportBINFilesToolStripMenuItem });
-            exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            exportToolStripMenuItem.Size = new Size(52, 20);
-            exportToolStripMenuItem.Text = "Export";
-            // 
-            // exportBINFilesToolStripMenuItem
-            // 
-            exportBINFilesToolStripMenuItem.Name = "exportBINFilesToolStripMenuItem";
-            exportBINFilesToolStripMenuItem.Size = new Size(180, 22);
-            exportBINFilesToolStripMenuItem.Text = "Export .BIN files";
-            exportBINFilesToolStripMenuItem.Click += exportBINFilesToolStripMenuItem_Click;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -168,7 +168,7 @@
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "MainForm";
+            Text = "Smile Game Editor";
             WindowState = FormWindowState.Maximized;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
