@@ -181,7 +181,7 @@ namespace SKcode.Data
                 new Colors.Models.Path { Id = 1, Name = "Path 01", LevelId = 1 });
 
             modelBuilder.Entity<Step>().HasData(
-                new Step { Id = 1, Name = "Step 01", PathId = 1 });
+                new Step { Id = 1, Name = "Step 1", PathId = 1, X = 19, Y = 8 });
         }
     }
 }

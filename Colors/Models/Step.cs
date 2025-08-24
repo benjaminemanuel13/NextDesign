@@ -15,9 +15,12 @@ namespace Colors.Models
 
         public string Name { get; set; } = string.Empty;
 
+        public int X { get; set; } = 0;
+        public int Y { get; set; } = 0;
+
         override public string ToString()
         {
-            return Name;
+            return "(" + X + "," + Y + ")";
         }
     }
 }

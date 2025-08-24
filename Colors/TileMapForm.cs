@@ -1,4 +1,5 @@
 ﻿using Colors.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,7 +54,7 @@ namespace Colors
 
         private void GetPaths()
         {
-            var thesepaths = Program.Project.Paths.ToList();
+            var thesepaths = Program.Project.Paths.Include(x => x.Steps).ToList();
 
             paths.Items.Clear();
             foreach (var path in thesepaths)
@@ -65,6 +66,11 @@ namespace Colors
                 {
                     steps.Items.Add(step);
                 }
+            }
+
+            if(paths.Items.Count > 0)
+            {
+                paths.SelectedIndex = 0;
             }
         }
 
@@ -120,7 +126,7 @@ namespace Colors
                         using (Brush brush = new SolidBrush(Color.FromArgb(0xFF, 0xFF, 0xFF)))
                         {
                             var font = new System.Drawing.Font("Arial", 8, FontStyle.Bold);
-                            g.DrawString(i.ToString() + "," + j.ToString(), font, Brushes.White, x, y);
+                            g.DrawString(j.ToString() + "," + i.ToString(), font, Brushes.White, x, y);
                         }
 
                         g.DrawRectangle(Pens.Black, x, y, CellSize * 2, CellSize * 2);
@@ -336,15 +342,21 @@ namespace Colors
         {
             if (settingPathStep == true)
             {
-                var path = (Colors.Models.Path)paths.SelectedItem;
+                var temppath = (Colors.Models.Path)paths.SelectedItem;
 
                 Step newStep = new Step() { 
-                    Name = "Step " + (steps.Items.Count + 1).ToString(),
-                    PathId = path.Id,
+                    Name = "Step " + (temppath.Steps.Count + 1).ToString(),
+                    PathId = temppath.Id,
+                    X = currentCol,
+                    Y = currentRow
                 };
 
+                var path = Program.Project.Paths.Find(temppath.Id);
                 path.Steps.Add(newStep);
 
+                Program.Project.SaveChanges();
+
+                steps.Items.Add(newStep);
 
                 settingPathStep = false;
                 messages.Text = "(no message)";
