@@ -134,6 +134,7 @@
             addStep.TabIndex = 16;
             addStep.Text = "Add";
             addStep.UseVisualStyleBackColor = true;
+            addStep.Click += addStep_Click;
             // 
             // remove
             // 
@@ -170,6 +171,7 @@
             messages.ReadOnly = true;
             messages.Size = new Size(201, 60);
             messages.TabIndex = 12;
+            messages.Text = "(no message)";
             // 
             // label2
             // 
@@ -215,6 +217,7 @@
             Controls.Add(mode);
             Controls.Add(button1);
             Controls.Add(save);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "TileMapForm";
             Text = "Tile Map / Path Editor";
             Load += TileMapForm_Load;

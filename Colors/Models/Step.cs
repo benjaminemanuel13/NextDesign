@@ -14,5 +14,10 @@ namespace Colors.Models
         public Path Path { get; set; }
 
         public string Name { get; set; } = string.Empty;
+
+        override public string ToString()
+        {
+            return Name;
+        }
     }
 }

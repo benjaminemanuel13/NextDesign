@@ -47,6 +47,25 @@ namespace Colors
             }
 
             mode.SelectedIndex = 0;
+
+            GetPaths();
+        }
+
+        private void GetPaths()
+        {
+            var thesepaths = Program.Project.Paths.ToList();
+
+            paths.Items.Clear();
+            foreach (var path in thesepaths)
+            {
+                paths.Items.Add(path);
+
+                steps.Items.Clear();
+                foreach (var step in path.Steps)
+                {
+                    steps.Items.Add(step);
+                }
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -91,27 +110,25 @@ namespace Colors
 
                 int top = 0;
                 int left = 0;
-                for (int i = 0; i < 32 /2; i++)
+                for (int i = 0; i < 32 / 2; i++)
                 {
-                    for (int j = 0; j < 40 /2; j++)
+                    for (int j = 0; j < 40 / 2; j++)
                     {
                         int x = left * CellSize;
                         int y = top * CellSize;
 
                         using (Brush brush = new SolidBrush(Color.FromArgb(0xFF, 0xFF, 0xFF)))
                         {
-                            if (tiles[i] != 0)
-                            {
-                                //g.FillRectangle(brush, x, y, CellSize * 2, CellSize * 2);
-                            }
+                            var font = new System.Drawing.Font("Arial", 8, FontStyle.Bold);
+                            g.DrawString(i.ToString() + "," + j.ToString(), font, Brushes.White, x, y);
                         }
 
                         g.DrawRectangle(Pens.Black, x, y, CellSize * 2, CellSize * 2);
 
-                        left +=2;
+                        left += 2;
                     }
                     left = 0;
-                    top +=2;
+                    top += 2;
                 }
             }
         }
@@ -242,14 +259,14 @@ namespace Colors
                 currentCol = col;
                 currentRow = row;
             }
-                
+
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
 
-            if(mode.SelectedIndex == 1)
+            if (mode.SelectedIndex == 1)
             {
                 PathMouseMove(e);
                 return;
@@ -317,9 +334,20 @@ namespace Colors
 
         private void PathsMouseClick(MouseEventArgs e)
         {
-            if(settingPathStep == false)
+            if (settingPathStep == true)
             {
-                // Set the Step
+                var path = (Colors.Models.Path)paths.SelectedItem;
+
+                Step newStep = new Step() { 
+                    Name = "Step " + (steps.Items.Count + 1).ToString(),
+                    PathId = path.Id,
+                };
+
+                path.Steps.Add(newStep);
+
+
+                settingPathStep = false;
+                messages.Text = "(no message)";
             }
         }
 
@@ -327,7 +355,7 @@ namespace Colors
         {
             base.OnMouseClick(e);
 
-            if(mode.SelectedIndex == 1)
+            if (mode.SelectedIndex == 1)
             {
                 PathsMouseClick(e);
                 return;
@@ -564,12 +592,12 @@ namespace Colors
 
         private void mode_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void mode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(mode.SelectedIndex == 0)
+            if (mode.SelectedIndex == 0)
             {
                 pathPanel.Visible = false;
             }
@@ -579,6 +607,13 @@ namespace Colors
             }
 
             this.Invalidate();
+        }
+
+        private void addStep_Click(object sender, EventArgs e)
+        {
+            messages.Text = "Please Select A Step Position In The Map";
+
+            settingPathStep = true;
         }
     }
 }

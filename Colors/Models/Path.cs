@@ -16,5 +16,10 @@ namespace Colors.Models
         public string Name { get; set; } = string.Empty;
 
         public List<Step> Steps { get; set; } = new List<Step>();
+
+        override public string ToString()
+        {
+            return Name;
+        }
     }
 }
