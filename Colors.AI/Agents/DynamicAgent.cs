@@ -18,9 +18,9 @@ namespace Smile_7.Plugins.MultiAgent
         private readonly AzureOpenAIService svc;
         private List<PluginLookup> plugins;
 
-        public DynamicAgent(AzureOpenAIService svc) : base()
+        public DynamicAgent() : base()
         {
-            this.svc = svc;
+            this.svc = new AzureOpenAIService();
         }
 
         // A good question to ask is: send an email from john doe to jane smith subject "Hello" body "Hello"
