@@ -15,6 +15,10 @@ namespace Colors
             //Project.Database.EnsureDeleted();
             Project.Database.EnsureCreated();
 
+            AzureOpenAIService.Endpoint = Environment.GetEnvironmentVariable("AZUREOPENAIENDPOINT");
+            AzureOpenAIService.Key = Environment.GetEnvironmentVariable("AZUREOPENAIKEY");
+            AzureOpenAIService.Model = "gpt-4o-smile";
+
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
         }
