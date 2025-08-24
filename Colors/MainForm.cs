@@ -137,5 +137,11 @@ namespace Colors
         {
 
         }
+
+        private void yourAssistantToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var assistantForm = new AssistantForm();
+            assistantForm.BringToFront();
+        }
     }
 }
