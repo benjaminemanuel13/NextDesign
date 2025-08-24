@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colors", "Colors\Colors.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colors.AI", "Colors.AI\Colors.AI.csproj", "{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colors.Assistant.Plugin", "Colors.Assistant.Plugin\Colors.Assistant.Plugin.csproj", "{B801AE6F-0479-447C-949C-5633899F2EFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B801AE6F-0479-447C-949C-5633899F2EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B801AE6F-0479-447C-949C-5633899F2EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B801AE6F-0479-447C-949C-5633899F2EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B801AE6F-0479-447C-949C-5633899F2EFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

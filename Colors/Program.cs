@@ -1,6 +1,7 @@
 using Colors.AI.Services;
 using SKcode.Data;
 using Smile_7.Agents.Services;
+using Smile_7.Plugins.MultiAgent;
 
 namespace Colors
 {
@@ -23,6 +24,8 @@ namespace Colors
 
             SpeechService.Endpoint = Environment.GetEnvironmentVariable("AZURESPEECHENDPOINT");
             SpeechService.Key = Environment.GetEnvironmentVariable("AZURESPEECHKEY");
+
+            BaseAgent.OpenAIKey = Environment.GetEnvironmentVariable("OPENAIKEY");
 
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
