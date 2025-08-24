@@ -1,6 +1,6 @@
 ﻿
+using Colors.Assistant.Plugin.Models;
 using Microsoft.SemanticKernel;
-using Smile_7.Common.Models;
 using Smile_7.Plugins;
 using System;
 using System.Collections.Generic;
