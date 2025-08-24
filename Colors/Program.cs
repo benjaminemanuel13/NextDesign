@@ -1,3 +1,4 @@
+using Colors.AI.Services;
 using SKcode.Data;
 using Smile_7.Agents.Services;
 
@@ -19,6 +20,9 @@ namespace Colors
             AzureOpenAIService.Endpoint = Environment.GetEnvironmentVariable("AZUREOPENAIENDPOINT");
             AzureOpenAIService.Key = Environment.GetEnvironmentVariable("AZUREOPENAIKEY");
             AzureOpenAIService.Model = "gpt-4o-smile";
+
+            SpeechService.Endpoint = Environment.GetEnvironmentVariable("AZURESPEECHENDPOINT");
+            SpeechService.Key = Environment.GetEnvironmentVariable("AZURESPEECHKEY");
 
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());

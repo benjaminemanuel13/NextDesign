@@ -21,6 +21,7 @@ namespace Colors
         Tile16x16Form tile16Form = new Tile16x16Form();
         TileMapForm tileMapForm = new TileMapForm();
         ProjectForm projectForm = new ProjectForm();
+        AssistantForm assistantForm = new AssistantForm();
 
         public MainForm()
         {
@@ -56,6 +57,9 @@ namespace Colors
             projectForm.Tile16Form = tile16Form;
             projectForm.TileMapForm = tileMapForm;
             projectForm.Show();
+
+            assistantForm.MdiParent = this;
+            assistantForm.Show();
         }
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
