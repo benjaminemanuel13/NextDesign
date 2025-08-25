@@ -17,8 +17,8 @@ namespace Colors
         private SpeechService _speech = new SpeechService();
         private DynamicAgent _agent = new DynamicAgent();
 
-
         private bool speaking = true;
+        private string sentence = string.Empty;
 
         public AssistantForm()
         {
@@ -46,9 +46,15 @@ namespace Colors
                 this.Invoke((MethodInvoker)delegate
                 {
                     output.Text += s;
+
+                    sentence += s;
                 });
             });
 
+            if (speaking)
+                _speech.Speak(sentence);
+
+            sentence = string.Empty;
             input.Text = string.Empty;
         }
     }
