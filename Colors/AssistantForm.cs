@@ -46,7 +46,6 @@ namespace Colors
                 this.Invoke((MethodInvoker)delegate
                 {
                     output.Text += s;
-
                     sentence += s;
                 });
             });
