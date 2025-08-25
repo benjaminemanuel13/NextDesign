@@ -100,6 +100,7 @@
             Controls.Add(text);
             Name = "Tile16x16Form";
             Text = "Tile (16x16)";
+            Load += Tile16x16Form_Load;
             ResumeLayout(false);
             PerformLayout();
         }

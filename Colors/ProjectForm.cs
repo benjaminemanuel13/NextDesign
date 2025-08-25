@@ -74,11 +74,13 @@ namespace Colors
             else if (node.Tag is Tile8x8)
             {
                 contextMenu.Items.Add("Rename Tile", null, (s, e) => { /* Rename logic */ });
+                contextMenu.Items.Add("Import Tile", null, (s, e) => { /* Import logic */ });
                 contextMenu.Items.Add("Delete Tile", null, (s, e) => { /* Delete logic */ });
             }
             else if (node.Tag is Tile16x16)
             {
                 contextMenu.Items.Add("Rename Tile", null, (s, e) => { /* Rename logic */ });
+                contextMenu.Items.Add("Import Tile", null, (s, e) => { /* Import logic */ });
                 contextMenu.Items.Add("Delete Tile", null, (s, e) => { /* Delete logic */ });
             }
             else

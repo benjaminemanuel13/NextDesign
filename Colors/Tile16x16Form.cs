@@ -69,7 +69,7 @@ namespace Colors
             Graphics g = e.Graphics;
 
             var count = 0;
-            
+
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -85,7 +85,7 @@ namespace Colors
                     }
                 }
             }
-            
+
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -166,7 +166,7 @@ namespace Colors
                 {
                     index = (row - 8) * 8 + (col - 8) + 192;
                 }
-                
+
                 var (r, g, b) = ConvertRGB332ToRGB888((byte)index);
 
                 string tip = $"Index: 0x{index:X2}\nRGB888: ({r}, {g}, {b})";
@@ -238,7 +238,7 @@ namespace Colors
                 {
                     count = 8;
                 }
-                
+
                 sb.AppendLine();
             }
 
@@ -298,6 +298,11 @@ namespace Colors
             var tile = _context.Tiles16.Where(x => x.Id == CurrentTile.Id).First();
 
             MainForm.TileMapForm.CurrentTile = tile;
+        }
+
+        private void Tile16x16Form_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
