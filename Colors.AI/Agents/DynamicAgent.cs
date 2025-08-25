@@ -73,43 +73,48 @@ namespace Smile_7.Plugins.MultiAgent
                 .ToList()
                 .ForEach(file =>
                 {
-                    var assembly = Assembly.LoadFrom(file);
-                    var types = assembly.GetTypes()
-                        .Where(t => t.GetInterfaces().Contains(typeof(IPlugin)))
-                        .ToList();
-                    foreach (var type in types)
+                    try
                     {
-                        var agentInstance = Activator.CreateInstance(type);
-                        if (agentInstance != null)
+                        var assembly = Assembly.LoadFrom(file);
+                        var types = assembly.GetTypes()
+                            .Where(t => t.GetInterfaces().Contains(typeof(IPlugin)))
+                            .ToList();
+                        foreach (var type in types)
                         {
-                            var desc = type.GetCustomAttributes(typeof(DescriptionAttribute), false)
-                                .FirstOrDefault();
-
-                            foreach(var method in type.GetMethods())
+                            var agentInstance = Activator.CreateInstance(type);
+                            if (agentInstance != null)
                             {
-                                var description = method.GetCustomAttributes(typeof(DescriptionAttribute), false)
-                                    .FirstOrDefault() as DescriptionAttribute;
-                                var kernelFunction = method.GetCustomAttributes(typeof(KernelFunctionAttribute), false)
+                                var desc = type.GetCustomAttributes(typeof(DescriptionAttribute), false)
                                     .FirstOrDefault();
 
-                                if (description != null && kernelFunction != null)
+                                foreach (var method in type.GetMethods())
                                 {
-                                    var ass = file;
-                                    var thistype = type;
+                                    var description = method.GetCustomAttributes(typeof(DescriptionAttribute), false)
+                                        .FirstOrDefault() as DescriptionAttribute;
+                                    var kernelFunction = method.GetCustomAttributes(typeof(KernelFunctionAttribute), false)
+                                        .FirstOrDefault();
 
-                                    if (!lookups.Any(x => x.Type == thistype.FullName && x.Method == method.Name))
+                                    if (description != null && kernelFunction != null)
                                     {
-                                        lookups.Add(new PluginLookup()
+                                        var ass = file;
+                                        var thistype = type;
+
+                                        if (!lookups.Any(x => x.Type == thistype.FullName && x.Method == method.Name))
                                         {
-                                            AssemblyPath = file,
-                                            Description = description.Description,
-                                            Type = thistype.FullName,
-                                            Method = method.Name
-                                        });
+                                            lookups.Add(new PluginLookup()
+                                            {
+                                                AssemblyPath = file,
+                                                Description = description.Description,
+                                                Type = thistype.FullName,
+                                                Method = method.Name
+                                            });
+                                        }
                                     }
                                 }
                             }
-                        }   
+                        }
+                    }
+                    catch (Exception ex) { 
                     }
                 });
 

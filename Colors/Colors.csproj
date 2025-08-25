@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Colors.AI\Colors.AI.csproj" />
+    <ProjectReference Include="..\Colors.Assistant.Plugin\Colors.Assistant.Plugin.csproj" />
   </ItemGroup>
 
 </Project>
