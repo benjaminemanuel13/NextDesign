@@ -1,6 +1,6 @@
 ﻿namespace Colors
 {
-    partial class SpriteForm
+    partial class Sprite16x16Form
     {
         /// <summary>
         /// Required designer variable.

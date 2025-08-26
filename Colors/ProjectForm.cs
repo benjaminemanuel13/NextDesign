@@ -21,7 +21,7 @@ namespace Colors
         public Tile16x16Form Tile16Form { get; set; } = null!;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public SpriteForm SpriteForm { get; set; } = null!;
+        public Sprite16x16Form SpriteForm { get; set; } = null!;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TileMapForm TileMapForm { get; set; } = null!;
@@ -54,7 +54,7 @@ namespace Colors
         private void SetupMenu(TreeNode node)
         {
             contextMenu.Items.Clear();
-            if (node.Tag is List<Sprite>)
+            if (node.Tag is List<Sprite16x16>)
             {
                 var item = contextMenu.Items.Add("Add Sprite", null, (s, e) => { AddSprite(node); });
             }
@@ -66,7 +66,7 @@ namespace Colors
             {
                 contextMenu.Items.Add("Add 16x16 Tile", null, (s, e) => { AddLargeTile(node); });
             }
-            else if (node.Tag is Sprite)
+            else if (node.Tag is Sprite16x16)
             {
                 contextMenu.Items.Add("Rename Sprite", null, (s, e) => { /* Rename logic */ });
                 contextMenu.Items.Add("Delete Sprite", null, (s, e) => { /* Delete logic */ });
@@ -95,7 +95,7 @@ namespace Colors
 
             var level = Program.Project.Levels.Include(x => x.Sprites).Where(x => x.Id == levelTag.Id).FirstOrDefault();
 
-            var newSprite = new Sprite
+            var newSprite = new Sprite16x16
             {
                 Name = "New Sprite",
                 LevelId = level.Id,
@@ -220,9 +220,9 @@ namespace Colors
         {
             var node = e.Node;
 
-            if (node.Tag is Sprite)
+            if (node.Tag is Sprite16x16)
             {
-                SpriteForm.SetSprite(node.Tag as Sprite);
+                SpriteForm.SetSprite(node.Tag as Sprite16x16);
             }
             else if (node.Tag is Tile8x8)
             {
