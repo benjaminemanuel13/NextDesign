@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Colors.AI\Colors.AI.csproj" />
-    <ProjectReference Include="..\Colors.Common\Colors.Common.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -127,42 +127,42 @@
             // projectToolStripMenuItem
             // 
             projectToolStripMenuItem.Name = "projectToolStripMenuItem";
-            projectToolStripMenuItem.Size = new Size(180, 22);
+            projectToolStripMenuItem.Size = new Size(179, 22);
             projectToolStripMenuItem.Text = "Project";
             projectToolStripMenuItem.Click += projectToolStripMenuItem_Click;
             // 
             // pallettespritesToolStripMenuItem
             // 
             pallettespritesToolStripMenuItem.Name = "pallettespritesToolStripMenuItem";
-            pallettespritesToolStripMenuItem.Size = new Size(180, 22);
+            pallettespritesToolStripMenuItem.Size = new Size(179, 22);
             pallettespritesToolStripMenuItem.Text = "256 Pallette (sprites)";
             pallettespritesToolStripMenuItem.Click += pallettespritesToolStripMenuItem_Click_1;
             // 
             // x8TileToolStripMenuItem
             // 
             x8TileToolStripMenuItem.Name = "x8TileToolStripMenuItem";
-            x8TileToolStripMenuItem.Size = new Size(180, 22);
+            x8TileToolStripMenuItem.Size = new Size(179, 22);
             x8TileToolStripMenuItem.Text = "8x8 Tile";
             x8TileToolStripMenuItem.Click += x8TileToolStripMenuItem_Click_1;
             // 
             // x16TileToolStripMenuItem
             // 
             x16TileToolStripMenuItem.Name = "x16TileToolStripMenuItem";
-            x16TileToolStripMenuItem.Size = new Size(180, 22);
+            x16TileToolStripMenuItem.Size = new Size(179, 22);
             x16TileToolStripMenuItem.Text = "16x16 Tile";
             x16TileToolStripMenuItem.Click += x16TileToolStripMenuItem_Click_1;
             // 
             // tileMapToolStripMenuItem
             // 
             tileMapToolStripMenuItem.Name = "tileMapToolStripMenuItem";
-            tileMapToolStripMenuItem.Size = new Size(180, 22);
+            tileMapToolStripMenuItem.Size = new Size(179, 22);
             tileMapToolStripMenuItem.Text = "Tile Map";
             tileMapToolStripMenuItem.Click += tileMapToolStripMenuItem_Click_1;
             // 
             // yourAssistantToolStripMenuItem
             // 
             yourAssistantToolStripMenuItem.Name = "yourAssistantToolStripMenuItem";
-            yourAssistantToolStripMenuItem.Size = new Size(180, 22);
+            yourAssistantToolStripMenuItem.Size = new Size(179, 22);
             yourAssistantToolStripMenuItem.Text = "Your Assistant";
             yourAssistantToolStripMenuItem.Click += yourAssistantToolStripMenuItem_Click;
             // 
@@ -178,6 +178,8 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Smile Game Editor";
             WindowState = FormWindowState.Maximized;
+            Load += MainForm_Load;
+            Resize += MainForm_Resize;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);

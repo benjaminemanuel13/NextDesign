@@ -60,7 +60,13 @@ namespace Smile_7.Plugins.MultiAgent
 
                 var plugme = Activator.CreateInstance(type);
 
-                kernel.Plugins.AddFromObject(plugme);
+                try
+                {
+                    kernel.Plugins.AddFromObject(plugme);
+                }
+                catch (Exception ex)
+                {
+                }
             }
         }
 

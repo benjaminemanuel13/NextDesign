@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Colors.Common.EventArguments;
+using Colors.Common.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Colors
 {
@@ -26,6 +30,9 @@ namespace Colors
         public MainForm()
         {
             InitializeComponent();
+
+            Orchestrator.ProjectFormToFrontEvent += Orchestrator_ProjectFormToFrontEvent;
+            Orchestrator.SelectionMoveEvent += Orchestrator_SelectionMoveEvent;
 
             palletteForm.MdiParent = this;
             palletteForm.Show();
@@ -60,6 +67,36 @@ namespace Colors
 
             assistantForm.MdiParent = this;
             assistantForm.Show();
+        }
+
+        private void Orchestrator_SelectionMoveEvent(object? sender, SelectionMoveEventArgs e)
+        {
+
+        }
+
+        private void Orchestrator_ProjectFormToFrontEvent(object? sender, ProjectFormToFrontEventArgs e)
+        {
+            string formName = e.FormName.ToLower();
+            if (formName.Contains("project"))
+            {
+                projectForm.Invoke(new Action(() => projectForm.BringToFront()));
+            }
+            else if (formName.Contains("tile") && (formName.Contains("sixteen") || formName.Contains("16")))
+            {
+                tile16Form.Invoke(new Action(() => tile16Form.BringToFront()));
+            }
+            else if (formName.Contains("tile") && (formName.Contains("eight") || formName.Contains("8")))
+            {
+                tileForm.Invoke(new Action(() => tileForm.BringToFront()));
+            }
+            else if (e.FormName.ToLower().Contains("pallette"))
+            {
+                palletteForm.Invoke(new Action(() => palletteForm.BringToFront()));
+            }
+            else if ((formName.Contains("tile") && formName.Contains("tile")) || formName.Contains("tilemap"))
+            {
+                tileMapForm.Invoke(new Action(() => tileMapForm.BringToFront()));
+            }
         }
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -142,6 +179,18 @@ namespace Colors
         {
             var assistantForm = new AssistantForm();
             assistantForm.BringToFront();
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            assistantForm.Top = 0;
+            assistantForm.Left = this.ClientSize.Width - assistantForm.Width - 20;
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            assistantForm.Top = 0;
+            assistantForm.Left = this.ClientSize.Width - assistantForm.Width - 20;
         }
     }
 }

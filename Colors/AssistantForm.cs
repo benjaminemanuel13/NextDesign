@@ -41,7 +41,7 @@ namespace Colors
 
         private async void speakTest_Click(object sender, EventArgs e)
         {
-            await _agent.AskAsync("Send an email from John Doe to Jane Smith subject Hello body Hello", (s) =>
+            await _agent.AskAsync(input.Text, (s) =>
             {
                 this.Invoke((MethodInvoker)delegate
                 {

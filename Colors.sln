@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colors.AI", "Colors.AI\Colo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colors.Assistant.Plugin", "Colors.Assistant.Plugin\Colors.Assistant.Plugin.csproj", "{B801AE6F-0479-447C-949C-5633899F2EFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colors.Common", "Colors.Common\Colors.Common.csproj", "{49123447-7AD7-4C2B-932B-5CCF03D39493}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B801AE6F-0479-447C-949C-5633899F2EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B801AE6F-0479-447C-949C-5633899F2EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B801AE6F-0479-447C-949C-5633899F2EFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
