@@ -6,6 +6,8 @@ May be z88dk compatible (I can't remember the db lines struture in z88dk but wou
 
 TileMap designer next to do, though I might do the assembly generation (skeleton game with sprites and tiles from here) next.
 
+Be sure to read readme.txt in CoreGame folder!  Important if you want to use vscode to debug and run.
+
 [Edit 16/08/2025]
 
 Have added capability to add new Sprites, 8x8 Tiles and 16x16 Tiles which save in DB when added.
