@@ -14,7 +14,7 @@ namespace Colors.Assistant.Plugin
     public class ColorsControlPlugin : IPlugin
     {
         [KernelFunction]
-        [Description("Brings the Project Form to the forefront of the screen.")]
+        [Description("Brings the requested Form to the forefront of the screen.")]
         public void ProjectFormToFront(string formName)
         {
             Orchestrator.ProjectFormToFront(formName);
