@@ -33,6 +33,7 @@
             save = new Button();
             select = new Button();
             not = new Label();
+            import = new Button();
             SuspendLayout();
             // 
             // text
@@ -43,7 +44,7 @@
             text.Multiline = true;
             text.Name = "text";
             text.ScrollBars = ScrollBars.Vertical;
-            text.Size = new Size(519, 426);
+            text.Size = new Size(519, 454);
             text.TabIndex = 1;
             // 
             // generate
@@ -88,11 +89,21 @@
             not.TabIndex = 7;
             not.Text = "No Tile Loaded";
             // 
+            // import
+            // 
+            import.Location = new Point(237, 444);
+            import.Name = "import";
+            import.Size = new Size(92, 23);
+            import.TabIndex = 8;
+            import.Text = "Import";
+            import.UseVisualStyleBackColor = true;
+            // 
             // Tile16x16Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(866, 450);
+            ClientSize = new Size(866, 478);
+            Controls.Add(import);
             Controls.Add(not);
             Controls.Add(select);
             Controls.Add(save);
@@ -112,5 +123,6 @@
         private Button save;
         private Button select;
         private Label not;
+        private Button import;
     }
 }
