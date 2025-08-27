@@ -24,9 +24,32 @@ namespace Colors.Assistant.Plugin
         [Description("Moves Currently selected item Left, Right, Up or Down by given number.")]
         public void MoveSelection(string direction, string number)
         {
+            SelectionMoveDirection dir = SelectionMoveDirection.Undefined;
+            direction = direction?.ToLower();
+
+            if (direction != null)
+            {
+                if (direction.Contains("left"))
+                {
+                    dir = SelectionMoveDirection.Left;
+                }
+                else if (direction.Contains("right"))
+                {
+                    dir = SelectionMoveDirection.Right;
+                }
+                else if (direction.Contains("up"))
+                {
+                    dir = SelectionMoveDirection.Up;
+                }
+                else if (direction.Contains("down"))
+                {
+                    dir = SelectionMoveDirection.Down;
+                }
+            }
+
             var move = new SelectionMove()
             {
-                Direction = SelectionMoveDirection.Up,
+                Direction = dir,
                 Amount = int.TryParse(number, out int num) ? num : 1
             };
 

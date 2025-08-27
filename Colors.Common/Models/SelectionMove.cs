@@ -8,6 +8,7 @@ namespace Colors.Assistant.Plugin.Models
 {
     public enum SelectionMoveDirection
     {
+        Undefined,
         Left,
         Right,
         Up,

@@ -93,7 +93,7 @@ namespace Colors
             {
                 palletteForm.Invoke(new Action(() => palletteForm.BringToFront()));
             }
-            else if ((formName.Contains("tile") && formName.Contains("tile")) || formName.Contains("tilemap"))
+            else if ((formName.Contains("tile") && formName.Contains("map")) || formName.Contains("tilemap"))
             {
                 tileMapForm.Invoke(new Action(() => tileMapForm.BringToFront()));
             }
