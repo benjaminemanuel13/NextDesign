@@ -16,7 +16,7 @@ namespace Colors
         public static TileMapForm TileMapForm { get; private set; } = null!;
 
         PalletteForm palletteForm = new PalletteForm();
-        SpriteForm spriteForm = new SpriteForm();
+        Sprite16x16Form spriteForm = new Sprite16x16Form();
         Tile8x8Form tileForm = new Tile8x8Form();
         Tile16x16Form tile16Form = new Tile16x16Form();
         TileMapForm tileMapForm = new TileMapForm();

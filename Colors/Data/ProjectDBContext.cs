@@ -23,7 +23,7 @@ namespace SKcode.Data
         public DbSet<Game> Games { get; set; } = null!;
         public DbSet<Level> Levels { get; set; } = null!;
         public DbSet<Pallette> Palletts { get; set; } = null!;
-        public DbSet<Sprite> Sprites { get; set; }
+        public DbSet<Sprite16x16> Sprites { get; set; }
         public DbSet<Tile8x8> Tiles8 { get; set; } = null!;
         public DbSet<Tile16x16> Tiles16 { get; set; } = null!;
         public DbSet<TileMap> TilesMaps { get; set; } = null!;
@@ -110,8 +110,8 @@ namespace SKcode.Data
                 0xE3, 0xE3, 0xE3, 0xE3, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0xE3, 0xE3, 0xE3, 0xE3,
                 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3 ];
 
-            modelBuilder.Entity<Sprite>().HasData(
-            new Sprite { Id = 1, LevelId = 1, Name = "Sprite 01", Width = 16, Height = 16, Pixels = sprite });
+            modelBuilder.Entity<Sprite16x16>().HasData(
+            new Sprite16x16 { Id = 1, LevelId = 1, Name = "Sprite 01", Width = 16, Height = 16, Pixels = sprite });
 
             byte[] tile = [
                 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

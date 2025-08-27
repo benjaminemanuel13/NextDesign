@@ -15,11 +15,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Colors
 {
-    public partial class SpriteForm : Form
+    public partial class Sprite16x16Form : Form
     {
         private readonly ProjectDBContext _context;
 
-        private Sprite CurrentSprite { get; set; }
+        private Sprite16x16 CurrentSprite { get; set; }
 
         const int CellSize = 20;
         const int GridSize = 16;
@@ -31,7 +31,7 @@ namespace Colors
 
         private byte currentIndex = 0;
 
-        public SpriteForm()
+        public Sprite16x16Form()
         {
             InitializeComponent();
 
@@ -48,7 +48,7 @@ namespace Colors
             }
         }
 
-        public void SetSprite(Sprite sprite)
+        public void SetSprite(Sprite16x16 sprite)
         {
             if (sprite == null) return;
 

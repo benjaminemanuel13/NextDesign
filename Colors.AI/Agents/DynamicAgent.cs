@@ -2,7 +2,6 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Smile_7.Agents.Services;
-//using Smile_7.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

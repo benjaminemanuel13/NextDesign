@@ -16,7 +16,7 @@ namespace Colors.Models
         public int Height { get; set; } = 32;
 
         public Pallette Pallette { get; set; }
-        public List<Sprite> Sprites { get; set; }
+        public List<Sprite16x16> Sprites { get; set; }
         public List<Tile8x8> Tiles { get; set; }
 
         public List<Tile16x16> Tiles16 { get; set; }
