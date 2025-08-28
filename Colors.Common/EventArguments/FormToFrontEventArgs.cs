@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Colors.Common.EventArguments
 {
-    public class ProjectFormToFrontEventArgs : EventArgs
+    public class FormToFrontEventArgs : EventArgs
     {
         public string FormName { get; set; }
 
-        public ProjectFormToFrontEventArgs(string formName)
+        public FormToFrontEventArgs(string formName)
         {
             FormName = formName;
         }

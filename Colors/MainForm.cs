@@ -74,7 +74,7 @@ namespace Colors
 
         }
 
-        private void Orchestrator_ProjectFormToFrontEvent(object? sender, ProjectFormToFrontEventArgs e)
+        private void Orchestrator_ProjectFormToFrontEvent(object? sender, FormToFrontEventArgs e)
         {
             string formName = e.FormName.ToLower();
             if (formName.Contains("project"))
@@ -185,12 +185,16 @@ namespace Colors
         {
             assistantForm.Top = 0;
             assistantForm.Left = this.ClientSize.Width - assistantForm.Width - 20;
+            projectForm.Top = 0;
+            projectForm.Left = (this.ClientSize.Width - assistantForm.Width - 20) - projectForm.Width;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             assistantForm.Top = 0;
             assistantForm.Left = this.ClientSize.Width - assistantForm.Width - 20;
+            projectForm.Top = 0;
+            projectForm.Left = (this.ClientSize.Width - assistantForm.Width - 20) - projectForm.Width;
         }
     }
 }

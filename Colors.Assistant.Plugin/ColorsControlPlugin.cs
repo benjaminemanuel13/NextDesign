@@ -15,9 +15,9 @@ namespace Colors.Assistant.Plugin
     {
         [KernelFunction]
         [Description("Brings the requested Form to the forefront of the screen.")]
-        public void ProjectFormToFront(string formName)
+        public void FormToFront(string formName)
         {
-            Orchestrator.ProjectFormToFront(formName);
+            Orchestrator.FormToFront(formName);
         }
 
         [KernelFunction]
