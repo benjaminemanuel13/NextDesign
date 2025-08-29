@@ -252,7 +252,7 @@ namespace Colors
             g.DrawRectangle(Pens.Yellow, x, y, CellSize, CellSize);
         }
 
-        void StopHighlight()
+        public void StopHighlight()
         {
             if (oldHighlight != -1)
             {

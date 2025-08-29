@@ -27,12 +27,15 @@ namespace Colors
         ProjectForm projectForm = new ProjectForm();
         AssistantForm assistantForm = new AssistantForm();
 
+        private Form selectedForm = null!;
+
         public MainForm()
         {
             InitializeComponent();
 
-            Orchestrator.ProjectFormToFrontEvent += Orchestrator_ProjectFormToFrontEvent;
+            Orchestrator.FormToFrontEvent += Orchestrator_FormToFrontEvent;
             Orchestrator.SelectionMoveEvent += Orchestrator_SelectionMoveEvent;
+            Orchestrator.SelectFormEvent += Orchestrator_SelectFormEvent;
 
             palletteForm.MdiParent = this;
             palletteForm.Show();
@@ -69,12 +72,76 @@ namespace Colors
             assistantForm.Show();
         }
 
+        private void Orchestrator_SelectFormEvent(object? sender, SelectFormEventArgs e)
+        {
+            var formName = e.FormName.ToLower();
+            if (formName.Contains("tile") && (formName.Contains("eight") || formName.Contains("8")))
+            {
+                tileForm.Invoke(new Action(() => tileForm.Select()));
+
+                if (selectedForm is Tile16x16Form)
+                {
+                    tile16Form.Invoke(new Action(() => tile16Form.StopHighlight()));
+                }
+                else if (selectedForm is TileMapForm)
+                {
+                    tileMapForm.Invoke(new Action(() => tileMapForm.StopHighlight()));
+                }
+
+                selectedForm = tileForm;
+                tileForm.DrawHighlight();
+            }
+            else if (formName.Contains("tile") && (formName.Contains("sixteen") || formName.Contains("16")))
+            {
+                tile16Form.Invoke(new Action(() => tile16Form.Select()));
+
+                if (selectedForm is Tile8x8Form)
+                {
+                    tileForm.Invoke(new Action(() => tileForm.StopHighlight()));
+                }
+                else if (selectedForm is TileMapForm)
+                {
+                    tileMapForm.Invoke(new Action(() => tileMapForm.StopHighlight()));
+                }
+
+                selectedForm = tile16Form;
+            }
+            else if (formName.Contains("pallette"))
+            {
+                palletteForm.Invoke(new Action(() => palletteForm.Select()));
+                selectedForm = palletteForm;
+            }
+            else if ((formName.Contains("tile") && formName.Contains("map")) || formName.Contains("tilemap"))
+            {
+                tileMapForm.Invoke(new Action(() => tileMapForm.Select()));
+
+                if (selectedForm is Tile8x8Form)
+                {
+                    tileForm.Invoke(new Action(() => tileForm.StopHighlight()));
+                    
+                }
+                else if (selectedForm is Tile16x16Form)
+                {
+                    tile16Form.Invoke(new Action(() => tile16Form.StopHighlight()));
+                }
+
+                selectedForm = tileMapForm;
+            }
+            else if (formName.Contains("project"))
+            {
+                projectForm.Invoke(new Action(() => projectForm.Select()));
+                selectedForm = projectForm;
+            }
+            else
+            { }
+        }
+
         private void Orchestrator_SelectionMoveEvent(object? sender, SelectionMoveEventArgs e)
         {
 
         }
 
-        private void Orchestrator_ProjectFormToFrontEvent(object? sender, FormToFrontEventArgs e)
+        private void Orchestrator_FormToFrontEvent(object? sender, FormToFrontEventArgs e)
         {
             string formName = e.FormName.ToLower();
             if (formName.Contains("project"))

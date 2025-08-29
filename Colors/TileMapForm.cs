@@ -627,5 +627,13 @@ namespace Colors
 
             settingPathStep = true;
         }
+
+        public void StopHighlight()
+        {
+            //int x = (currentIndex % GridSize) * CellSize;
+            //int y = (currentIndex / GridSize) * CellSize;
+            //Graphics g = this.CreateGraphics();
+            //g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
+        }
     }
 }

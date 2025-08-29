@@ -175,7 +175,10 @@ namespace Colors
             }
         }
 
-        public void StartHighlight()
+        public void DrawHighlight()
+        { }
+
+        public void StopHighlight()
         { }
 
         public void SetHighlight(SelectionMove move)

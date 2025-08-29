@@ -55,5 +55,13 @@ namespace Colors.Assistant.Plugin
 
             Orchestrator.MoveSelection(move);
         }
+
+
+        [KernelFunction]
+        [Description("Selects the requested Form.")]
+        public void SelctForm(string formName)
+        {
+            Orchestrator.SelectForm(formName);
+        }
     }
 }
