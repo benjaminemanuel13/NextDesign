@@ -1,4 +1,5 @@
-﻿using Colors.Models;
+﻿using Colors.Assistant.Plugin.Models;
+using Colors.Models;
 using Microsoft.EntityFrameworkCore;
 using SKcode.Data;
 using System;
@@ -171,6 +172,25 @@ namespace Colors
 
                 string tip = $"Index: 0x{index:X2}\nRGB888: ({r}, {g}, {b})";
                 currentIndex = (byte)index;
+            }
+        }
+
+        public void StartHighlight()
+        { }
+
+        public void SetHighlight(SelectionMove move)
+        {
+            if (move.Direction == SelectionMoveDirection.Up)
+            { 
+            }
+            else if (move.Direction == SelectionMoveDirection.Down)
+            {
+            }
+            else if (move.Direction == SelectionMoveDirection.Left)
+            {
+            }
+            else if (move.Direction == SelectionMoveDirection.Right)
+            {
             }
         }
 

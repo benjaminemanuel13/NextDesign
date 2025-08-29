@@ -1,4 +1,5 @@
-﻿using Colors.Models;
+﻿using Colors.Assistant.Plugin.Models;
+using Colors.Models;
 using SKcode.Data;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,9 @@ namespace Colors
 
         const int CellSize = 20;
         const int GridSize = 8;
+
+        public int oldHighlight = -1;
+        public int highlight = -1;
 
         const int PalletteGridSize = 16;
 
@@ -86,6 +90,7 @@ namespace Colors
                 {
                     g.FillRectangle(brush, (i * 20) + 8, 320, CellSize, CellSize);
                     g.DrawRectangle(Pens.Black, (i * 20) + 8, 320, CellSize, CellSize);
+                    g.DrawString(i.ToString(), this.Font, Brushes.Black, (i * 20) + 8, 320);
                 }
             }
         }
@@ -220,6 +225,62 @@ namespace Colors
             var tile = _context.Tiles8.Where(x => x.Id == CurrentTile.Id).First();
 
             MainForm.TileMapForm.CurrentTile = tile;
+        }
+
+        public void DrawHighlight()
+        {
+            if(highlight == -1)
+            {
+                highlight = 0;
+            }
+
+            var g = this.CreateGraphics();
+
+            if (oldHighlight != -1)
+            {
+                int ax = (oldHighlight % GridSize) * CellSize;
+                int ay = (oldHighlight / GridSize) * CellSize;
+
+                g.DrawRectangle(Pens.Black, ax, ay, CellSize, CellSize);    
+            }
+
+            oldHighlight = highlight;
+
+            int x = (highlight % GridSize) * CellSize;
+            int y = (highlight / GridSize) * CellSize;
+
+            g.DrawRectangle(Pens.Yellow, x, y, CellSize, CellSize);
+        }
+
+        void StopHighlight()
+        {
+            if (oldHighlight != -1)
+            {
+                var g = this.CreateGraphics();
+                int ax = (oldHighlight % GridSize) * CellSize;
+                int ay = (oldHighlight / GridSize) * CellSize;
+                g.DrawRectangle(Pens.Black, ax, ay, CellSize, CellSize);
+            }
+            oldHighlight = -1;
+            highlight = -1;
+        }
+
+        public void SetHighlight(SelectionMove move)
+        {
+            if (move.Direction == SelectionMoveDirection.Up)
+            {
+            }
+            else if (move.Direction == SelectionMoveDirection.Down)
+            {
+            }
+            else if (move.Direction == SelectionMoveDirection.Left)
+            {
+            }
+            else if (move.Direction == SelectionMoveDirection.Right)
+            {
+            }
+
+            DrawHighlight();
         }
     }
 }
