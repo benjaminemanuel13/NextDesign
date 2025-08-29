@@ -1,4 +1,5 @@
-﻿using Colors.Models;
+﻿using Colors.Assistant.Plugin.Models;
+using Colors.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -628,12 +629,25 @@ namespace Colors
             settingPathStep = true;
         }
 
+        public void DrawHighlight()
+        {
+            //int x = (currentIndex % GridSize) * CellSize;
+            //int y = (currentIndex / GridSize) * CellSize;
+            //Graphics g = this.CreateGraphics();
+            //g.DrawRectangle(Pens.LightGoldenrodYellow, x, y, CellSize, CellSize);
+        }
+
         public void StopHighlight()
         {
             //int x = (currentIndex % GridSize) * CellSize;
             //int y = (currentIndex / GridSize) * CellSize;
             //Graphics g = this.CreateGraphics();
             //g.DrawRectangle(Pens.Black, x, y, CellSize, CellSize);
+        }
+
+        public void MoveSelection(SelectionMove move)
+        {
+
         }
     }
 }

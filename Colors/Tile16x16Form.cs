@@ -181,6 +181,11 @@ namespace Colors
         public void StopHighlight()
         { }
 
+        public void MoveSelection(SelectionMove move)
+        {
+
+        }
+
         public void SetHighlight(SelectionMove move)
         {
             if (move.Direction == SelectionMoveDirection.Up)

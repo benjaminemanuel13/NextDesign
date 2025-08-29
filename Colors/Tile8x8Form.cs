@@ -227,6 +227,11 @@ namespace Colors
             MainForm.TileMapForm.CurrentTile = tile;
         }
 
+        public void MoveSelection(SelectionMove move)
+        {
+
+        }
+
         public void DrawHighlight()
         {
             if(highlight == -1)

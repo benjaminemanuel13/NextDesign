@@ -101,7 +101,9 @@ namespace Colors
             else if (formName.Contains("tile") && (formName.Contains("sixteen") || formName.Contains("16")))
             {
                 tile16Form.Invoke(new Action(() => tile16Form.Select()));
+
                 selectedForm = tile16Form;
+                tile16Form.DrawHighlight();
             }
             else if (formName.Contains("pallette"))
             {
@@ -111,6 +113,8 @@ namespace Colors
             else if ((formName.Contains("tile") && formName.Contains("map")) || formName.Contains("tilemap"))
             {
                 tileMapForm.Invoke(new Action(() => tileMapForm.Select()));
+
+                tileMapForm.DrawHighlight();
                 selectedForm = tileMapForm;
             }
             else if (formName.Contains("project"))
@@ -124,7 +128,18 @@ namespace Colors
 
         private void Orchestrator_SelectionMoveEvent(object? sender, SelectionMoveEventArgs e)
         {
-
+            if(selectedForm is Tile8x8Form)
+            {
+                tileForm.Invoke(new Action(() => tileForm.MoveSelection(e.Move)));
+            }
+            else if(selectedForm is Tile16x16Form)
+            {
+                tile16Form.Invoke(new Action(() => tile16Form.MoveSelection(e.Move)));
+            }
+            else if(selectedForm is TileMapForm)
+            {
+                tileMapForm.Invoke(new Action(() => tileMapForm.MoveSelection(e.Move)));
+            }
         }
 
         private void Orchestrator_FormToFrontEvent(object? sender, FormToFrontEventArgs e)
