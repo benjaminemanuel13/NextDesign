@@ -93,6 +93,11 @@ namespace Colors
                     g.DrawString(i.ToString(), this.Font, Brushes.Black, (i * 20) + 8, 320);
                 }
             }
+
+            if(highlight != -1)
+            {
+                DrawHighlight();
+            }
         }
 
         protected override void OnMouseMove(MouseEventArgs e)

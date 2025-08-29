@@ -109,6 +109,7 @@
             Controls.Add(save);
             Controls.Add(generate);
             Controls.Add(text);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Tile16x16Form";
             Text = "Tile (16x16)";
             Load += Tile16x16Form_Load;

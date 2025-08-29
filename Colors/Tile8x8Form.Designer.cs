@@ -97,6 +97,7 @@
             Controls.Add(save);
             Controls.Add(text);
             Controls.Add(generate);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Tile8x8Form";
             Text = "Tile (8x8)";
             ResumeLayout(false);
