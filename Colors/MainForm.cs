@@ -114,8 +114,8 @@ namespace Colors
             {
                 tileMapForm.Invoke(new Action(() => tileMapForm.Select()));
 
-                tileMapForm.DrawHighlight();
                 selectedForm = tileMapForm;
+                tileMapForm.DrawHighlight();
             }
             else if (formName.Contains("project"))
             {

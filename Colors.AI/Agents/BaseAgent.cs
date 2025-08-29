@@ -5,6 +5,7 @@ using Smile_7.Agents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,8 +22,22 @@ namespace Smile_7.Plugins.MultiAgent
         {
             kernel = GetKernel();
 
-            if(addPlugins) 
-                AddPlugins();
+            var assembly = Assembly.LoadFrom("Colors.Assistant.Plugin.dll");
+            var types = assembly.GetTypes()
+                .Where(t => t.GetInterfaces().Contains(typeof(IPlugin)))
+                .ToList();
+
+            foreach (var type in types)
+            {
+                var plugin = Activator.CreateInstance(type);
+                try
+                {
+                    kernel.Plugins.AddFromObject(plugin);
+                }
+                catch (Exception ex)
+                {
+                }
+            }
         }
 
         private Kernel GetKernel()

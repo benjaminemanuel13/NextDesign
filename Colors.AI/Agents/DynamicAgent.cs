@@ -27,9 +27,9 @@ namespace Smile_7.Plugins.MultiAgent
 
         public override async Task<string> AskAsync(string question, Action<string> del = null, Dictionary<string, object> args = null)
         {
-            plugins = DetermineAgents(question, Directory.GetCurrentDirectory());
+            //plugins = DetermineAgents(question, Directory.GetCurrentDirectory());
 
-            AddPlugins();
+            //AddPlugins();
 
             OpenAIPromptExecutionSettings executionSettings = new() { ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions };
 
