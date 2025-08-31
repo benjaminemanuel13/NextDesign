@@ -9,9 +9,12 @@ namespace Colors.AssemblyModels
 {
     public class MemoryMapHeader
     {
+        public ushort PlayerStartPosition { get; set; }
+
         public ushort CurrentLevel { get; set; } = 1;
 
-        public byte NumberLives { get; set; } = 5;
+        public byte CurrentLives { get; set; } = 5;
+        public ushort CurrentPosition { get; set; }
 
         public ushort NumberLevels { get; set; } = 2;
 
@@ -22,8 +25,14 @@ namespace Colors.AssemblyModels
         {
             Levels = new List<MemoryLevel>()
             {
-                new MemoryLevel() { LevelNumber = 1, Spi },
-                new MemoryLevel() { LevelNumber = 2, TimeLimit = 250, NumberOfColors = 4 }
+                new MemoryLevel() 
+                { 
+                    LevelNumber = 1
+                },
+                new MemoryLevel() 
+                { 
+                    LevelNumber = 2 
+                }
             };
         }
     }

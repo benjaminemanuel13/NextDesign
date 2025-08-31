@@ -11,5 +11,9 @@ namespace Colors.Common.AssemblyModels
         public byte Sprite { get; set; } = 0;
 
         public byte Path { get; set; } = 0;
+
+        public ushort CurrentPosition { get; set; } = 0;
+
+        public byte CurrentStep { get; set; } = 0;
     }
 }

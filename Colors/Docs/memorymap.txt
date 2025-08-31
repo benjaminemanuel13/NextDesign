@@ -2,11 +2,12 @@
 label:
 
 CurrentLevel (0x00) - Assuming < 256 levels
+
 CurrentLives (0x00)
 CurrentPosition
 	X (0x00 0x00)
 	Y (0x00 0x00)
-
+NumberLevels (0x01) - Assuming < 256 levels
 
 label:
 
@@ -14,19 +15,24 @@ Level
 Player Start Position
 	X (0x00 0x00)
 	Y (0x00 0x00)
+
 NumberEnemies (0x02)
 	Enemy
 	Current Position
 		X (0x00 0x00)
 		Y (0x00 0x00)
-	NumberPaths (0x00) - Assuming < 256 paths
-		Path
-		CurrentStep (0x00) - Assuming < 256 Steps
-		NumberSteps (0x01)
-			StepSpeed (0x00 0x00)
-			Step
-				X (0x00 0x00)
-				Y (0x00 0x00)
-			Step
-				X (0x00 0x00)
-				Y (0x00 0x00)
+	Sprite (0x00)
+	Path (0x00) - Assuming < 256 paths
+	CurrentStep (0x00) - Assuming < 256 Steps
+
+NumberPaths (0x00) - Assuming < 256 paths
+	Path
+
+	NumberSteps (0x01)
+		StepSpeed (0x00 0x00)
+		Step
+			X (0x00 0x00)
+			Y (0x00 0x00)
+		Step
+			X (0x00 0x00)
+			Y (0x00 0x00)
