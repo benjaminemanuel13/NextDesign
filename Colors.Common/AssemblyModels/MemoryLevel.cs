@@ -12,6 +12,13 @@ namespace Colors.Common.AssemblyModels
 
         public int LevelNumber { get; set; } = 1;
 
+        public int EnemyCount
+        {
+            get { 
+                return Enemies.Count;
+            }
+        }
+
         public List<MemoryEnemy> Enemies { get; set; }
 
 
