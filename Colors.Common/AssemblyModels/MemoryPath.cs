@@ -10,14 +10,8 @@ namespace Colors.Common.AssemblyModels
     {
         public byte CurrentStep { get; set; } = 0;
 
-        public byte NumberSteps
-        {
-            get
-            {
-                return (byte)Steps.Count;
-            }
-        }
-
+        public byte NumberSteps { get; set; }
+        
         public List<MemoryStep> Steps { get; set; } = new List<MemoryStep>();
     }
 }

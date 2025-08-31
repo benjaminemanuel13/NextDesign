@@ -1,4 +1,5 @@
-﻿using Colors.Models;
+﻿using Colors.Data.Models;
+using Colors.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,8 @@ namespace SKcode.Data
 
         public DbSet<Colors.Models.Path> Paths { get; set; } = null!;
         public DbSet<Step> Steps { get; set; } = null!;
+
+        public DbSet<Enemy> Enemies { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -74,25 +77,27 @@ namespace SKcode.Data
                 .WithOne(p => p.Level)
                 .HasForeignKey(p => p.LevelId);
 
+            modelBuilder.Entity<Level>()
+                .HasMany(l => l.Enemies)
+                .WithOne(p => p.Level)
+                .HasForeignKey(p => p.LevelId);
+
             modelBuilder.Entity<Colors.Models.Path>()
                 .HasMany(l => l.Steps)
                 .WithOne(p => p.Path)
                 .HasForeignKey(p => p.PathId);
 
             modelBuilder.Entity<Game>().HasData(
-            new Game { Id = 1, Name = "Game 01", Author = "Ben", Version = "1.0.0" },
-            new Game { Id = 2, Name = "Game 02", Author = "Ben", Version = "1.0.0" });
+            new Game { Id = 1, Name = "Game 01", Author = "Ben", Version = "1.0.0" });
 
             modelBuilder.Entity<Level>().HasData(
-            new Level { Id = 1, Name = "Level 01", GameId = 1 },
-            new Level { Id = 2, Name = "Level 02", GameId = 1 });
+            new Level { Id = 1, Name = "Level 01", GameId = 1 });
 
             byte[] pallette = [
                 0x8C, 0x0D, 0x89, 0x38, 0xE0, 0x8C, 0xFC, 0xE3, 0x1F, 0xFF, 0x70, 0x07, 0x00, 0xC7, 0x92, 0xAA ];
 
             modelBuilder.Entity<Pallette>().HasData(
-            new Pallette { Id = 1, LevelId = 1, Name = "Pallette 01", Colors = pallette.ToList() },
-            new Pallette { Id = 2, LevelId = 2, Name = "Pallette 02" });
+            new Pallette { Id = 1, LevelId = 1, Name = "Pallette 01", Colors = pallette.ToList() });
 
             byte[] sprite = [
                 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3, 0xE3,
@@ -183,7 +188,14 @@ namespace SKcode.Data
                 new Colors.Models.Path { Id = 1, Name = "Path 01", LevelId = 1 });
 
             modelBuilder.Entity<Step>().HasData(
-                new Step { Id = 1, Name = "Step 1", PathId = 1, X = 19, Y = 8 });
+                new Step { Id = 1, Name = "Step 1", PathId = 1, X = 19, Y = 8, Speed = 0xFFFF },
+                new Step { Id = 2, Name = "Step 2", PathId = 1, X = 18, Y = 8, Speed = 0xFFFF },
+                new Step { Id = 3, Name = "Step 3", PathId = 1, X = 17, Y = 8, Speed = 0xFFFF },
+                new Step { Id = 4, Name = "Step 4", PathId = 1, X = 18, Y = 8, Speed = 0xFFFF },
+                new Step { Id = 5, Name = "Step 5", PathId = 1, X = 19, Y = 8, Speed = 0xFFFF });
+
+            modelBuilder.Entity<Enemy>().HasData(
+                new Enemy { Id = 1, LevelId = 1, Name = "Enemy 01", PathId = 1, SpriteId = 1});
         }
     }
 }

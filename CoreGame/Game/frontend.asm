@@ -119,6 +119,42 @@ initSprites:
     NEXTREG $15,0x03;       // layer order - and sprites on
     NEXTREG $4B,0xE3;       // sprite transparency
 
+initmemory:
+	LD A, (memory)		; Lives
+	LD A, (memory + 1)	; Current Level
+
+	LD A, (memory + 2) ; Player X
+	LD D, 16
+	LD E, A
+	MUL D, E
+	LD HL, DE
+
+	LD A, (memory + 4) ; Player Y
+	LD D, 16
+	LD E, A
+	MUL D, E
+
+	LD A, (memory + 6)	; Number Levels
+
+	; In 1st level now
+	LD HL, (memory + 7)	; X Player Start Position
+	LD HL, (memory + 9)	; Y Player Start Position
+
+	LD A, (memory + 11) ; Number Enemies
+
+	; First Enemy (Enemies)
+	LD HL, (memory + 12)	; Current Position X
+	LD HL, (memory + 14)	; Current Position Y
+	LD A, (memory + 16)	; Sprite
+	LD A, (memory + 17)	; Path
+	LD A, (memory + 18)	; Current Step
+
+	; 1st Path (Paths)
+	LD A, (memory + 19)	; Number Steps
+	LD HL, (memory + 20)	; Step Speed (0x0000)
+	LD HL, (memory + 22)	; Step X
+	LD HL, (memory + 24)	; Step X
+	
 	RET
 
 ;;--------------------------------------------------------------------
@@ -166,21 +202,25 @@ palette:
 
 paletteLength: EQU $-palette
 
-frontend_main:
+showsprite:
+	
 	; Show single sprite 0 using pattern 0
-	NEXTREG $34, 0			; First sprite
-	NEXTREG $35, 100		; X=100
-	NEXTREG $36, 80			; Y=80
+	NEXTREG $34, 0				; First sprite
+	NEXTREG $35, 255			; X=100
+	NEXTREG $36, 80				; Palette offset, no mirror, no rotation
 	NEXTREG $37, %00000000		; Palette offset, no mirror, no rotation
 	NEXTREG $38, %10000000		; Visible, no byte 4, pattern 0
+	RET
+frontend_main:
+	
 
 	; Show single sprite 1 using pattern 0
-	NEXTREG $34, 1			; Second sprite
-	NEXTREG $35, 84			; X=84
-	NEXTREG $36, 80			; Y=80
-	NEXTREG $37, %00000000		; Palette offset, no mirror, no rotation
-	NEXTREG $38, %10000000		; Visible, no byte 4, pattern 0
-
+	;NEXTREG $34, 0			; Second sprite
+	;NEXTREG $35, 84			; X=84
+	;NEXTREG $36, 80			; Y=80
+	;NEXTREG $37, %00000000		; Palette offset, no mirror, no rotation
+	;NEXTREG $38, %10000000		; Visible, no byte 4, pattern 0
+	call showsprite
     jp start
 
 ; HL = address of sprite sheet in memory

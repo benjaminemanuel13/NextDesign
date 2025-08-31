@@ -15,8 +15,17 @@ namespace Colors
         [STAThread]
         static void Main()
         {
-            //Project.Database.EnsureDeleted();
-            ProjectDBContext.Project.Database.EnsureCreated();
+            ProjectDBContext.Project.Database.EnsureDeleted();
+
+            try
+            {
+                ProjectDBContext.Project.Database.EnsureCreated();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error creating database: " + ex.Message);
+                return;
+            }
 
             AzureOpenAIService.Endpoint = Environment.GetEnvironmentVariable("AZUREOPENAIENDPOINT");
             AzureOpenAIService.Key = Environment.GetEnvironmentVariable("AZUREOPENAIKEY");

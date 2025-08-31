@@ -51,3 +51,16 @@
 	;NEXTREG $39, %00101000		; Anchor with unified relatives, scale X 
 
 	call delay
+
+
+	//LD A, (memory + 1) 	; Level
+	LD A, (memory + 2) ; Player X
+	LD D, 16
+	LD E, A
+	MUL D, E
+	LD HL, DE
+
+	LD A, (memory + 4) ; Player Y
+	LD D, 16
+	LD E, A
+	MUL D, E

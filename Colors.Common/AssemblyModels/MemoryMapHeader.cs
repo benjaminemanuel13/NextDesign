@@ -18,22 +18,6 @@ namespace Colors.AssemblyModels
 
         public byte NumberLevels { get; set; } = 2;
 
-        public List<MemoryLevel> Levels { get; set; }
-
-
-        public MemoryMapHeader()
-        {
-            Levels = new List<MemoryLevel>()
-            {
-                new MemoryLevel() 
-                { 
-                    LevelNumber = 1
-                },
-                new MemoryLevel() 
-                { 
-                    LevelNumber = 2 
-                }
-            };
-        }
+        public List<MemoryLevel> Levels { get; set; } = new List<MemoryLevel>();
     }
 }

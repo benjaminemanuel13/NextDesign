@@ -64,6 +64,7 @@ state:
 
     INCLUDE "frontend.asm"
     INCLUDE "game.asm"
+    INCLUDE "memory.asm"
     INCLUDE "gamedata.asm"
     INCLUDE "irq.asm"
 

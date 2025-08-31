@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Colors.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace Colors.Models
         public List<Tile16x16> Tiles16 { get; set; }
 
         public List<Path> Paths { get; set; }
+
+        public List<Enemy> Enemies { get; set; }
 
         public TileMap TileMap { get; set; }
 
