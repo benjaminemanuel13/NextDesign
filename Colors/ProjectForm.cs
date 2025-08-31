@@ -1,5 +1,6 @@
 ﻿using Colors.Models;
 using Microsoft.EntityFrameworkCore;
+using SKcode.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -93,7 +94,7 @@ namespace Colors
         {
             var levelTag = node.Parent.Tag as Level;
 
-            var level = Program.Project.Levels.Include(x => x.Sprites).Where(x => x.Id == levelTag.Id).FirstOrDefault();
+            var level = ProjectDBContext.Project.Levels.Include(x => x.Sprites).Where(x => x.Id == levelTag.Id).FirstOrDefault();
 
             var newSprite = new Sprite16x16
             {
@@ -109,8 +110,8 @@ namespace Colors
                 newSprite.Pixels[i] = 0xE3;
             }
 
-            Program.Project.Sprites.Add(newSprite);
-            Program.Project.SaveChanges();
+            ProjectDBContext.Project.Sprites.Add(newSprite);
+            ProjectDBContext.Project.SaveChanges();
 
             node.Nodes.Add(newSprite.Id.ToString(), "New Sprite");
 
@@ -121,7 +122,7 @@ namespace Colors
         {
             var levelTag = node.Parent.Tag as Level;
 
-            var level = Program.Project.Levels.Include(x => x.Tiles).FirstOrDefault(x => x.Id == levelTag.Id);
+            var level = ProjectDBContext.Project.Levels.Include(x => x.Tiles).FirstOrDefault(x => x.Id == levelTag.Id);
 
             var newTile = new Tile8x8
             {
@@ -135,8 +136,8 @@ namespace Colors
                 newTile.Pixels[i] = 0;
             }
 
-            Program.Project.Tiles8.Add(newTile);
-            Program.Project.SaveChanges();
+            ProjectDBContext.Project.Tiles8.Add(newTile);
+            ProjectDBContext.Project.SaveChanges();
 
             node.Nodes.Add(newTile.Id.ToString(), "New Tile");
 
@@ -147,7 +148,7 @@ namespace Colors
         {
             var levelTag = node.Parent.Tag as Level;
 
-            var level = Program.Project.Levels.Include(x => x.Tiles16).FirstOrDefault(x => x.Id == levelTag.Id);
+            var level = ProjectDBContext.Project.Levels.Include(x => x.Tiles16).FirstOrDefault(x => x.Id == levelTag.Id);
 
             var newTile = new Tile16x16
             {
@@ -161,8 +162,8 @@ namespace Colors
                 newTile.Pixels[i] = 0;
             }
 
-            Program.Project.Tiles16.Add(newTile);
-            Program.Project.SaveChanges();
+            ProjectDBContext.Project.Tiles16.Add(newTile);
+            ProjectDBContext.Project.SaveChanges();
 
             node.Nodes.Add(newTile.Id.ToString(), "New Tile");
 
@@ -173,7 +174,7 @@ namespace Colors
         {
             project.Nodes.Clear();
 
-            var games = Program.Project.Games.Include(x => x.Levels).ThenInclude(y => y.Sprites)
+            var games = ProjectDBContext.Project.Games.Include(x => x.Levels).ThenInclude(y => y.Sprites)
                 .Include(x => x.Levels).ThenInclude(y => y.Tiles).Include(x => x.Levels)
                 .ThenInclude(y => y.Tiles16).ToList();
 

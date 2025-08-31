@@ -1,9 +1,9 @@
 
 label:
 
-CurrentLevel (0x00) - Assuming < 256 levels
-
 CurrentLives (0x00)
+
+CurrentLevel (0x00) - Assuming < 256 levels
 CurrentPosition
 	X (0x00 0x00)
 	Y (0x00 0x00)

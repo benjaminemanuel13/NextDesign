@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Colors.Assistant.Plugin\Colors.Assistant.Plugin.csproj" />
     <ProjectReference Include="..\Colors.Business\Colors.Business.csproj" />
     <ProjectReference Include="..\Colors.Common\Colors.Common.csproj" />
+    <ProjectReference Include="..\Colors.Data\Colors.Data.csproj" />
   </ItemGroup>
 
 </Project>
