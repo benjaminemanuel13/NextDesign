@@ -10,6 +10,8 @@ namespace SKcode.Data
 {
     public class ProjectDBContext : DbContext
     {
+        public static ProjectDBContext Project = new ProjectDBContext("colors.db");
+
         public string DatabasePath { get; set; }
         
         public ProjectDBContext(string databasePath)

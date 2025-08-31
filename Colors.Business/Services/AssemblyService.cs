@@ -9,15 +9,17 @@ namespace Colors.Business.Services
 {
     public class AssemblyService
     {
+        string BasePath = @"C:\Users\benja\source\Next\Colors\CoreGame\Game\";
+
         public void GenerateMemoryMap()
         {
             MemoryMap map = new MemoryMap();
 
-            FileStream stream = new FileStream("", FileMode.Create);
+            FileStream stream = new FileStream(BasePath + "memory.map", FileMode.Create);
             BinaryWriter writer = new BinaryWriter(stream);
-
-            writer.Write(map.Header.CurrentLevel);
+            
             writer.Write(map.Header.CurrentLives);
+            writer.Write(map.Header.CurrentLevel);
             writer.Write(map.Header.CurrentPosition);
 
             writer.Write(map.Header.NumberLevels);

@@ -42,7 +42,7 @@ namespace Colors
         {
             InitializeComponent();
 
-            _context = Program.Project;
+            _context = ProjectDBContext.Project;
         }
 
         public void SetTile(Tile16x16 tile)

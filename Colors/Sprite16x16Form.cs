@@ -35,7 +35,7 @@ namespace Colors
         {
             InitializeComponent();
 
-            _context = Program.Project;
+            _context = ProjectDBContext.Project;
 
             Setup();
         }

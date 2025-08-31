@@ -7,7 +7,7 @@ namespace Colors
 {
     internal static class Program
     {
-        public static ProjectDBContext Project = new ProjectDBContext("colors.db");
+        public static string BasePath = @"C:\Users\benja\source\Next\Colors\CoreGame\Game\";
 
         /// <summary>
         ///  The main entry point for the application.
@@ -16,7 +16,7 @@ namespace Colors
         static void Main()
         {
             //Project.Database.EnsureDeleted();
-            Project.Database.EnsureCreated();
+            ProjectDBContext.Project.Database.EnsureCreated();
 
             AzureOpenAIService.Endpoint = Environment.GetEnvironmentVariable("AZUREOPENAIENDPOINT");
             AzureOpenAIService.Key = Environment.GetEnvironmentVariable("AZUREOPENAIKEY");

@@ -1,6 +1,7 @@
 ﻿using Colors.Assistant.Plugin.Models;
 using Colors.Models;
 using Microsoft.EntityFrameworkCore;
+using SKcode.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,7 +41,7 @@ namespace Colors
         {
             InitializeComponent();
 
-            var thesetiles = Program.Project.TilesMaps.First();
+            var thesetiles = ProjectDBContext.Project.TilesMaps.First();
 
             var count = 0;
             foreach (var id in thesetiles.LookupIds)
@@ -55,7 +56,7 @@ namespace Colors
 
         private void GetPaths()
         {
-            var thesepaths = Program.Project.Paths.Include(x => x.Steps).ToList();
+            var thesepaths = ProjectDBContext.Project.Paths.Include(x => x.Steps).ToList();
 
             paths.Items.Clear();
             foreach (var path in thesepaths)
@@ -143,13 +144,13 @@ namespace Colors
         private void DrawTile(int i, int x, int y, Graphics g)
         {
             var id = tiles[i];
-            var lookup = Program.Project.TileLookups.Find(id);
+            var lookup = ProjectDBContext.Project.TileLookups.Find(id);
 
             if (lookup.Type == TileType.Tile8x8)
             {
                 id = lookup.TileId;
 
-                var tile = Program.Project.Tiles8.Find(id);
+                var tile = ProjectDBContext.Project.Tiles8.Find(id);
 
                 var count = 0;
                 for (int j = 0; j < CellSize; j += 2)
@@ -171,7 +172,7 @@ namespace Colors
             {
                 id = lookup.TileId;
 
-                var tile = Program.Project.Tiles16.Find(id);
+                var tile = ProjectDBContext.Project.Tiles16.Find(id);
 
                 var count = 0;
                 for (int j = 0; j < CellSize; j += 2)
@@ -352,10 +353,10 @@ namespace Colors
                     Y = currentRow
                 };
 
-                var path = Program.Project.Paths.Find(temppath.Id);
+                var path = ProjectDBContext.Project.Paths.Find(temppath.Id);
                 path.Steps.Add(newStep);
 
-                Program.Project.SaveChanges();
+                ProjectDBContext.Project.SaveChanges();
 
                 steps.Items.Add(newStep);
 
@@ -380,12 +381,12 @@ namespace Colors
             if (CurrentTile is Tile8x8)
             {
                 var tempId = ((Tile8x8)CurrentTile).Id;
-                id = Program.Project.TileLookups.Where(x => x.Type == TileType.Tile8x8 && x.TileId == tempId).First().Id;
+                id = ProjectDBContext.Project.TileLookups.Where(x => x.Type == TileType.Tile8x8 && x.TileId == tempId).First().Id;
             }
             else if (CurrentTile is Tile16x16)
             {
                 var tempId = ((Tile16x16)CurrentTile).Id;
-                id = Program.Project.TileLookups.Where(x => x.Type == TileType.Tile16x16 && x.TileId == tempId).First().Id;
+                id = ProjectDBContext.Project.TileLookups.Where(x => x.Type == TileType.Tile16x16 && x.TileId == tempId).First().Id;
             }
 
             tiles[currentIndex] = id;
@@ -405,10 +406,10 @@ namespace Colors
 
         private void save_Click(object sender, EventArgs e)
         {
-            var tilemap = Program.Project.TilesMaps.First();
+            var tilemap = ProjectDBContext.Project.TilesMaps.First();
             tilemap.LookupIds = tiles;
 
-            Program.Project.SaveChanges();
+            ProjectDBContext.Project.SaveChanges();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -429,7 +430,7 @@ namespace Colors
 
                 if (tileId == 0) continue;
 
-                var lookup = Program.Project.TileLookups.Where(x => x.Id == tileId).First();
+                var lookup = ProjectDBContext.Project.TileLookups.Where(x => x.Id == tileId).First();
 
                 byte newPos = 0;
 
@@ -441,7 +442,7 @@ namespace Colors
                         newPos = tilePos;
                         output[i] = tilePos++;
 
-                        var tile = Program.Project.Tiles8.Find(lookup.TileId);
+                        var tile = ProjectDBContext.Project.Tiles8.Find(lookup.TileId);
                         var data = Save8x8Tile(tile.Pixels);
                         writer.Write(data);
                     }
@@ -460,7 +461,7 @@ namespace Colors
                         newPos = tilePos;
                         tilePos += 4;
 
-                        var tile = Program.Project.Tiles16.Find(lookup.TileId);
+                        var tile = ProjectDBContext.Project.Tiles16.Find(lookup.TileId);
                         var data = Save16x16Tile(tile.Pixels);
                         writer.Write(data);
                     }

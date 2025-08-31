@@ -1,5 +1,6 @@
 ﻿using Colors.Common.EventArguments;
 using Colors.Common.Models;
+using SKcode.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,14 +49,14 @@ namespace Colors
             tileMapForm.Show();
 
             tileForm.MdiParent = this;
-            tileForm.Pallette = Program.Project.Palletts.First();
-            tileForm.colors = Program.Project.Tiles8.First().Pixels.ToArray();
+            tileForm.Pallette = ProjectDBContext.Project.Palletts.First();
+            tileForm.colors = ProjectDBContext.Project.Tiles8.First().Pixels.ToArray();
             tileForm.Show();
 
             tile16Form.MdiParent = this;
-            tile16Form.Pallette = Program.Project.Palletts.First();
+            tile16Form.Pallette = ProjectDBContext.Project.Palletts.First();
             tile16Form.Tile8X8Form = tileForm;
-            tile16Form.colors = Program.Project.Tiles16.First().Pixels.ToArray();
+            tile16Form.colors = ProjectDBContext.Project.Tiles16.First().Pixels.ToArray();
             tile16Form.Show();
 
             TileMapForm = tileMapForm;
