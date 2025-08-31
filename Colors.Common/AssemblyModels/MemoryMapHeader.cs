@@ -9,14 +9,14 @@ namespace Colors.AssemblyModels
 {
     public class MemoryMapHeader
     {
-        public ushort PlayerStartPosition { get; set; }
+        public uint PlayerStartPosition { get; set; }
 
-        public ushort CurrentLevel { get; set; } = 1;
+        public byte CurrentLevel { get; set; } = 1;
 
         public byte CurrentLives { get; set; } = 5;
-        public ushort CurrentPosition { get; set; }
+        public uint CurrentPosition { get; set; }
 
-        public ushort NumberLevels { get; set; } = 2;
+        public byte NumberLevels { get; set; } = 2;
 
         public List<MemoryLevel> Levels { get; set; }
 

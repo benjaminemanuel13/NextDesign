@@ -12,7 +12,7 @@ namespace Colors.Common.AssemblyModels
 
         public byte Path { get; set; } = 0;
 
-        public ushort CurrentPosition { get; set; } = 0;
+        public uint CurrentPosition { get; set; } = 0;
 
         public byte CurrentStep { get; set; } = 0;
     }

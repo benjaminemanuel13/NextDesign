@@ -10,11 +10,11 @@ namespace Colors.Common.AssemblyModels
     {
         public byte CurrentStep { get; set; } = 0;
 
-        public ushort NumberSteps
+        public byte NumberSteps
         {
             get
             {
-                return (ushort)Steps.Count;
+                return (byte)Steps.Count;
             }
         }
 
