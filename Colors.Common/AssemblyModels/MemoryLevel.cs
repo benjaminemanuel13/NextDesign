@@ -18,7 +18,7 @@ namespace Colors.Common.AssemblyModels
         
         public List<MemoryEnemy> Enemies { get; set; }
 
-        public int NumberPaths { get; set; }
+        public byte NumberPaths { get; set; }
         
         public List<MemoryPath> Paths { get; set; }
     }

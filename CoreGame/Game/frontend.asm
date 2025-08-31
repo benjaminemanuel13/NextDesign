@@ -142,18 +142,25 @@ initmemory:
 
 	LD A, (memory + 11) ; Number Enemies
 
-	; First Enemy (Enemies)
+; First Enemy (Enemies)
 	LD HL, (memory + 12)	; Current Position X
 	LD HL, (memory + 14)	; Current Position Y
 	LD A, (memory + 16)	; Sprite
 	LD A, (memory + 17)	; Path
 	LD A, (memory + 18)	; Current Step
 
-	; 1st Path (Paths)
-	LD A, (memory + 19)	; Number Steps
-	LD HL, (memory + 20)	; Step Speed (0x0000)
-	LD HL, (memory + 22)	; Step X
-	LD HL, (memory + 24)	; Step X
+; 1st Path (Paths)
+	LD A, (memory + 19) ; Number Paths
+
+	LD A, (memory + 20)	; Number Steps
+	LD HL, (memory + 21)	; Step Speed (0x0000)
+	LD HL, (memory + 23)	; Step X
+	LD HL, (memory + 25)	; Step X
+	
+
+	
+
+	
 	
 	RET
 
