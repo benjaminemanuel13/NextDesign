@@ -1,4 +1,5 @@
-﻿using Colors.Models;
+﻿using Colors.Business.Services;
+using Colors.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -104,7 +105,7 @@ namespace Colors
                 Width = 16,
             };
 
-            for(int i = 0; i < newSprite.Pixels.Length; i++)
+            for (int i = 0; i < newSprite.Pixels.Length; i++)
             {
                 newSprite.Pixels[i] = 0xE3;
             }
@@ -243,6 +244,13 @@ namespace Colors
         private void project_MouseDown(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void generate_Click(object sender, EventArgs e)
+        {
+            var assembly = new AssemblyService();
+
+            assembly.GenerateMemoryMap();
         }
     }
 }

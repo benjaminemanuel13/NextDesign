@@ -30,6 +30,7 @@
         {
             project = new TreeView();
             label1 = new Label();
+            generate = new Button();
             SuspendLayout();
             // 
             // project
@@ -50,11 +51,22 @@
             label1.TabIndex = 1;
             label1.Text = "Project";
             // 
+            // generate
+            // 
+            generate.Location = new Point(12, 301);
+            generate.Name = "generate";
+            generate.Size = new Size(257, 23);
+            generate.TabIndex = 2;
+            generate.Text = "Generate Memory Map...";
+            generate.UseVisualStyleBackColor = true;
+            generate.Click += generate_Click;
+            // 
             // ProjectForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(283, 450);
+            ClientSize = new Size(283, 339);
+            Controls.Add(generate);
             Controls.Add(label1);
             Controls.Add(project);
             MaximizeBox = false;
@@ -70,5 +82,6 @@
 
         private TreeView project;
         private Label label1;
+        private Button generate;
     }
 }

@@ -1,13 +1,24 @@
 
 label:
 
+0
+
 CurrentLevel (0x00) - Assuming < 256 levels
 
+1
+
 CurrentLives (0x00)
+
+2
+
 CurrentPosition
 	X (0x00 0x00)
 	Y (0x00 0x00)
+
+7
 NumberLevels (0x01) - Assuming < 256 levels
+
+8
 
 label:
 
