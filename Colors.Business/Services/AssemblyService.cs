@@ -72,7 +72,8 @@ namespace Colors.Business.Services
                 {
                     memLevel.Enemies.Add(new MemoryEnemy()
                     {
-                        CurrentPosition = 0x000A000A,
+                        X = 19,
+                        Y = 8,
                         Path = (byte)0,
                         Sprite = (byte)0,
                         CurrentStep = 0,
@@ -102,7 +103,8 @@ namespace Colors.Business.Services
                 writer.Write(level.NumberEnemies);
                 foreach (var enemy in level.Enemies)
                 {
-                    writer.Write(enemy.CurrentPosition);
+                    writer.Write(enemy.X);
+                    writer.Write(enemy.Y);
                     writer.Write(enemy.Sprite);
                     writer.Write(enemy.Path);
                     writer.Write(enemy.CurrentStep);
