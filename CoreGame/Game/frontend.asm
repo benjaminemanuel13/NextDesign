@@ -141,24 +141,116 @@ initmemory:
 	LD HL, (memory + 9)	; Y Player Start Position
 
 	LD A, (memory + 11) ; Number Enemies
+	LD B, A
 
+	LD (numberenemies), A
+
+	LD HL, enemydata
+	LD (enemyplace), HL
+
+	LD IX, memory + 12
+enemies:
+	PUSH BC
+	LD BC, (enemyplace)
 ; First Enemy (Enemies)
-	LD HL, (memory + 12)	; Current Position X
-	LD HL, (memory + 14)	; Current Position Y
-	LD A, (memory + 16)	; Sprite
-	LD A, (memory + 17)	; Path
-	LD A, (memory + 18)	; Current Step
+	LD DE, (IX)	; Current Position X
+	
+	LD HL, BC
+	LD D, 16
+	MUL D, E
+	LD (HL), DE
+	INC BC
+	INC BC
+	
+	INC IX
+	INC IX
+	LD DE, (IX)	; Current Position Y
+	
+	LD HL, BC
+	LD D, 16
+	MUL D, E
+	LD (HL), DE
+	INC BC
+	INC BC
+	
+	INC IX
+	INC IX
+	LD A, (IX)	; Sprite
+	LD (BC), A
+	INC BC
+	INC IX
+	LD A, (IX)	; Path
+	LD (BC), A
+	INC BC
+	INC IX
+	LD A, (IX)	; Current Step
+	LD (BC), A
+	INC BC
+	INC IX
+
+	LD (enemyplace), BC
+
+	POP BC
+	DEC B
+	JP NZ, enemies
 
 ; 1st Path (Paths)
-	LD A, (memory + 19) ; Number Paths
+	LD A, (IX) ; Number Paths
+	LD C, A
+thepaths:
+	INC IX
+	LD A, (IX)	; Number Steps
+	LD B, A
+		
+	PUSH BC
+steps:
+	PUSH BC
 
-	LD A, (memory + 20)	; Number Steps
-	LD HL, (memory + 21)	; Step Speed (0x0000)
-	LD HL, (memory + 23)	; Step X
-	LD HL, (memory + 25)	; Step X
+	LD BC, (enemyplace)
 	
+	INC IX
+	LD DE, (IX)	; Step Speed (0x0000) 0xFFFF
+	LD HL, BC
+	LD (HL), DE
+	INC BC
+	INC BC
+	INC IX
+	INC IX
+	LD DE, (IX)	; Step X
+	LD A, 16
+	LD D, A
+	MUL D, E
+	LD HL, BC
+	LD (HL), DE
+	INC BC
+	INC BC
+	INC IX
+	INC IX
+	LD DE, (IX)	; Step Y
+	LD D, 16
+	MUL D, E
+	LD HL, BC
+	LD (HL), DE
+	INC BC
+	INC BC
+	INC IX
+
+	LD (enemyplace), BC
+
+	POP BC
+
+	DEC B
+	JP NZ, steps
+
+	POP BC
+
+	DEC C
+	JP NZ, thepaths
+
 	RET
 
+enemyplace:
+	db 0x00
 ;;--------------------------------------------------------------------
 ;; data
 ;;--------------------------------------------------------------------
@@ -204,26 +296,39 @@ palette:
 
 paletteLength: EQU $-palette
 
+// Initially A is Sprite, HL is X Pos, C is Y Pos
 showsprite:
 	
 	; Show single sprite 0 using pattern 0
-	NEXTREG $34, 0				; First sprite
-	NEXTREG $35, 255			; X=100
-	NEXTREG $36, 80				; Palette offset, no mirror, no rotation
-	NEXTREG $37, %00000000		; Palette offset, no mirror, no rotation
+	NEXTREG $34, A				; First sprite
+	LD A, L
+	NEXTREG $35, A				; X=100
+	LD A, C
+	NEXTREG $36, A				; Y=80
+	LD A, 0
+	ADD A, H
+	NEXTREG $37, A				; Palette offset, no mirror, no rotation
 	NEXTREG $38, %10000000		; Visible, no byte 4, pattern 0
 	RET
 frontend_main:
-	
-
 	; Show single sprite 1 using pattern 0
 	;NEXTREG $34, 0			; Second sprite
 	;NEXTREG $35, 84			; X=84
 	;NEXTREG $36, 80			; Y=80
 	;NEXTREG $37, %00000000		; Palette offset, no mirror, no rotation
 	;NEXTREG $38, %10000000		; Visible, no byte 4, pattern 0
-	call showsprite
-    jp start
+enemiesgo:
+	LD A, (numberenemies)
+	LD B, A
+	LD A, 0
+enemiesloop:
+	LD HL, 300
+	LD C, 30
+	CALL showsprite
+
+	DEC B
+	JP NZ, enemiesloop
+    JP start
 
 ; HL = address of sprite sheet in memory
 ; BC = number of bytes to load

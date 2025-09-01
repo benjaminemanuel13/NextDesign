@@ -5,6 +5,7 @@ using SKcode.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -59,8 +60,8 @@ namespace Colors.Business.Services
                         memPath.Steps.Add(new MemoryStep()
                         {
                             Speed = (ushort)step.Speed,
-                            X = (ushort)(step.X * 16),
-                            Y = (ushort)(step.Y * 16),
+                            X = (ushort)(step.X),
+                            Y = (ushort)(step.Y),
                         });
                     }
                     memLevel.Paths.Add(memPath);
