@@ -15,7 +15,7 @@ namespace Colors
         [STAThread]
         static void Main()
         {
-            ProjectDBContext.Project.Database.EnsureDeleted();
+            //ProjectDBContext.Project.Database.EnsureDeleted();
 
             try
             {

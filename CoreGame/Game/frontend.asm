@@ -183,7 +183,9 @@ enemies:
 	LD (BC), A
 	INC BC
 	INC IX
-	LD A, (IX)	; Current Step
+
+	;LD A, (IX)	; Current Step
+	LD A, 0
 	LD (BC), A
 	INC BC
 	INC IX
@@ -200,8 +202,17 @@ enemies:
 thepaths:
 	INC IX
 	LD A, (IX)	; Number Steps
+
+	PUSH BC
+	LD BC, (enemyplace)
+	LD HL, BC
+	LD (HL), A
+	INC BC
+	LD (enemyplace), BC
+	POP BC
+
 	LD B, A
-		
+
 	PUSH BC
 steps:
 	PUSH BC
@@ -314,14 +325,73 @@ frontend_main:
 enemiesgo:
 	LD A, (numberenemies)
 	LD B, A
-	LD A, 0
+	LD C, 0
+
+	LD HL, enemydata
+	LD IY, HL
+
+	LD A, (IY + 5)	; sprite
+	
+	PUSH AF
+	PUSH BC
+
+	; Find Current Step
+	LD A, (IY + 6)
+
+	LD B, A 	; current step
+	LD C, 0xFF		; counter
+
+	ADD HL, 3
+	LD IY, HL
+
+enemymove:
+	INC C
+	ADD HL, 6
+
+	LD IY, HL
+	LD A, C
+	CP B
+	JP C, enemymove ; (Counter) < Less
+
+	;PUSH IY
+	;LD HL, enemydata
+	;LD IY, HL
+
+	;LD C, (IY + 7)
+	;LD A, B
+	
+	;JR Z, reset
+	;JP pastreset
+
+reset:
+	;LD (IY + 6), 0
+
+pastreset:
+	PUSH IY
+
+	LD HL, enemydata
+	LD IY, HL
+
+	INC A
+	LD (IY + 6), A
+
+	POP IY
+
+	POP AF
+	POP BC
+
+	INC IY
+	LD HL, (IY)
+	LD A, (IY + 2)
+	LD C, A
 enemiesloop:
-	LD HL, 300
-	LD C, 30
+
+	;LD HL, 300
+	;LD C, 30
 	CALL showsprite
 
-	DEC B
-	JP NZ, enemiesloop
+	;DEC B
+	;JP NZ, enemiesloop
     JP start
 
 ; HL = address of sprite sheet in memory
