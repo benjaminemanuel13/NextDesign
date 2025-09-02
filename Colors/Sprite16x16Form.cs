@@ -165,5 +165,17 @@ namespace Colors
             bool hasChanges = _context.ChangeTracker.HasChanges();
             int affected = _context.SaveChanges(); // should be > 0
         }
+
+        private void animation_CheckedChanged(object sender, EventArgs e)
+        {
+            if(animation.Checked)
+            {
+                animationIndex.Enabled = true;
+            }
+            else
+            {
+                animationIndex.Enabled = false;
+            }
+        }
     }
 }

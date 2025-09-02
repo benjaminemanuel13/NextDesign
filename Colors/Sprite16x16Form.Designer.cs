@@ -32,6 +32,8 @@
             generate = new Button();
             save = new Button();
             not = new Label();
+            animationIndex = new ComboBox();
+            animation = new CheckBox();
             SuspendLayout();
             // 
             // textBox1
@@ -75,16 +77,39 @@
             not.TabIndex = 7;
             not.Text = "No Sprite Loaded";
             // 
-            // SpriteForm
+            // animationIndex
+            // 
+            animationIndex.Enabled = false;
+            animationIndex.FormattingEnabled = true;
+            animationIndex.Items.AddRange(new object[] { "1" });
+            animationIndex.Location = new Point(788, 444);
+            animationIndex.Name = "animationIndex";
+            animationIndex.Size = new Size(66, 23);
+            animationIndex.TabIndex = 9;
+            // 
+            // animation
+            // 
+            animation.AutoSize = true;
+            animation.Location = new Point(700, 444);
+            animation.Name = "animation";
+            animation.Size = new Size(82, 19);
+            animation.TabIndex = 10;
+            animation.Text = "Animation";
+            animation.UseVisualStyleBackColor = true;
+            animation.CheckedChanged += animation_CheckedChanged;
+            // 
+            // Sprite16x16Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(866, 450);
+            ClientSize = new Size(866, 476);
+            Controls.Add(animation);
+            Controls.Add(animationIndex);
             Controls.Add(not);
             Controls.Add(save);
             Controls.Add(generate);
             Controls.Add(textBox1);
-            Name = "SpriteForm";
+            Name = "Sprite16x16Form";
             Text = "Sprite";
             ResumeLayout(false);
             PerformLayout();
@@ -96,5 +121,7 @@
         private Button generate;
         private Button save;
         private Label not;
+        private ComboBox animationIndex;
+        private CheckBox animation;
     }
 }

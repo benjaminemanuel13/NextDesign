@@ -251,12 +251,6 @@ steps:
 
 enemyplace:
 	db 0x00
-;;--------------------------------------------------------------------
-;; data
-;;--------------------------------------------------------------------
-
-; Note: all files created with https://zx.remysharp.com/sprites/#sprite-editor
-; See individual notes besides each entry below:
 
 ; Tilemap settings: 8px, 40x32, disable "include header" when downloading, file is then usabe as is.
 tilemap:
