@@ -353,22 +353,26 @@ enemymove:
 	CP B
 	JP C, enemymove ; (Counter) < Less
 
-	;PUSH IY
-	;LD HL, enemydata
-	;LD IY, HL
+	PUSH IY
+	LD HL, enemydata
+	LD IY, HL
 
-	;LD C, (IY + 7)
-	;LD A, B
+	LD C, (IY + 7)
+	LD A, B
 	
-	;JR Z, reset
-	;JP pastreset
+	CP C
+
+	JP Z, reset
+	JP pastreset
 
 reset:
-	;LD (IY + 6), 0
+	PUSH IY
+	LD HL, enemydata
+	LD IY, HL
+	LD (IY + 6), 0
+	POP IY
 
 pastreset:
-	PUSH IY
-
 	LD HL, enemydata
 	LD IY, HL
 
