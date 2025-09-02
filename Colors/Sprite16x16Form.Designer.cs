@@ -79,6 +79,7 @@
             // 
             // animationIndex
             // 
+            animationIndex.DropDownStyle = ComboBoxStyle.DropDownList;
             animationIndex.Enabled = false;
             animationIndex.FormattingEnabled = true;
             animationIndex.Items.AddRange(new object[] { "1" });
