@@ -18,7 +18,8 @@ namespace Colors
 {
     public partial class TileMapForm : Form
     {
-        private string basePath = @"C:\Users\benja\source\Next\Game\";
+        //private string basePath = @"C:\Users\benja\source\Next\Game\";
+        string BasePath = @"C:\Users\benja\source\Next\Colors\CoreGame\Game\";
 
         const int CellSize = 16;
         const int GridSize = 40;
@@ -418,11 +419,9 @@ namespace Colors
             int count = 0;
             byte tilePos = 0;
 
-            // int: id, int: position in output array
             Dictionary<int, byte> tileMap = new Dictionary<int, byte>();
 
-            //var tileStream = File.OpenWrite(basePath + "tiles.asm");
-            var writer = new StreamWriter(basePath + "tiles.asm", false, Encoding.UTF8);
+            var writer = new StreamWriter(BasePath + "tiles.asm", false, Encoding.UTF8);
 
             for (int i = 0; i < tiles.Length; i++)
             {
@@ -495,7 +494,7 @@ namespace Colors
                 finaloutput[i] = output[varcount++];
             }
 
-            File.WriteAllBytes(basePath + "tileMap.map", finaloutput);
+            File.WriteAllBytes(BasePath + "tileMap.map", finaloutput);
         }
 
         private string Save8x8Tile(byte[] colors)
