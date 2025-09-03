@@ -72,9 +72,9 @@ namespace Colors.Business.Services
                 {
                     memLevel.Enemies.Add(new MemoryEnemy()
                     {
-                        X = 19,
-                        Y = 8,
-                        Path = (byte)0,
+                        X = (ushort)enemy.Path.Steps[0].X,
+                        Y = (ushort)enemy.Path.Steps[0].Y,
+                        Path = (byte)enemy.Path.Id,
                         Sprite = (byte)0,
                         CurrentStep = 0,
                     });
@@ -108,17 +108,15 @@ namespace Colors.Business.Services
                     writer.Write(enemy.Sprite);
                     writer.Write(enemy.Path);
                     writer.Write(enemy.CurrentStep);
-                }
 
-                writer.Write(level.NumberPaths);
-                foreach (var path in level.Paths)
-                {
-                    writer.Write(path.NumberSteps);
-                    foreach (var step in path.Steps)
+                    writer.Write((byte)2);  // This should be ignored.
+                    var p = _context.Paths.Include(x => x.Steps).First(x => x.Id == enemy.Path);
+                    writer.Write((byte)p.Steps.Count);
+                    foreach (var step in p.Steps)
                     {
-                        writer.Write(step.Speed);
-                        writer.Write(step.X);
-                        writer.Write(step.Y);
+                        writer.Write((ushort)step.Speed);
+                        writer.Write((ushort)step.X);
+                        writer.Write((ushort)step.Y);
                     }
                 }
             }

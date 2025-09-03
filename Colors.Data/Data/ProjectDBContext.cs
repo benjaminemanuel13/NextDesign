@@ -185,17 +185,25 @@ namespace SKcode.Data
                 new TileLookup { Id = 2, Type = (TileType)1, TileId = 1 });
 
             modelBuilder.Entity<Colors.Models.Path>().HasData(
-                new Colors.Models.Path { Id = 1, Name = "Path 01", LevelId = 1 });
+                new Colors.Models.Path { Id = 1, Name = "Path 01", LevelId = 1 },
+                new Colors.Models.Path { Id = 2, Name = "Path 02", LevelId = 1 });
 
             modelBuilder.Entity<Step>().HasData(
                 new Step { Id = 1, Name = "Step 1", PathId = 1, X = 19, Y = 8, Speed = 0xFFFF },
                 new Step { Id = 2, Name = "Step 2", PathId = 1, X = 18, Y = 8, Speed = 0xFFFF },
                 new Step { Id = 3, Name = "Step 3", PathId = 1, X = 17, Y = 8, Speed = 0xFFFF },
                 new Step { Id = 4, Name = "Step 4", PathId = 1, X = 18, Y = 8, Speed = 0xFFFF },
-                new Step { Id = 5, Name = "Step 5", PathId = 1, X = 19, Y = 8, Speed = 0xFFFF });
+                new Step { Id = 5, Name = "Step 5", PathId = 1, X = 19, Y = 8, Speed = 0xFFFF },
+
+                new Step { Id = 6, Name = "Step 2 - 1", PathId = 2, X = 0, Y = 8, Speed = 0xFFFF },
+                new Step { Id = 7, Name = "Step 2 - 2", PathId = 2, X = 1, Y = 8, Speed = 0xFFFF },
+                new Step { Id = 8, Name = "Step 2 - 3", PathId = 2, X = 2, Y = 8, Speed = 0xFFFF },
+                new Step { Id = 9, Name = "Step 2 - 3", PathId = 2, X = 1, Y = 8, Speed = 0xFFFF },
+                new Step { Id = 10, Name = "Step 2 - 3", PathId = 2, X = 0, Y = 8, Speed = 0xFFFF });
 
             modelBuilder.Entity<Enemy>().HasData(
-                new Enemy { Id = 1, LevelId = 1, Name = "Enemy 01", PathId = 1, SpriteId = 1});
+                new Enemy { Id = 1, LevelId = 1, Name = "Enemy 01", PathId = 1, SpriteId = 1 },
+                new Enemy { Id = 2, LevelId = 1, Name = "Enemy 02", PathId = 2, SpriteId = 1 });
         }
     }
 }

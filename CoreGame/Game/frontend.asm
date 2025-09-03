@@ -143,6 +143,7 @@ initmemory:
 	LD A, (memory + 11) ; Number Enemies
 	LD B, A
 
+	LD B, 1						; REPLACE THIS
 	LD (numberenemies), A
 
 	LD HL, enemydata
@@ -388,13 +389,11 @@ pastreset:
 	LD A, (IY + 2)
 	LD C, A
 enemiesloop:
-
-	;LD HL, 300
-	;LD C, 30
 	CALL showsprite
-
-	;DEC B
-	;JP NZ, enemiesloop
+	
+	CALL delay
+	CALL delay
+	
     JP start
 
 ; HL = address of sprite sheet in memory
