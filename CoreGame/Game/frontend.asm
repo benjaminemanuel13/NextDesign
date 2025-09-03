@@ -359,20 +359,19 @@ enemymove:
 
 	LD C, (IY + 7)
 	LD A, B
-	
+	INC A
+
 	CP C
 
 	JP Z, reset
 	JP pastreset
 
-reset:
-	PUSH IY
-	LD HL, enemydata
-	LD IY, HL
-	LD (IY + 6), 0
-	POP IY
+	;JP C, pastreset
 
+reset:
+	LD A, 0x00
 pastreset:
+	DEC A
 	LD HL, enemydata
 	LD IY, HL
 
