@@ -1,267 +1,10 @@
-frontend_init:
-; Enable tilemap mode
-    NEXTREG $6B, %10100001		; 40x32, 8-bit entries
-	NEXTREG $6C, %00000000		; palette offset, visuals
-
-	; Tell harware where to find tiles
-	NEXTREG $6E, OFFSET_OF_MAP	; MSB of tilemap in bank 5  40
-	NEXTREG $6F, OFFSET_OF_TILES	; MSB of tilemap definitions  32
-
-	; Setup tilemap palette
-	NEXTREG $43, %00110000		; Auto increment, select first tilemap palette
-	NEXTREG $40, 0			; Start with first entry
-
-	; Copy palette
-	LD HL, palette			; Address of palette data in memory
-	LD B, 16			; Copy 16 colours
-	CALL copyPalette		; Call routine for copying
-
-	; Copy tile definitions to expected memory
-	LD HL, tiles			; Address of tiles in memory
-	LD BC, tilesLength		; Number of bytes to copy
-	CALL copyTileDefinitions	; Copy all tiles data
-
-	; Copy tilemap to expected memory
-	LD HL, tilemap			; Addreess of tilemap in memory
-	CALL copyTileMap40x32		; Copy 40x32 tilemaps
-
-	; Give it some time
-	CALL delay
-	CALL delay
-	CALL delay
-	CALL delay
-    
-	; Then use offset registers to simulate shake.
-	LD A, 1				; Offset by 1 pixel
-	LD B, 40			; Number of repetitions
-.shakeLoop:
-	NEXTREG $30, A			; Set current offset
-	LD HL, 5000
-	CALL customDelay
-	XOR 1				; Change offset: if 0 to 1, then back to 0
-	DJNZ .shakeLoop
-
-    ld hl, $0001
-    ld (state), hl
-
-	CALL initSprites
-
-    jp start
-
-delay:
-	LD HL, $FFFF
-customDelay:
-	PUSH AF
-.loop:
-	DEC HL
-	LD A, H
-	OR L
-	JR NZ, .loop
-
-	POP AF
-	RET
-
-;;--------------------------------------------------------------------
-;; subroutines
-;;--------------------------------------------------------------------
-
-;---------------------------------------------------------------------
-; HL = memory location of the palette
-copyPalette256:
-	LD B, 0			; This variant always starts with 0
-;---------------------------------------------------------------------
-; HL = memory location of the palette
-; B = number of colours to copy
-copyPalette:
-	LD A, (HL)		; Load RRRGGGBB into A
-	INC HL			; Increment to next entry
-	NEXTREG $41, A		; Send entry to Next HW
-	DJNZ copyPalette	; Repeat until B=0
-	RET
-
-;---------------------------------------------------------------------
-; HL = memory location of tile definitons
-; BC = size of tile defitions in bytes.
-copyTileDefinitions:
-	LD DE, START_OF_TILES
-	LDIR
-	RET
-
-;---------------------------------------------------------------------
-; HL = memory location of tilemap
-copyTileMap40x32:
-	LD BC, 40*32		; This variant always load 40x32
-	JR copyTileMap
-copyTileMap80x32:
-	LD BC, 80*32		; This variant always loads 80x32
-;---------------------------------------------------------------------
-; HL = memory location of tilemap
-; BC = size of tilemap in bytes
-copyTileMap:
-	LD DE, START_OF_TILEMAP
-	LDIR
-	RET
-
-initSprites:
-; Load sprite data using DMA
-	LD HL, sprites			; Sprites data source
-	LD BC, 16*16*5			; Copy 5 sprites, each 16x16 pixels
-	LD A, 0				; Start with first sprite
-	CALL loadSprites		; Load sprites to FPGA
-
-	; Setup sprite hardware
-	NEXTREG $15, %01000001		; sprite 0 on top, SLU, sprites visible
-
-    ; This block from 'Code' project
-    NEXTREG $07, 3;           // 28Mhz
-    NEXTREG $08,0x4A;        // Disable RAM contention, enable DAC and turbosound
-    NEXTREG $05,0x04;        // 60Hz mode
-    NEXTREG $15,0x03;       // layer order - and sprites on
-    NEXTREG $4B,0xE3;       // sprite transparency
-
-initmemory:
-	LD A, (memory)		; Lives
-	LD A, (memory + 1)	; Current Level
-
-	LD A, (memory + 2) ; Player X
-	LD D, 16
-	LD E, A
-	MUL D, E
-	LD HL, DE
-
-	LD A, (memory + 4) ; Player Y
-	LD D, 16
-	LD E, A
-	MUL D, E
-
-	LD A, (memory + 6)	; Number Levels
-
-	; In 1st level now
-	LD HL, (memory + 7)	; X Player Start Position
-	LD HL, (memory + 9)	; Y Player Start Position
-
-	LD A, (memory + 11) ; Number Enemies
-	LD B, A
-
-	LD B, 1						; REPLACE THIS
-	LD (numberenemies), A
-
-	LD HL, enemydata
-	LD (enemyplace), HL
-
-	LD IX, memory + 12
-enemies:
-	PUSH BC
-	LD BC, (enemyplace)
-; First Enemy (Enemies)
-	LD DE, (IX)	; Current Position X
-	
-	LD HL, BC
-	LD D, 16
-	MUL D, E
-	LD (HL), DE
-	INC BC
-	INC BC
-	
-	INC IX
-	INC IX
-	LD DE, (IX)	; Current Position Y
-	
-	LD HL, BC
-	LD D, 16
-	MUL D, E
-	LD (HL), DE
-	INC BC
-	INC BC
-	
-	INC IX
-	INC IX
-	LD A, (IX)	; Sprite
-	LD (BC), A
-	INC BC
-	INC IX
-	LD A, (IX)	; Path
-	LD (BC), A
-	INC BC
-	INC IX
-
-	;LD A, (IX)	; Current Step
-	LD A, 0
-	LD (BC), A
-	INC BC
-	INC IX
-
-	LD (enemyplace), BC
-
-	POP BC
-	DEC B
-	JP NZ, enemies
-
-; 1st Path (Paths)
-	LD A, (IX) ; Number Paths
-	LD C, A
-thepaths:
-	INC IX
-	LD A, (IX)	; Number Steps
-
-	PUSH BC
-	LD BC, (enemyplace)
-	LD HL, BC
-	LD (HL), A
-	INC BC
-	LD (enemyplace), BC
-	POP BC
-
-	LD B, A
-
-	PUSH BC
-steps:
-	PUSH BC
-
-	LD BC, (enemyplace)
-	
-	INC IX
-	LD DE, (IX)	; Step Speed (0x0000) 0xFFFF
-	LD HL, BC
-	LD (HL), DE
-	INC BC
-	INC BC
-	INC IX
-	INC IX
-	LD DE, (IX)	; Step X
-	LD A, 16
-	LD D, A
-	MUL D, E
-	LD HL, BC
-	LD (HL), DE
-	INC BC
-	INC BC
-	INC IX
-	INC IX
-	LD DE, (IX)	; Step Y
-	LD D, 16
-	MUL D, E
-	LD HL, BC
-	LD (HL), DE
-	INC BC
-	INC BC
-	INC IX
-
-	LD (enemyplace), BC
-
-	POP BC
-
-	DEC B
-	JP NZ, steps
-
-	POP BC
-
-	DEC C
-	JP NZ, thepaths
-
-	RET
+	include "frontend_init.asm"
+	include "memory_init.asm"
 
 enemyplace:
+	db 0x00
+
+nosteps:
 	db 0x00
 
 ; Tilemap settings: 8px, 40x32, disable "include header" when downloading, file is then usabe as is.
@@ -326,10 +69,15 @@ frontend_main:
 enemiesgo:
 	LD A, (numberenemies)
 	LD B, A
-	LD C, 0
+
+	LD (enemynum), A
 
 	LD HL, enemydata
+	LD (enemyhold), HL
+enemyport:
+	LD HL, (enemyhold)
 	LD IY, HL
+	LD C, 0
 
 	LD A, (IY + 5)	; sprite
 	
@@ -355,7 +103,7 @@ enemymove:
 	JP C, enemymove ; (Counter) < Less
 
 	PUSH IY
-	LD HL, enemydata
+	LD HL, (enemyhold)
 	LD IY, HL
 
 	LD C, (IY + 7)
@@ -367,22 +115,21 @@ enemymove:
 	JP Z, reset
 	JP pastreset
 
-	;JP C, pastreset
-
 reset:
 	LD A, 0x00
 pastreset:
 	DEC A
-	LD HL, enemydata
+	LD HL, (enemyhold)
 	LD IY, HL
 
 	INC A
 	LD (IY + 6), A
 
 	POP IY
-
-	POP AF
 	POP BC
+	POP AF
+
+	PUSH IY
 
 	INC IY
 	LD HL, (IY)
@@ -391,10 +138,32 @@ pastreset:
 enemiesloop:
 	CALL showsprite
 	
+	POP IY
+
+	LD HL, IY
+
 	CALL delay
-	CALL delay
-	
+
+	INC IY
+
+	LD A, (enemynum)
+	LD D, 6
+	LD E, A
+	MUL D, E
+	ADD HL, DE
+	LD (enemyhold), HL
+
+	DEC B
+	JP NZ, enemyport
+
     JP start
+
+enemyhold:
+	db 0x00, 0x00
+
+enemynum:
+	db 0x00
+
 
 ; HL = address of sprite sheet in memory
 ; BC = number of bytes to load
