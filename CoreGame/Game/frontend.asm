@@ -151,6 +151,7 @@ enemiesloop:
 	LD E, A
 	MUL D, E
 	ADD HL, DE
+
 	LD (enemyhold), HL
 
 	DEC B
