@@ -67,6 +67,7 @@ namespace Colors.Business.Services
                     memLevel.Paths.Add(memPath);
                 }
 
+                int sprite = 0;
                 memLevel.NumberEnemies = (byte)level.Enemies.Count;
                 foreach (var enemy in level.Enemies)
                 {
@@ -75,7 +76,7 @@ namespace Colors.Business.Services
                         X = (ushort)enemy.Path.Steps[0].X,
                         Y = (ushort)enemy.Path.Steps[0].Y,
                         Path = (byte)enemy.Path.Id,
-                        Sprite = (byte)0,
+                        Sprite = (byte)sprite++,
                         CurrentStep = 0,
                     });
                 }

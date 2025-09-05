@@ -59,6 +59,10 @@ showsprite:
 	NEXTREG $37, A				; Palette offset, no mirror, no rotation
 	NEXTREG $38, %10000000		; Visible, no byte 4, pattern 0
 	RET
+
+spritepos:
+	db 0x00
+
 frontend_main:
 	; Show single sprite 1 using pattern 0
 	;NEXTREG $34, 0			; Second sprite
@@ -76,8 +80,12 @@ enemiesgo:
 	LD (enemyhold), HL
 enemyport:
 	LD HL, (enemyhold)
+	LD A, (HL)
+	ADD A, 4
+	LD (spritepos), A
+
 	LD IY, HL
-	LD C, 0
+	;LD C, 0
 
 	LD A, (IY + 5)	; sprite
 	
@@ -107,7 +115,10 @@ enemymove:
 	LD IY, HL
 
 	LD C, (IY + 7)
+	LD A, C
+	LD (numsteps), A
 	LD A, B
+	
 	INC A
 
 	CP C
@@ -136,21 +147,26 @@ pastreset:
 	LD A, (IY + 2)
 	LD C, A
 enemiesloop:
+	PUSH AF
+	LD A, (spritepos)
 	CALL showsprite
-	
+	POP AF
+
+	PUSH HL
+	CALL delay
+	POP HL
+
 	POP IY
 
 	LD HL, IY
 
-	CALL delay
-
-	INC IY
-
-	LD A, (enemynum)
+	LD HL, (enemyhold)
+	LD A, (numsteps)
 	LD D, 6
 	LD E, A
 	MUL D, E
 	ADD HL, DE
+	ADD HL, 8
 
 	LD (enemyhold), HL
 
@@ -165,6 +181,8 @@ enemyhold:
 enemynum:
 	db 0x00
 
+numsteps:
+	db 0x00
 
 ; HL = address of sprite sheet in memory
 ; BC = number of bytes to load
