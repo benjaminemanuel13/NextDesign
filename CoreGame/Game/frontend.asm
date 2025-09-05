@@ -47,7 +47,6 @@ paletteLength: EQU $-palette
 
 // Initially A is Sprite, HL is X Pos, C is Y Pos
 showsprite:
-	
 	; Show single sprite 0 using pattern 0
 	NEXTREG $34, A				; First sprite
 	LD A, L
@@ -58,6 +57,7 @@ showsprite:
 	ADD A, H
 	NEXTREG $37, A				; Palette offset, no mirror, no rotation
 	NEXTREG $38, %10000000		; Visible, no byte 4, pattern 0
+
 	RET
 
 spritepos:

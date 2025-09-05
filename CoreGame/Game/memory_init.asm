@@ -22,7 +22,6 @@ initmemory:
 	LD A, (memory + 11) ; Number Enemies
 	LD B, A
 
-	;LD B, 2						; REPLACE THIS
 	LD (numberenemies), A
 
 	LD HL, enemydata
@@ -35,12 +34,9 @@ enemies:
 	PUSH BC
 	LD BC, (enemyplace)
 
-; First Enemy (Enemies)
 	LD DE, (IX)	; Current Position X
 	
 	LD HL, BC
-	;LD D, 16
-	;MUL D, E
 	LD (HL), DE
 	INC BC
 	INC BC
@@ -50,8 +46,6 @@ enemies:
 	LD DE, (IX)	; Current Position Y
 	
 	LD HL, BC
-	;LD D, 16
-	;MUL D, E
 	LD (HL), DE
 	INC BC
 	INC BC
@@ -75,7 +69,6 @@ enemies:
 
 	LD (enemyplace), BC
 
-; 1st Path (Paths)
 	LD A, (IX) ; Number Paths
 	LD C, A
 thepaths:
@@ -107,8 +100,6 @@ steps:
 	INC IX
 	INC IX
 	LD DE, (IX)	; Step X
-	;LD D, 16
-	;MUL D, E
 	LD HL, BC
 	LD (HL), DE
 	INC BC
@@ -116,8 +107,6 @@ steps:
 	INC IX
 	INC IX
 	LD DE, (IX)	; Step Y
-	;LD D, 16
-	;MUL D, E
 	LD HL, BC
 	LD (HL), DE
 	INC BC
