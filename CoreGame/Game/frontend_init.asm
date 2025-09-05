@@ -26,10 +26,10 @@ frontend_init:
 	CALL copyTileMap40x32		; Copy 40x32 tilemaps
 
 	; Give it some time
-	CALL delay
-	CALL delay
-	CALL delay
-	CALL delay
+	;CALL delay
+	;CALL delay
+	;CALL delay
+	;CALL delay
     
 	; Then use offset registers to simulate shake.
 	LD A, 1				; Offset by 1 pixel

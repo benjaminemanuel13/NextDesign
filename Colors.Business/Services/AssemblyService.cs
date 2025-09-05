@@ -60,8 +60,8 @@ namespace Colors.Business.Services
                         memPath.Steps.Add(new MemoryStep()
                         {
                             Speed = (ushort)step.Speed,
-                            X = (ushort)(step.X),
-                            Y = (ushort)(step.Y),
+                            X = (ushort)(step.X * 16),
+                            Y = (ushort)(step.Y * 16),
                         });
                     }
                     memLevel.Paths.Add(memPath);
@@ -73,8 +73,8 @@ namespace Colors.Business.Services
                 {
                     memLevel.Enemies.Add(new MemoryEnemy()
                     {
-                        X = (ushort)enemy.Path.Steps[0].X,
-                        Y = (ushort)enemy.Path.Steps[0].Y,
+                        X = (ushort)(enemy.Path.Steps[0].X * 16),
+                        Y = (ushort)(enemy.Path.Steps[0].Y * 16),
                         Path = (byte)enemy.Path.Id,
                         Sprite = (byte)sprite++,
                         CurrentStep = 0,
@@ -116,8 +116,8 @@ namespace Colors.Business.Services
                     foreach (var step in p.Steps)
                     {
                         writer.Write((ushort)step.Speed);
-                        writer.Write((ushort)step.X);
-                        writer.Write((ushort)step.Y);
+                        writer.Write((ushort)(step.X * 16));
+                        writer.Write((ushort)(step.Y * 16));
                     }
                 }
             }
