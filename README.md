@@ -26,4 +26,8 @@ You need to have Azure OpenAI and OpenAI keys (you can choose one or the other a
 If you are following this project you may be interested in SmileMidi, a midi controller (keyboard) driven sound system the will eventually be used to generate sound for the Next Game.
 See: https://github.com/benjaminemanuel13/SmileMidi  (its early days just now but plays tones when keyboard used) don't forget to add the NuGet package from the NuGets folder.
 
+[Edit 06/09/2025]
+
+Now have enemies moving around screen using defined paths (enemies, each path 5 steps) - this was implemented in CoreGame assembly.
+
 If you find this useful please let me know at benjaminemanuel13@gmail.com
