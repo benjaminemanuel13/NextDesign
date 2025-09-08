@@ -190,6 +190,7 @@
             addPath.TabIndex = 10;
             addPath.Text = "Add";
             addPath.UseVisualStyleBackColor = true;
+            addPath.Click += addPath_Click;
             // 
             // paths
             // 
@@ -198,6 +199,7 @@
             paths.Name = "paths";
             paths.Size = new Size(120, 139);
             paths.TabIndex = 9;
+            paths.SelectedIndexChanged += paths_SelectedIndexChanged;
             // 
             // label1
             // 

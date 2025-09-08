@@ -71,7 +71,7 @@ namespace Colors
                 }
             }
 
-            if(paths.Items.Count > 0)
+            if (paths.Items.Count > 0)
             {
                 paths.SelectedIndex = 0;
             }
@@ -347,7 +347,8 @@ namespace Colors
             {
                 var temppath = (Colors.Models.Path)paths.SelectedItem;
 
-                Step newStep = new Step() { 
+                Step newStep = new Step()
+                {
                     Name = "Step " + (temppath.Steps.Count + 1).ToString(),
                     PathId = temppath.Id,
                     X = currentCol,
@@ -415,6 +416,11 @@ namespace Colors
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("This will overwrite any existing tile and tilemap files in the game folder. Are you sure you want to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                return;
+            }
+
             byte[] output = new byte[1280];
             int count = 0;
             byte tilePos = 0;
@@ -648,6 +654,26 @@ namespace Colors
         public void MoveSelection(SelectionMove move)
         {
 
+        }
+
+        private void paths_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var path = sender as ListBox;
+
+            steps.Items.Clear();
+
+            foreach (var step in ((Models.Path)path.SelectedItem).Steps)
+            {
+                steps.Items.Add(step);
+            }
+        }
+
+        private void addPath_Click(object sender, EventArgs e)
+        {
+            var form = new AddPathForm();
+            form.TileForm = this;
+
+            form.ShowDialog(this);
         }
     }
 }
