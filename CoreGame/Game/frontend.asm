@@ -153,7 +153,8 @@ enemiesloop:
 	POP AF
 
 	PUSH HL
-	CALL delay
+	LD HL, $1FFF
+	CALL customDelay
 	POP HL
 
 	POP IY

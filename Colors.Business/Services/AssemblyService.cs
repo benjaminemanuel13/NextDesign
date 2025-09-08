@@ -112,12 +112,99 @@ namespace Colors.Business.Services
 
                     writer.Write((byte)2);  // This should be ignored.
                     var p = _context.Paths.Include(x => x.Steps).First(x => x.Id == enemy.Path);
-                    writer.Write((byte)p.Steps.Count);
+                    writer.Write((byte)(p.Steps.Count * 4));
+
+                    var a = 0;
+
                     foreach (var step in p.Steps)
                     {
-                        writer.Write((ushort)step.Speed);
-                        writer.Write((ushort)(step.X * 16));
-                        writer.Write((ushort)(step.Y * 16));
+                        bool isX = false;
+                        bool isPositive = false;
+
+                        if (a < p.Steps.Count - 1)
+                        {
+                            if (p.Steps[a + 1].X > p.Steps[a].X) // Moving right
+                            {
+                                isX = true;
+                                isPositive = true;
+                            }
+                            else if (p.Steps[a + 1].Y > p.Steps[a].Y) // Moving down
+                            {
+                                isX = false;
+                                isPositive = true;
+                            }
+                            else if (p.Steps[a].X > p.Steps[a + 1].X)  // Moving left
+                            {
+                                isX = true;
+                                isPositive = false;
+                            }
+                            else if (p.Steps[a].Y > p.Steps[a + 1].Y) // Moving up
+                            {
+                                isX = false;
+                                isPositive = false;
+                            }
+                        }
+                        else
+                        {
+                            if (p.Steps[0].X > p.Steps[a].X) // Moving right
+                            {
+                                isX = true;
+                                isPositive = true;
+                            }
+                            else if (p.Steps[0].Y > p.Steps[a].Y) // Moving down
+                            {
+                                isX = false;
+                                isPositive = true;
+                            }
+                            else if (p.Steps[a].X > p.Steps[0].X)  // Moving left
+                            {
+                                isX = true;
+                                isPositive = false;
+                            }
+                            else if (p.Steps[a].Y > p.Steps[0].Y) // Moving up
+                            {
+                                isX = false;
+                                isPositive = false;
+                            }
+                        }
+                        a++;
+
+                        if (!isPositive)
+                        {
+                            for (int i = 0; i < 4; i++)
+                            {
+                                writer.Write((ushort)step.Speed);
+
+                                if (isX)
+                                {
+                                    writer.Write((ushort)((step.X * 16) - (i * 4)));
+                                    writer.Write((ushort)(step.Y * 16));
+                                }
+                                else
+                                {
+                                    writer.Write((ushort)(step.X * 16));
+                                    writer.Write((ushort)((step.Y * 16) - (i * 4)));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 4; i++)
+                            {
+                                writer.Write((ushort)step.Speed);
+
+                                if (isX)
+                                {
+                                    writer.Write((ushort)((step.X * 16) + (i * 4)));
+                                    writer.Write((ushort)(step.Y * 16));
+                                }
+                                else
+                                {
+                                    writer.Write((ushort)(step.X * 16));
+                                    writer.Write((ushort)((step.Y * 16) + (i * 4)));
+                                }
+                            }
+                        }
                     }
                 }
             }

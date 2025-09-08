@@ -194,19 +194,21 @@ namespace SKcode.Data
                 new Step { Id = 2, Name = "Step 2", PathId = 1, X = 18, Y = 8, Speed = 0xFFFF },
                 new Step { Id = 3, Name = "Step 3", PathId = 1, X = 17, Y = 8, Speed = 0xFFFF },
                 new Step { Id = 4, Name = "Step 4", PathId = 1, X = 18, Y = 8, Speed = 0xFFFF },
-                new Step { Id = 5, Name = "Step 5", PathId = 1, X = 19, Y = 8, Speed = 0xFFFF },
+                //new Step { Id = 5, Name = "Step 5", PathId = 1, X = 19, Y = 8, Speed = 0xFFFF },
 
                 new Step { Id = 6, Name = "Step 2 - 1", PathId = 2, X = 0, Y = 8, Speed = 0xFFFF },
                 new Step { Id = 7, Name = "Step 2 - 2", PathId = 2, X = 1, Y = 8, Speed = 0xFFFF },
                 new Step { Id = 8, Name = "Step 2 - 3", PathId = 2, X = 2, Y = 8, Speed = 0xFFFF },
                 new Step { Id = 9, Name = "Step 2 - 3", PathId = 2, X = 1, Y = 8, Speed = 0xFFFF },
-                new Step { Id = 10, Name = "Step 2 - 3", PathId = 2, X = 0, Y = 8, Speed = 0xFFFF },
+                //new Step { Id = 10, Name = "Step 2 - 3", PathId = 2, X = 0, Y = 8, Speed = 0xFFFF },
 
                 new Step { Id = 11, Name = "Step 3 - 1", PathId = 3, X = 1, Y = 9, Speed = 0xFFFF },
                 new Step { Id = 12, Name = "Step 3 - 2", PathId = 3, X = 2, Y = 9, Speed = 0xFFFF },
                 new Step { Id = 13, Name = "Step 3 - 3", PathId = 3, X = 3, Y = 9, Speed = 0xFFFF },
-                new Step { Id = 14, Name = "Step 3 - 3", PathId = 3, X = 2, Y = 9, Speed = 0xFFFF },
-                new Step { Id = 15, Name = "Step 3 - 3", PathId = 3, X = 1, Y = 9, Speed = 0xFFFF });
+                new Step { Id = 14, Name = "Step 3 - 4", PathId = 3, X = 4, Y = 9, Speed = 0xFFFF },
+                new Step { Id = 15, Name = "Step 3 - 5", PathId = 3, X = 3, Y = 9, Speed = 0xFFFF },
+                new Step { Id = 16, Name = "Step 3 - 6", PathId = 3, X = 2, Y = 9, Speed = 0xFFFF });//,
+                //new Step { Id = 17, Name = "Step 3 - 7", PathId = 3, X = 1, Y = 9, Speed = 0xFFFF });
 
             modelBuilder.Entity<Enemy>().HasData(
                 new Enemy { Id = 1, LevelId = 1, Name = "Enemy 01", PathId = 1, SpriteId = 1 },
