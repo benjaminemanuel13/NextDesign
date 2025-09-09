@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colors.Business", "Colors.B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colors.Data", "Colors.Data\Colors.Data.csproj", "{AA165CEC-3DDE-4741-BF3C-73B502B554B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colors.Server", "Colors.Server\Colors.Server.csproj", "{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
