@@ -18,9 +18,11 @@ namespace Colors
 {
     public partial class TileMapForm : Form
     {
-        //private string basePath = @"C:\Users\benja\source\Next\Game\";
+#if Desktop
         string BasePath = @"C:\Users\benja\source\Next\Colors\CoreGame\Game\";
-
+#else
+        string BasePath = @"C:\Users\benja\source\repos\benjaminemanuel13\NextDesign\CoreGame\Game\";
+#endif
         const int CellSize = 16;
         const int GridSize = 40;
         const int PathCellSize = 32;

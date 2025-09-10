@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-Colors.Server-b3c16c9a-c3b9-475b-b074-450cc2c926cf</UserSecretsId>
+    <Configurations>Debug;Release;Laptop</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

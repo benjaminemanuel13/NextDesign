@@ -13,7 +13,11 @@ namespace Colors.Business.Services
 {
     public class AssemblyService
     {
+#if Desktop
         string BasePath = @"C:\Users\benja\source\Next\Colors\CoreGame\Game\";
+#else
+        string BasePath = @"C:\Users\benja\source\repos\benjaminemanuel13\NextDesign\CoreGame\Game\";
+#endif
         private ProjectDBContext _context;
 
         public AssemblyService()

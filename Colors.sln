@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36109.1
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11005.162 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colors", "Colors\Colors.csproj", "{63499B42-5A11-4879-9ECC-46DC37EA0047}"
 EndProject
@@ -20,35 +20,65 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Desktop|Any CPU = Desktop|Any CPU
+		Laptop|Any CPU = Laptop|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{63499B42-5A11-4879-9ECC-46DC37EA0047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{63499B42-5A11-4879-9ECC-46DC37EA0047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63499B42-5A11-4879-9ECC-46DC37EA0047}.Desktop|Any CPU.ActiveCfg = Desktop|Any CPU
+		{63499B42-5A11-4879-9ECC-46DC37EA0047}.Desktop|Any CPU.Build.0 = Desktop|Any CPU
+		{63499B42-5A11-4879-9ECC-46DC37EA0047}.Laptop|Any CPU.ActiveCfg = Laptop|Any CPU
+		{63499B42-5A11-4879-9ECC-46DC37EA0047}.Laptop|Any CPU.Build.0 = Laptop|Any CPU
 		{63499B42-5A11-4879-9ECC-46DC37EA0047}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63499B42-5A11-4879-9ECC-46DC37EA0047}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Desktop|Any CPU.ActiveCfg = Release|Any CPU
+		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Desktop|Any CPU.Build.0 = Release|Any CPU
+		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Laptop|Any CPU.ActiveCfg = Laptop|Any CPU
+		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Laptop|Any CPU.Build.0 = Laptop|Any CPU
 		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF8859A0-CCAD-453D-A96F-FEE0F857E69B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B801AE6F-0479-447C-949C-5633899F2EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B801AE6F-0479-447C-949C-5633899F2EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B801AE6F-0479-447C-949C-5633899F2EFE}.Desktop|Any CPU.ActiveCfg = Release|Any CPU
+		{B801AE6F-0479-447C-949C-5633899F2EFE}.Desktop|Any CPU.Build.0 = Release|Any CPU
+		{B801AE6F-0479-447C-949C-5633899F2EFE}.Laptop|Any CPU.ActiveCfg = Laptop|Any CPU
+		{B801AE6F-0479-447C-949C-5633899F2EFE}.Laptop|Any CPU.Build.0 = Laptop|Any CPU
 		{B801AE6F-0479-447C-949C-5633899F2EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B801AE6F-0479-447C-949C-5633899F2EFE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Desktop|Any CPU.ActiveCfg = Release|Any CPU
+		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Desktop|Any CPU.Build.0 = Release|Any CPU
+		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Laptop|Any CPU.ActiveCfg = Laptop|Any CPU
+		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Laptop|Any CPU.Build.0 = Laptop|Any CPU
 		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49123447-7AD7-4C2B-932B-5CCF03D39493}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C76F9B39-87CE-4BF2-8C63-D2CD0916C8F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C76F9B39-87CE-4BF2-8C63-D2CD0916C8F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C76F9B39-87CE-4BF2-8C63-D2CD0916C8F4}.Desktop|Any CPU.ActiveCfg = Release|Any CPU
+		{C76F9B39-87CE-4BF2-8C63-D2CD0916C8F4}.Desktop|Any CPU.Build.0 = Release|Any CPU
+		{C76F9B39-87CE-4BF2-8C63-D2CD0916C8F4}.Laptop|Any CPU.ActiveCfg = Laptop|Any CPU
+		{C76F9B39-87CE-4BF2-8C63-D2CD0916C8F4}.Laptop|Any CPU.Build.0 = Laptop|Any CPU
 		{C76F9B39-87CE-4BF2-8C63-D2CD0916C8F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C76F9B39-87CE-4BF2-8C63-D2CD0916C8F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Desktop|Any CPU.ActiveCfg = Release|Any CPU
+		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Desktop|Any CPU.Build.0 = Release|Any CPU
+		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Laptop|Any CPU.ActiveCfg = Laptop|Any CPU
+		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Laptop|Any CPU.Build.0 = Laptop|Any CPU
 		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA165CEC-3DDE-4741-BF3C-73B502B554B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Desktop|Any CPU.ActiveCfg = Release|Any CPU
+		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Desktop|Any CPU.Build.0 = Release|Any CPU
+		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Laptop|Any CPU.ActiveCfg = Release|Any CPU
+		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Laptop|Any CPU.Build.0 = Release|Any CPU
 		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C13E44B8-BAA9-423A-BF65-97190C5FE8FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
