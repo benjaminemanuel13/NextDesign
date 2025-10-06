@@ -177,7 +177,8 @@ namespace Colors.Business.Services
                         {
                             for (int i = 0; i < 4; i++)
                             {
-                                writer.Write((ushort)step.Speed);
+                                writer.Write((byte)0);
+                                writer.Write((byte)enemy.Sprite);
 
                                 if (isX)
                                 {
@@ -195,7 +196,8 @@ namespace Colors.Business.Services
                         {
                             for (int i = 0; i < 4; i++)
                             {
-                                writer.Write((ushort)step.Speed);
+                                writer.Write((byte)0);
+                                writer.Write((byte)enemy.Sprite);
 
                                 if (isX)
                                 {

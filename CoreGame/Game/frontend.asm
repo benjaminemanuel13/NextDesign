@@ -153,7 +153,7 @@ pastreset:
 	LD C, A
 
 	PUSH AF
-	LD A, 0 // THIS IS TEMP
+	LD A, (IY - 1) // THIS IS TEMP
 	LD (spritepos), A
 	POP AF
 enemiesloop:
