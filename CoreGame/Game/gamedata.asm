@@ -4,9 +4,9 @@ level:
     db 0x00
 levelSprites:
     // Level 1
-    db 0x00, 0x01, 0x00, 0x00
+    db 0x00, 0x01, 0x00, 0x00, 0x00
     // Level 2
-    db 0x00, 0x01, 0x00, 0x00
+    db 0x00, 0x01, 0x00, 0x00, 0x00
 spriteData:
     // Level 1
     // Sprite 1
@@ -25,8 +25,8 @@ spriteData:
     // Path, Current Path position
     db 0x00, 0x00
 
-    // Level 2
-    // Sprite 1
+    // Level 1
+    // Sprite 3
     // X Position
     db 0x00, 0x00
     // Y Position
@@ -34,7 +34,7 @@ spriteData:
     // Path, Current Path position
     db 0x00, 0x00
 
-    // Sprite 2
+    // Sprite 4
     // X Position
     db 0x00, 0x00
     // Y Position
@@ -43,6 +43,39 @@ spriteData:
     db 0x00, 0x00
 
 paths:
+    // Path 1
+    // Segment 1
+    // Start X
+    db 0x00, 0x00
+    // Start Y
+    db 0x00
+    // End X
+    db 0x00, 0x00
+    // End Y
+
+    db 0x00
+    // Path 1
+    // Segment 1
+    // Start X
+    db 0x00, 0x00
+    // Start Y
+    db 0x00
+    // End X
+    db 0x00, 0x00
+    // End Y
+
+    db 0x00
+    // Path 1
+    // Segment 1
+    // Start X
+    db 0x00, 0x00
+    // Start Y
+    db 0x00
+    // End X
+    db 0x00, 0x00
+    // End Y
+    db 0x00
+
     // Path 1
     // Segment 1
     // Start X

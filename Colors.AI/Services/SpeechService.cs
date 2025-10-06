@@ -26,11 +26,11 @@ namespace Colors.AI.Services
 
         private async void Initialize()
         {
-            _config = SpeechConfig.FromEndpoint(new Uri(Endpoint), new ApiKeyCredential(Key));
-            _recognizer = new SpeechRecognizer(_config);
-            _recognizer.Recognized += Speech_Recognised;
+            //_config = SpeechConfig.FromEndpoint(new Uri(Endpoint), new ApiKeyCredential(Key));
+            //_recognizer = new SpeechRecognizer(_config);
+            //_recognizer.Recognized += Speech_Recognised;
 
-            _speech = new SpeechSynthesizer(_config);
+            //_speech = new SpeechSynthesizer(_config);
         }
 
         public async void Speak(string text)

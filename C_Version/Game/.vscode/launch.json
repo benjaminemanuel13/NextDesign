@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "type": "dezog",
+            "request": "launch",
+            "name": "DeZog",
+            "remoteType": "cspect",
+            "z88dkv2": [
+                {
+                    "path": "build/*.lis",
+                    "srcDirs": [
+                        "src",
+                        "build",
+                    ],
+                    "mapFile": "build/main.map",
+                    "excludeFiles": []
+                },
+            ],
+            "startAutomatically": false,
+            "history": {
+                "reverseDebugInstructionCount": 10000,
+                "codeCoverageEnabled": false
+            },
+            "commandsAfterLaunch": [],
+            "disassemblerArgs": {
+                "numberOfLines": 20
+            },
+            "smartDisassemblerArgs": {
+                "lowerCase": false
+            },
+            "rootFolder": "${workspaceFolder}",
+            "topOfStack": "0xFF58",
+            "load": "build/main.nex",
+            "smallValuesMaximum": 513,
+            "tmpDir": ".tmp"
+        }
+    ]
+}

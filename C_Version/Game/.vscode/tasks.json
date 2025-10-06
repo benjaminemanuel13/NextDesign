@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build ZX Next Project",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        //"zcc +zxn -subtype=nex -vn -g --list -m --c-code-in-asm -clib=sdcc_iy -startup=31 -o build/main src/main.c -create-app"
+        "zcc +zxn -subtype=nex -vn -g --list -m --c-code-in-asm -clib=sdcc_iy -o build/main src/main.c -create-app"
+        //"zcc +zxn -subtype=nex -vn -g --list -m -clib=new -c --c-code-in-asm -Cz --clean -startup=31 -o build/main.nex src/main.c"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Compiles C code for ZX Spectrum Next with debug symbols for DeZog"
+    },
+    {
+      "label": "Launch CSpect with Debug",
+      "type": "process",
+      "command": "${workspaceRoot}/../Tools/CSpect/CSpect.exe",
+      "args": [
+        "-debug",
+        "-exit",
+        "-brk",
+        "-g",
+        "-sound",
+        "-tv",
+        "-esc",
+        "-zxnext",
+        "-remote",
+        "-map=build/main.map",
+        "-brk",
+        "-nextrom",
+        "-mmc=./cspect-next-2gb.img",
+        "-s",
+        "build/main.nex"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "detail": "Starts CSpect with debugging enabled"
+    }
+  ]
+}

@@ -13,11 +13,11 @@ namespace Colors.Business.Services
 {
     public class AssemblyService
     {
-#if Desktop
+//#if Desktop
         string BasePath = @"C:\Users\benja\source\Next\Colors\CoreGame\Game\";
-#else
-        string BasePath = @"C:\Users\benja\source\repos\benjaminemanuel13\NextDesign\CoreGame\Game\";
-#endif
+//#else
+//        string BasePath = @"C:\Users\benja\source\repos\benjaminemanuel13\NextDesign\CoreGame\Game\";
+//#endif
         private ProjectDBContext _context;
 
         public AssemblyService()
@@ -80,7 +80,7 @@ namespace Colors.Business.Services
                         X = (ushort)(enemy.Path.Steps[0].X * 16),
                         Y = (ushort)(enemy.Path.Steps[0].Y * 16),
                         Path = (byte)enemy.Path.Id,
-                        Sprite = (byte)sprite++,
+                        Sprite = (byte)enemy.Sprite.Pos,
                         CurrentStep = 0,
                     });
                 }

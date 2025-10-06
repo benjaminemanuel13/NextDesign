@@ -18,6 +18,8 @@ namespace Colors.Models
         public int Height { get; set; } = 16;
         public byte[] Pixels { get; set; } = new byte[256]; // 16x16 pixels, each pixel is a byte
 
+        public byte Pos { get; set; } = 0; // Position in sprite sheet
+
         public Sprite16x16()
         {
             for (int i = 0; i < Pixels.Length; i++)

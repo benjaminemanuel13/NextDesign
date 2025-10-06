@@ -45,9 +45,11 @@ palette:
 
 paletteLength: EQU $-palette
 
-// Initially A is Sprite, HL is X Pos, C is Y Pos
+// Initially A is Sprite, HL is X Pos, C is Y Pos, D is Pattern
 showsprite:
-	; Show single sprite 0 using pattern 0
+	; Show single sprite 0
+	PUSH BC
+	
 	NEXTREG $34, A				; First sprite
 	LD A, L
 	NEXTREG $35, A				; X=100
@@ -56,8 +58,11 @@ showsprite:
 	LD A, 0
 	ADD A, H
 	NEXTREG $37, A				; Palette offset, no mirror, no rotation
-	NEXTREG $38, %10000000		; Visible, no byte 4, pattern 0
+	LD A, %10000000
+	ADD A, D
+	NEXTREG $38, A		; Visible, no byte 4, pattern 0
 
+	POP BC
 	RET
 
 spritepos:
@@ -85,10 +90,9 @@ enemyport:
 	LD (spritepos), A
 
 	LD IY, HL
-	;LD C, 0
 
 	LD A, (IY + 5)	; sprite
-	
+
 	PUSH AF
 	PUSH BC
 
@@ -141,15 +145,26 @@ pastreset:
 	POP AF
 
 	PUSH IY
+	PUSH AF
 
 	INC IY
 	LD HL, (IY)
 	LD A, (IY + 2)
 	LD C, A
-enemiesloop:
+
 	PUSH AF
+	LD A, 0 // THIS IS TEMP
+	LD (spritepos), A
+	POP AF
+enemiesloop:
+	POP AF
+	PUSH AF
+	PUSH DE
 	LD A, (spritepos)
+	LD D, A
+	LD A, B
 	CALL showsprite
+	POP DE
 	POP AF
 
 	PUSH HL
